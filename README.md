@@ -3,7 +3,7 @@ Tseesecake is a lightweight solution for time series
 
 ![Logo](https://raw.githubusercontent.com/Seddryck/Tseesecake/main/misc/logo/Tseesecake-logo.png)
 
-[About][] | [Quickstart][] | [Installing][] | [Functions and predicates][]
+[About][] | [Quickstart][] | [Installing][]
 
 [About]: #about (About)
 [Quickstart]: #quickstart (Quickstart)

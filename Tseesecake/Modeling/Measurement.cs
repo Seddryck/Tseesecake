@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public class DataPoint : Column
+    public class Measurement : Column
     {
-        public DataPoint(string name)
+        public Measurement(string name)
             : base(name, DbType.Decimal) { }
     }
 }

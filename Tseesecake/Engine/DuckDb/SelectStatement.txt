@@ -4,3 +4,15 @@ SELECT
 {{/each}}
 FROM
 	{{Timeseries.Name}}
+{{#if Filters}}
+WHERE
+{{#each Filters}}
+	{{#if @index}}AND {{/if}}{{Label}}
+{{/each}}
+{{/if}}
+{{#if Slicers}}
+GROUP BY
+{{#each Slicers}}
+	{{#if @index}}, {{/if}}{{Label}}
+{{/each}}
+{{/if}}

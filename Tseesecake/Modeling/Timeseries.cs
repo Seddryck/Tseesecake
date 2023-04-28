@@ -10,10 +10,14 @@ namespace Tseesecake.Modeling
     {
         public string Name { get; }
         protected Timestamp Timestamp { get; }
-        protected DataPoint[] DataPoints { get; }
+        protected Measurement[] measurements { get; }
         protected Facet[] Facets { get; } = Array.Empty<Facet>();
 
-        public Timeseries(string name, Timestamp timestamp, DataPoint datapoint)
-            => (Name, Timestamp, DataPoints) = (name, timestamp, new DataPoint[] { datapoint });
+        public Timeseries(string name, Timestamp timestamp, Measurement measurement)
+            : this(name, timestamp, measurement, null) {}
+
+        public Timeseries(string name, Timestamp timestamp, Measurement measurement, Facet[]? facets)
+            => (Name, Timestamp, measurements, Facets) 
+                = (name, timestamp, new Measurement[] { measurement }, facets ?? Array.Empty<Facet>());
     }
 }

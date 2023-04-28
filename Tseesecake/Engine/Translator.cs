@@ -19,7 +19,8 @@ namespace Tseesecake.Engine
             using (var reader = new StreamReader(stream))
             {
                 var source = reader.ReadToEnd();
-                var template = Handlebars.Compile(source);
+                var handleBars = Handlebars.Create(new HandlebarsConfiguration { NoEscape = true });
+                var template = handleBars.Compile(source);
                 return template(query);
             }
         }
