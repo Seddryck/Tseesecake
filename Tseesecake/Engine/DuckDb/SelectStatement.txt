@@ -1,0 +1,6 @@
+SELECT
+{{#each Projections}}
+	{{#if @index}}, {{/if}}{{Label}}
+{{/each}}
+FROM
+	{{Timeseries.Name}}

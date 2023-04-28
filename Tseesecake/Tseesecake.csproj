@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Engine\DuckDb\SelectStatement.txt" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="Engine\DuckDb\SelectStatement.txt" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="DubUrl" Version="0.1.149" />
+	  <PackageReference Include="Handlebars.Net" Version="2.1.4" />
+	</ItemGroup>
+</Project>

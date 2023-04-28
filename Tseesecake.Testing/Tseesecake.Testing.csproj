@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+	  <None Remove="coverage.net6.0.opencover.xml" />
+	  <None Remove="coverage.net7.0.opencover.xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="coverlet.msbuild" Version="3.2.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="DubUrl" Version="0.1.149" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+		<PackageReference Include="NUnit" Version="3.13.3" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
+		<PackageReference Include="NUnit.Analyzers" Version="3.6.1">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+		<PackageReference Include="Moq" Version="4.18.4" />
+		<PackageReference Include="coverlet.collector" Version="3.2.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);TestResults\**;coverage.*.json</DefaultItemExcludes>
+  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Tseesecake\Tseesecake.csproj" />
+	</ItemGroup>
+</Project>
