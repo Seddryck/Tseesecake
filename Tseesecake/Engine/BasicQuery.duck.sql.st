@@ -13,3 +13,8 @@ GROUP BY
 	$statement.Slicers: {slicer | $slicer:(slicer.Template)()$}; separator="
 , "$
 $endif$
+$if(statement.Orders)$
+ORDER BY
+	$statement.Orders: {order | $order:(order.Template)()$}; separator="
+, "$
+$endif$

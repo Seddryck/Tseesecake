@@ -5,6 +5,7 @@
 	<ItemGroup>
 	  <None Remove="Engine\DuckDB\ColumnProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\comparisons.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
@@ -15,12 +16,14 @@
 	  <None Remove="Engine\DuckDB\Filters\InDicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\BasicQuery.duck.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\comparisons.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
@@ -31,6 +34,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\InDicer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\ExpressionProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\ColumnProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />

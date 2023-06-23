@@ -14,6 +14,7 @@ using Tseesecake.Engine;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Filters;
+using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Engine
@@ -236,6 +237,32 @@ namespace Tseesecake.Testing.Engine
             var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\nGROUP BY\r\n\tlocation\r\n\t, date_part('weekday', instant)\r\n"));
+        }
+
+
+        [Test]
+        public void Execute_Orders_ValidStatement()
+        {
+            var ts = new Timeseries(
+                    "WindForecast"
+                    , new Timestamp("instant")
+                    , new Measurement("value")
+                    , new[] { new Facet("location"), new Facet("action"), new Facet("customer") }
+                );
+
+            var select = new SelectStatement(ts
+                , new[] {
+                    new ColumnProjection(new Measurement("value"))
+                }
+                , null
+                , new IOrderBy[] {
+                    new ColumnOrder(new Facet("location"))
+                    , new ColumnOrder(new Timestamp("instant"), Sorting.Descending, NullSorting.Last)
+                });
+
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nORDER BY\r\n\tlocation ASC NULLS FIRST\r\n\t, instant DESC NULLS LAST\r\n"));
         }
     }
 }
