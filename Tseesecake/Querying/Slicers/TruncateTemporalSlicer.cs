@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Querying.Filters;
 
 namespace Tseesecake.Querying.Slicers
 {
     internal class TruncateTemporalSlicer : TemporalSlicer
     {
-        protected string Precision { get; }
+        public string Precision { get; }
 
-        public override string Label { get => $"date_trunc('{Precision}', {Timestamp.Name})"; }
+        public override string Template { get => nameof(TruncateTemporalSlicer); }
 
         public TruncateTemporalSlicer(Timestamp timestamp, string precision)
             : base(timestamp) { Precision = precision; }

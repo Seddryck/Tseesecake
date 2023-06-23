@@ -9,10 +9,8 @@ namespace Tseesecake.Querying.Filters
 {
     internal abstract class Temporizer : IFilter
     {
-        protected Timestamp Timestamp { get; }
-
-        protected virtual string Reference { get => Timestamp.Name; }
-        public abstract string Label { get; }
+        public Timestamp Timestamp { get; }
+        public abstract string Template { get; }
 
         public Temporizer(Timestamp timestamp)
             => (Timestamp) = (timestamp);

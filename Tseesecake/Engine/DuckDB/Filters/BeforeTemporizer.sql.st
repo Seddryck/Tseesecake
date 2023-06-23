@@ -1,0 +1,1 @@
+$filter.Timestamp.Column.Name$ < $filter.Instant; format="value"$

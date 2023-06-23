@@ -11,7 +11,7 @@ namespace Tseesecake.Querying.Filters
     {
         protected DateTime Instant { get; }
 
-        public override string Label { get => $"{Reference} < {Instant}"; }
+        public override string Template { get => nameof(BeforeTemporizer); }
 
         public BeforeTemporizer(Timestamp timestamp, DateTime instant)
             : base(timestamp) { (Instant) = (instant); }

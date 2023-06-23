@@ -9,9 +9,9 @@ namespace Tseesecake.Querying.Slicers
 {
     internal abstract class TemporalSlicer : ISlicer
     {
-        protected Timestamp Timestamp { get; }
+        public Timestamp Timestamp { get; }
 
-        public abstract string Label { get; }
+        public abstract string Template { get; }
 
         public TemporalSlicer(Timestamp timestamp)
             => Timestamp = timestamp;

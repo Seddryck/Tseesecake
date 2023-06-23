@@ -9,7 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     internal class InDicer : ManyDicer
     {
-        protected override string Operator { get => "IN"; }
+        public override string Template { get => nameof(InDicer); }
 
         public InDicer(Facet facet, string[] values)
             : base(facet, values) { }

@@ -8,6 +8,6 @@ namespace Tseesecake.Querying.Slicers
 {
     public interface ISlicer
     {
-        string Label { get; }
+        string Template { get; }
     }
 }

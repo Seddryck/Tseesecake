@@ -1,0 +1,1 @@
+date_part($slicer.Part; format="value"$, $slicer.Timestamp.Name$)

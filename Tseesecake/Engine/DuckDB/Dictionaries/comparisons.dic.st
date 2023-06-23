@@ -1,0 +1,6 @@
+"GreaterThan" : ">"
+"GreaterThanOrEqual" : ">="
+"LessThan" : "<"
+"LessThanOrEqual" : "<="
+"Equal" : "="
+"NotEqual" : "<>"

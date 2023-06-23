@@ -9,8 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     internal abstract class ManyDicer : Dicer
     {
-        protected string[] Values { get; set; }
-        protected override string Operand { get => $"('{string.Join("', '", Values)}')"; }
+        public string[] Values { get; set; }
 
         public ManyDicer(Facet facet, string[] values)
             : base(facet) { Values = values; }

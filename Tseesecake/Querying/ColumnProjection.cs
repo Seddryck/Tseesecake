@@ -11,7 +11,7 @@ namespace Tseesecake.Querying
     {
         public Column Column { get; }
 
-        public string Label { get => Column.Name; }
+        public string Template { get => nameof(ColumnProjection); }
 
         public ColumnProjection(Column column)
             => Column = column;

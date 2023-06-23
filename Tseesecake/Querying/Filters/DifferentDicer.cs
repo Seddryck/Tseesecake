@@ -9,7 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     internal class DifferentDicer : SingleDicer
     {
-        protected override string Operator { get => "!="; }
+        public override string Template { get => nameof(DifferentDicer); }
 
         public DifferentDicer(Facet facet, string value)
             : base(facet, value) { }

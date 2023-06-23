@@ -1,0 +1,1 @@
+$filter.Facet.Name$ = $filter.Value; format="value"$

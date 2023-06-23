@@ -3,13 +3,41 @@
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Engine\DuckDb\SelectStatement.txt" />
+	  <None Remove="Engine\DuckDB\ColumnProjection.sql.st" />
+	  <None Remove="Engine\DuckDB\comparisons.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
+	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\Culler.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\DifferentDicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\EqualDicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\InDicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Include="Engine\DuckDb\SelectStatement.txt" />
+	  <EmbeddedResource Include="Engine\BasicQuery.duck.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\types.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\comparisons.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\Culler.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\DifferentDicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\EqualDicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\InDicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Projections\ExpressionProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Projections\ColumnProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="DubUrl" Version="0.1.149" />
-	  <PackageReference Include="Handlebars.Net" Version="2.1.4" />
+	  <ProjectReference Include="..\..\DubUrl\DubUrl.Core\DubUrl.csproj" />
 	</ItemGroup>
 </Project>

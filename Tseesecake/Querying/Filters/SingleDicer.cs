@@ -9,9 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     internal abstract class SingleDicer : Dicer
     {
-        protected string Value { get; }
-
-        protected override string Operand { get => $"'{Value}'"; }
+        public string Value { get; }
 
         public SingleDicer(Facet facet, string value)
             : base(facet) { Value = value; }

@@ -9,10 +9,10 @@ namespace Tseesecake.Querying.Filters
 {
     internal class RangeTemporizer : Temporizer
     {
-        protected DateTime Start { get; }
-        protected DateTime End { get; }
+        public DateTime Start { get; }
+        public DateTime End { get; }
 
-        public override string Label { get => $"{Reference} BETWEEN {Start} AND {End}"; }
+        public override string Template { get => nameof(RangeTemporizer); }
 
         public RangeTemporizer(Timestamp timestamp, DateTime start, DateTime end)
             : base(timestamp) { (Start, End) = (start, end); }

@@ -1,0 +1,1 @@
+$projection.Expression$ AS $projection.Alias$

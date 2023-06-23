@@ -12,7 +12,7 @@ namespace Tseesecake.Querying
         public string Expression { get; }
         public string Alias { get; }
 
-        public string Label { get => $"{Expression} AS {Alias}"; }
+        public string Template { get => nameof(ExpressionProjection); }
 
         public ExpressionProjection(string expression, string alias)
             => (Expression, Alias) = (expression, alias);

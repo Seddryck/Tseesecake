@@ -8,6 +8,6 @@ namespace Tseesecake.Querying
 {
     public interface IProjection
     { 
-        string Label { get; }
+        string Template { get; }
     }
 }

@@ -9,6 +9,6 @@ namespace Tseesecake.Querying.Filters
 {
     public interface IFilter
     {
-        string Label { get; }
+        string Template { get; }
     }
 }

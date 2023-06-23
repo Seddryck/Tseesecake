@@ -1,6 +1,13 @@
-﻿using System;
+﻿using Antlr4.StringTemplate;
+using DubUrl.Mapping;
+using DubUrl.Mapping.Database;
+using DubUrl.Querying.Dialects;
+using DubUrl.Registering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Engine;
@@ -11,8 +18,24 @@ using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Engine
 {
-    public class TranslatorTest
+    public class BasicQueryTest
     {
+        private IDialect Dialect { get; set; }
+        private IConnectivity Connectivity { get; set; }
+
+        [OneTimeSetUp]
+        public void Initialize()
+        {
+            //Provider registration
+            new ProviderFactoriesRegistrator().Register();
+
+            //Scheme mapping
+            var schemeMapperBuilder = new SchemeMapperBuilder();
+            schemeMapperBuilder.Build();
+            var mapper = schemeMapperBuilder.GetMapper("duckdb");
+            (Dialect, Connectivity) = (mapper.GetDialect(), mapper.GetConnectivity());
+        }
+
         [Test]
         public void Execute_SingleProjection_ValidStatement()
         {
@@ -27,7 +50,7 @@ namespace Tseesecake.Testing.Engine
                     new ColumnProjection(new Timestamp("value"))
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\n"));
         }
@@ -47,7 +70,7 @@ namespace Tseesecake.Testing.Engine
                     , new ColumnProjection(new Timestamp("value"))
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tinstant\r\n\t, value\r\nFROM\r\n\tWindForecast\r\n"));
         }
@@ -66,7 +89,7 @@ namespace Tseesecake.Testing.Engine
                     new ExpressionProjection("MAX(value)", "maximum")
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\n"));
         }
@@ -89,7 +112,7 @@ namespace Tseesecake.Testing.Engine
                     new EqualDicer(new Facet("Location"), "Brussels")
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tLocation = 'Brussels'\r\n"));
         }
@@ -115,9 +138,9 @@ namespace Tseesecake.Testing.Engine
                     , new InDicer(new Facet("Customer"), new[] {"Foo", "Bar" })
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
-            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tLocation = 'Brussels'\r\n\tAND Action != 'Phone call'\r\n\tAND Customer IN ('Foo', 'Bar')\r\n"));
+            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tLocation = 'Brussels'\r\n\tAND Action <> 'Phone call'\r\n\tAND Customer IN ('Foo', 'Bar')\r\n"));
         }
 
         [Test]
@@ -135,10 +158,10 @@ namespace Tseesecake.Testing.Engine
                     new ColumnProjection(new Timestamp("value"))
                 }
                 , new IFilter[] {
-                    new Culler(new Measurement("value"), "< 100")
+                    new Culler(new Measurement("value"), Expression.LessThan,  100)
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tNOT(value < 100)\r\n"));
         }
@@ -161,9 +184,9 @@ namespace Tseesecake.Testing.Engine
                     new SinceTemporizer(new Timestamp("instant"), new TimeSpan(4, 30, 0))
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
-            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tage(instant) < 4 HOUR 30 MINUTE\r\n"));
+            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tage(instant) < INTERVAL '4 HOURS 30 MINUTES 0 SECONDS'\r\n"));
         }
 
         [Test]
@@ -185,7 +208,7 @@ namespace Tseesecake.Testing.Engine
                     new FacetSlicer(new Facet("Location"))
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\nGROUP BY\r\n\tLocation\r\n"));
         }
@@ -210,7 +233,7 @@ namespace Tseesecake.Testing.Engine
                     , new PartTemporalSlicer(new Timestamp("instant"), "weekday")
                 });
 
-            var response = new Translator().Execute(select);
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\nGROUP BY\r\n\tlocation\r\n\t, date_part('weekday', instant)\r\n"));
         }
