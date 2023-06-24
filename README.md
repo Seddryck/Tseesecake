@@ -20,7 +20,7 @@ Tseesecake is a lightweight solution for time series
 ![Still maintained](https://img.shields.io/maintenance/yes/2023.svg)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Seddryck/Tseesecake)
 
-**Continuous integration builds:** [![Build status](https://ci.appveyor.com/api/projects/status/7btqredpvl803ri5?svg=true)](https://ci.appveyor.com/project/Seddryck/Tseesecake/)
+**Continuous integration builds:** [![Build status](https://ci.appveyor.com/api/projects/status/80321ajt5beih60f?svg=true)](https://ci.appveyor.com/project/Seddryck/Tseesecake/)
 [![Tests](https://img.shields.io/appveyor/tests/seddryck/Tseesecake.svg)](https://ci.appveyor.com/project/Seddryck/Tseesecake/build/tests)
 [![CodeFactor](https://www.codefactor.io/repository/github/seddryck/Tseesecake/badge)](https://www.codefactor.io/repository/github/seddryck/Tseesecake)
 [![codecov](https://codecov.io/github/Seddryck/Tseesecake/branch/main/graph/badge.svg?token=9ZSJ6N0X9E)](https://codecov.io/github/Seddryck/Tseesecake)
