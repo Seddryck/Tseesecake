@@ -18,3 +18,6 @@ ORDER BY
 	$statement.Orders: {order | $order:(order.Template)()$}; separator="
 , "$
 $endif$
+$if(statement.Restriction)$
+$statement.Restriction:(statement.Restriction.Template)()$
+$endif$

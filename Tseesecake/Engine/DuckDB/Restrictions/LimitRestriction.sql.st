@@ -1,0 +1,1 @@
+LIMIT $statement.Restriction.Value$

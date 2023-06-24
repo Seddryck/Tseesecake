@@ -15,6 +15,7 @@ using Tseesecake.Modeling;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
+using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Engine
@@ -241,7 +242,7 @@ namespace Tseesecake.Testing.Engine
 
 
         [Test]
-        public void Execute_Orders_ValidStatement()
+        public void Execute_LimitOffset_ValidStatement()
         {
             var ts = new Timeseries(
                     "WindForecast"
@@ -256,13 +257,12 @@ namespace Tseesecake.Testing.Engine
                 }
                 , null
                 , new IOrderBy[] {
-                    new ColumnOrder(new Facet("location"))
-                    , new ColumnOrder(new Timestamp("instant"), Sorting.Descending, NullSorting.Last)
-                });
+                    new ColumnOrder(new Timestamp("instant"), Sorting.Descending, NullSorting.Last) }
+                , new LimitOffsetRestriction(20,40));
 
             var response = new BasicQuery(select).Read(Dialect, Connectivity);
             Assert.That(response, Is.Not.Null);
-            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nORDER BY\r\n\tlocation ASC NULLS FIRST\r\n\t, instant DESC NULLS LAST\r\n"));
+            Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nORDER BY\r\n\tinstant DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n"));
         }
     }
 }

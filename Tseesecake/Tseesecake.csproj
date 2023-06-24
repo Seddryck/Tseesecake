@@ -17,6 +17,8 @@
 	  <None Remove="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
+	  <None Remove="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
+	  <None Remove="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
@@ -37,6 +39,8 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\ExpressionProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\ColumnProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
