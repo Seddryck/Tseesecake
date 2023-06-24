@@ -1,1 +1,1 @@
-date_trunc($slicer.Precision; value="format"$, $slicer.Timestamp.Column.Name$)
+date_trunc($slicer.Precision; format="value"$, $slicer.Timestamp.Column.Name$)
