@@ -119,7 +119,6 @@ namespace Tseesecake.Testing.Engine
             Assert.That(response, Is.EqualTo("SELECT\r\n\tvalue\r\nFROM\r\n\tWindForecast\r\nWHERE\r\n\tLocation = 'Brussels'\r\n"));
         }
 
-
         [Test]
         public void Execute_MultipleDicers_ValidStatement()
         {
@@ -239,7 +238,6 @@ namespace Tseesecake.Testing.Engine
             Assert.That(response, Is.Not.Null);
             Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\nGROUP BY\r\n\tlocation\r\n\t, date_part('weekday', instant)\r\n"));
         }
-
 
         [Test]
         public void Execute_SlicerAndGroupFilter_ValidStatement()
