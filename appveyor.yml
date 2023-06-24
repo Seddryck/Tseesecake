@@ -30,7 +30,7 @@ after_test:
 - ps: >-
     $ErrorActionPreference = "Stop"
 
-    dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=10 /p:ThresholdType=line --no-build --nologo
+    dotnet test Tseesecake.Testing -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=10 /p:ThresholdType=line --no-build --nologo
     
     if($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode )  }
 
