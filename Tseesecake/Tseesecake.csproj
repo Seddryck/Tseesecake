@@ -13,6 +13,7 @@
 	  <None Remove="Engine\DuckDB\Filters\Culler.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\DifferentDicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\EqualDicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Filters\Gatherer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\InDicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
@@ -30,6 +31,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\comparisons.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Filters\Gatherer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\Culler.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\DifferentDicer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Filters\EqualDicer.sql.st" />
@@ -46,6 +48,6 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\DubUrl\DubUrl.Core\DubUrl.csproj" />
+	  <PackageReference Include="DubUrl" Version="0.1.194" />
 	</ItemGroup>
 </Project>
