@@ -9,17 +9,11 @@ using Tseesecake.Modeling;
 
 namespace Tseesecake.Querying.Filters
 {
-    internal class Culler : IFilter
+    internal class Culler : Gatherer
     {
-        public Measurement Measurement { get; }
-
-        protected Func<Expression, Expression, BinaryExpression> Comparison { get; }
-        public string ComparisonOperator { get => Comparison.GetMethodInfo().Name; }
-        public virtual object Value { get; private set; }
-
-        public string Template { get => nameof(Culler); }
+        public override string Template { get => nameof(Culler); }
 
         public Culler(Measurement measurement, Func<Expression, Expression, BinaryExpression> comparison, object value)
-            => (Measurement, Comparison, Value) = (measurement, comparison, value);
+            : base(measurement, comparison, value) { }
     }
 }
