@@ -242,6 +242,33 @@ namespace Tseesecake.Testing.Engine
 
 
         [Test]
+        public void Execute_SlicerAndGroupFilter_ValidStatement()
+        {
+            var ts = new Timeseries(
+                    "WindForecast"
+                    , new Timestamp("instant")
+                    , new Measurement("value")
+                    , new[] { new Facet("location"), new Facet("action"), new Facet("customer") }
+                );
+
+            var select = new SelectStatement(ts
+                , new[] {
+                    new ExpressionProjection("MAX(value)", "maximum")
+                }
+                , null
+                , new ISlicer[] {
+                    new FacetSlicer(new Facet("location"))
+                }
+                , new IFilter[] {
+                    new Gatherer(new Measurement("maximum"), Expression.GreaterThanOrEqual, 120)
+                });
+
+            var response = new BasicQuery(select).Read(Dialect, Connectivity);
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response, Is.EqualTo("SELECT\r\n\tMAX(value) AS maximum\r\nFROM\r\n\tWindForecast\r\nGROUP BY\r\n\tlocation\r\nHAVING\r\n\tmaximum >= 120\r\n"));
+        }
+
+        [Test]
         public void Execute_LimitOffset_ValidStatement()
         {
             var ts = new Timeseries(
@@ -255,6 +282,8 @@ namespace Tseesecake.Testing.Engine
                 , new[] {
                     new ColumnProjection(new Measurement("value"))
                 }
+                , null
+                , null
                 , null
                 , new IOrderBy[] {
                     new ColumnOrder(new Timestamp("instant"), Sorting.Descending, NullSorting.Last) }
