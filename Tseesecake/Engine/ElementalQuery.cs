@@ -10,12 +10,12 @@ using Tseesecake.Querying;
 
 namespace Tseesecake.Engine
 {
-    public class BasicQuery : EmbeddedSqlTemplateCommand
+    public class ElementalQuery : EmbeddedSqlTemplateCommand
     {
-        public BasicQuery(SelectStatement statement)
+        public ElementalQuery(SelectStatement statement)
             : base(
                    //, $"{typeof(BasicQuery).GetType().Assembly.GetName().Name}.{nameof(BasicQuery)}"
-                   "Tseesecake.Engine.BasicQuery"
+                   "Tseesecake.Engine.ElementalQuery"
                   , "Tseesecake.Engine"
                   , "Tseesecake.Engine"
                   , new Dictionary<string, object?>() { { "statement", statement } }
