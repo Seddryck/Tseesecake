@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
 
-namespace Tseesecake.Querying
+namespace Tseesecake.Querying.Projections
 {
     internal class ColumnProjection : IProjection
     {
