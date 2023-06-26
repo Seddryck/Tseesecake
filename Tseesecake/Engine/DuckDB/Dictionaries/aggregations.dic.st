@@ -1,0 +1,6 @@
+"max" : "MAX"
+"min" : "MIN"
+"average" : "AVG"
+"count" : "COUNT"
+"median" : "MEDIAN"
+

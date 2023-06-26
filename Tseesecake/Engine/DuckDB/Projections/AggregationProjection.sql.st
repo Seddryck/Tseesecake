@@ -1,0 +1,1 @@
+$aggregations.(projection.Aggregation)$($projection.Column.Name$) AS $projection.Alias$
