@@ -14,10 +14,9 @@ namespace Tseesecake.Engine
     {
         public ElementalQuery(SelectStatement statement)
             : base(
-                   //, $"{typeof(BasicQuery).GetType().Assembly.GetName().Name}.{nameof(BasicQuery)}"
-                   "Tseesecake.Engine.ElementalQuery"
-                  , "Tseesecake.Engine"
-                  , "Tseesecake.Engine"
+                   $"{typeof(ElementalQuery).Namespace}.{nameof(ElementalQuery)}"
+                  , $"{typeof(ElementalQuery).Namespace}"
+                  , $"{typeof(ElementalQuery).Namespace}"
                   , new Dictionary<string, object?>() { { "statement", statement } }
             )
         { }

@@ -65,7 +65,7 @@ namespace Tseesecake.Testing.Engine
                     new ColumnProjection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
-                    new Culler(new Measurement("Produced"), Expression.LessThan,  100)
+                    new Culler(new Measurement("Produced"), Expression.LessThan,  5)
                 });
 
         public static SelectStatement FilterTemporizer
@@ -101,14 +101,14 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerAndGroupFilter
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "maximum")
+                    new ExpressionProjection("AVG(Produced)", "average")
                 }
                 , null
                 , new ISlicer[] {
                     new FacetSlicer(new Facet("WindPark"))
                 }
                 , new IFilter[] {
-                    new Gatherer(new Measurement("maximum"), Expression.GreaterThanOrEqual, 120)
+                    new Gatherer(new Measurement("average"), Expression.GreaterThanOrEqual, 15)
                 });
 
         public static SelectStatement LimitOffset
@@ -120,7 +120,7 @@ namespace Tseesecake.Testing.Engine
                 , null
                 , null
                 , new IOrderBy[] {
-                    new ColumnOrder(new Timestamp("Instant"), Sorting.Descending, NullSorting.Last) }
+                    new ColumnOrder(new Measurement("Produced"), Sorting.Descending, NullSorting.Last) }
                 , new LimitOffsetRestriction(20,40));
     }
 }

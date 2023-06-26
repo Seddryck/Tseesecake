@@ -30,7 +30,7 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string FilterMultiple 
             => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tWindPark IN ('Sea park', 'Children of tomorrow park')\r\n\tAND Producer = 'Future Energy'\r\n";
         protected override string FilterCuller 
-            => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tNOT(Produced < 100)\r\n";
+            => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tNOT(Produced < 5)\r\n";
         protected override string FilterTemporizer 
             => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tage(Instant) < INTERVAL '4 HOURS 30 MINUTES 0 SECONDS'\r\n";
         protected override string SlicerSingle 
@@ -38,8 +38,8 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string SlicerMultiple 
             => "SELECT\r\n\tMAX(Produced) AS maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n\t, date_part('weekday', Instant)\r\n";
         protected override string SlicerAndGroupFilter 
-            => "SELECT\r\n\tMAX(Produced) AS maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\tmaximum >= 120\r\n";
+            => "SELECT\r\n\tAVG(Produced) AS average\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\taverage >= 15\r\n";
         protected override string LimitOffset 
-            => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nORDER BY\r\n\tInstant DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n";
+            => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nORDER BY\r\n\tProduced DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n";
     }
 }
