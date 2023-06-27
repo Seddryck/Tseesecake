@@ -119,4 +119,5 @@ if ($failureCount -eq 0) {
 } else {
     Write-Host "Test-harness has some failures during execution in $displayElapsed." -ForegroundColor black -BackgroundColor red -NoNewLine
 }
+Write-Host ""
 exit $failureCount
