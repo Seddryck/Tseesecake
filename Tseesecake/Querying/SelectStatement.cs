@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Tseesecake.Modeling;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
+using Tseesecake.Querying.Projections;
 using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 

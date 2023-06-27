@@ -1,0 +1,1 @@
+$aggregations.(projection.Aggregation.Name)$($projection.Column.Name$) $if(projection.Filters)$FILTER (WHERE $projection.Filters: {filter | $(filter.Template)()$}; separator=" AND "$) $endif$AS $projection.Alias$
