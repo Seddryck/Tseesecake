@@ -116,12 +116,17 @@ $displayElapsed =  if ($elapsed.Minutes -gt 0) {"$($elapsed.ToString("mm")) minu
 $displayElapsed += "$($elapsed.ToString("ss")) seconds"
 
 $defaultBackgroundColor = [System.Console]::BackgroundColor
-$defaultForegroundColor = [System.Console]::ForegroundColor
-if ($failureCount -eq 0) {
-    Write-Output "Test-harness successfully executed in $displayElapsed." -ForegroundColor black -BackgroundColor green
+$defaultForegroundColor = [System.Console]::ForegroundColor 
+$host.UI.RawUI.ForegroundColor = black
+if ($failureCount -eq 0) {  
+    $host.UI.RawUI.BackgroundColor = green
+    Write-Output "Test-harness successfully executed in $displayElapsed."
 } else {
-    Write-Output "Test-harness has some failures during execution in $displayElapsed." -ForegroundColor black -BackgroundColor red
+    $host.UI.RawUI.BackgroundColor = red
+    Write-Output "Test-harness has some failures during execution in $displayElapsed."
 }
-Write-Output ""  -ForegroundColor $defaultForegroundColor -BackgroundColor $defaultBackgroundColor
+$host.UI.RawUI.ForegroundColor = $defaultForegroundColor
+$host.UI.RawUI.BackgroundColor = $defaultBackgroundColor
+Write-Output ""
 
 exit $failureCount
