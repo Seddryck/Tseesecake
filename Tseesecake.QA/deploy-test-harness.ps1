@@ -28,7 +28,7 @@ Function Deploy-TestSuite {
         $startWait = Get-Date
         Push-Location $PSScriptRoot\$name
         try {
-            Write-Output "Running test-suite for $name"
+            Write-Host "Running test-suite for $name"
             & .\deploy-$name-test-env.ps1 -force:$force -config $config -frameworks $frameworks | Out-Null
             $result = $lastexitcode
             Write-Output $lastexitcode
@@ -36,11 +36,11 @@ Function Deploy-TestSuite {
             $displayElapsed =  if ($elasped.Minutes -gt 0) {"$($elasped.ToString("mm")) minute "}
             $displayElapsed += "$($elasped.ToString("ss")) seconds"
             if ($result -eq 0) {
-                Write-Output "Test-suite for $name successfully run in $displayElapsed." -ForegroundColor green
+                Write-Host "Test-suite for $name successfully run in $displayElapsed." -ForegroundColor green
             } elseif ($result -eq -1) {
-                Write-Output "Test-suite for $name was skipped." -ForegroundColor gray
+                Write-Host "Test-suite for $name was skipped." -ForegroundColor gray
             }  else {
-                Write-Output "Test-suite for $name run in $($elasped.ToString("ss")) seconds but returned some failures." -ForegroundColor red
+                Write-Host "Test-suite for $name run in $($elasped.ToString("ss")) seconds but returned some failures." -ForegroundColor red
             }
             return [PSCustomObject]@{
                 Suite = $name
@@ -104,29 +104,19 @@ foreach ($e in $exclude) {
             }
 }
 
-$results | Sort-Object -Property "Suite" | Format-Table | Out-String | Write-Output
+$results | Sort-Object -Property "Suite" | Format-Table | Out-String | Write-Host
 
 $failureCount = 0
 $results | ForEach {$failureCount += $_.TestSuiteFailure}
 $failureCount = if ($failureCount -gt 0) {1} else {0}
 
 $elapsed = $(New-TimeSpan -Start $startHarness)
-Write-Output $elapsed
 $displayElapsed =  if ($elapsed.Minutes -gt 0) {"$($elapsed.ToString("mm")) minute "}
 $displayElapsed += "$($elapsed.ToString("ss")) seconds"
 
-$defaultBackgroundColor = [System.Console]::BackgroundColor
-$defaultForegroundColor = [System.Console]::ForegroundColor 
-$host.UI.RawUI.ForegroundColor = black
 if ($failureCount -eq 0) {  
-    $host.UI.RawUI.BackgroundColor = green
-    Write-Output "Test-harness successfully executed in $displayElapsed."
+    Write-Host "Test-harness successfully executed in $displayElapsed." -ForegroundColor black -BackgroundColor green -NoNewLine
 } else {
-    $host.UI.RawUI.BackgroundColor = red
-    Write-Output "Test-harness has some failures during execution in $displayElapsed."
+    Write-Host "Test-harness has some failures during execution in $displayElapsed." -ForegroundColor black -BackgroundColor red -NoNewLine
 }
-$host.UI.RawUI.ForegroundColor = $defaultForegroundColor
-$host.UI.RawUI.BackgroundColor = $defaultBackgroundColor
-Write-Output ""
-
 exit $failureCount
