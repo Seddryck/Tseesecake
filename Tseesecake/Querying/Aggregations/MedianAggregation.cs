@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Querying.Aggregations
 {
-    internal class MaxAggregation : BaseAggregation
+    internal class MedianAggregation : BaseAggregation
     { }
 }

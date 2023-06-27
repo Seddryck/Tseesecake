@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Querying.Aggregations
 {
-    internal class MaxAggregation : IAggregation
+    internal abstract class BaseAggregation : IAggregation
     {
         public string Name => GetType().Name.Replace("Aggregation", "").ToLowerInvariant();
     }

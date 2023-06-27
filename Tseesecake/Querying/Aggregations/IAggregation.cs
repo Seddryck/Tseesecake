@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tseesecake.Querying.Projections
+namespace Tseesecake.Querying.Aggregations
 {
-    public interface IProjection
+    public interface IAggregation
     {
-        string Template { get; }
+        string Name { get; }
     }
 }

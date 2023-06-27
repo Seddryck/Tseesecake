@@ -76,8 +76,21 @@ namespace Tseesecake.QA
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
             Assert.That(reader.FieldCount, Is.EqualTo(1));
-            Assert.That(reader.GetName(0), Is.EqualTo("maximum"));
-            Assert.That(reader.GetDecimal(0), Is.GreaterThanOrEqualTo(0));
+            Assert.That(reader.GetName(0), Is.EqualTo("LowerWindPark"));
+            Assert.That(reader.GetString(0), Is.EqualTo(reader.GetString(0).ToLower()));
+        }
+
+        [Test]
+        public virtual void Execute_ProjectionAggregation_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionAggregation);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            Assert.That(reader.GetName(0), Is.EqualTo("Maximum"));
+            Assert.That(reader.GetDecimal(0), Is.EqualTo(30));
+            Assert.That(reader.Read(), Is.False);
         }
 
         [Test]

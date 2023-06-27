@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Querying.Aggregations;
 
-namespace Tseesecake.Querying
+namespace Tseesecake.Querying.Projections
 {
-    internal class ExpressionProjection : IProjection
+    internal class AggregationProjection : IProjection
     {
-        public string Expression { get; }
+        public IAggregation Aggregation { get; }
+        public Column Column { get; }
         public string Alias { get; }
 
-        public string Template { get => nameof(ExpressionProjection); }
+        public string Template { get => nameof(AggregationProjection); }
 
-        public ExpressionProjection(string expression, string alias)
-            => (Expression, Alias) = (expression, alias);
+        public AggregationProjection(IAggregation aggregation, Column column, string alias)
+            => (Aggregation, Column, Alias) = (aggregation, column, alias);
     }
 }
