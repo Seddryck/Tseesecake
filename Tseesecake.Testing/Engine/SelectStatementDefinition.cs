@@ -51,7 +51,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionAggregationFilter
             => new(WindEnergy
                 , new[] {
-                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } ,"Maximum")
+                    new AggregationProjection(new AverageAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } ,"Average")
                 });
 
         public static SelectStatement FilterSingle
