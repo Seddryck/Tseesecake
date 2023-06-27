@@ -25,7 +25,7 @@
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Include="Engine\BasicQuery.duck.sql.st" />
+	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\comparisons.dic.st" />

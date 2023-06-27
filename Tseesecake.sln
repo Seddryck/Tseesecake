@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{01685EF7-A
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tseesecake.QA", "Tseesecake.QA\Tseesecake.QA.csproj", "{0E5C5BDC-5869-4E01-A157-60CA9383C17B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{11F82DC7-7597-47ED-A3CC-1896726F957B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11F82DC7-7597-47ED-A3CC-1896726F957B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11F82DC7-7597-47ED-A3CC-1896726F957B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E5C5BDC-5869-4E01-A157-60CA9383C17B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E5C5BDC-5869-4E01-A157-60CA9383C17B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E5C5BDC-5869-4E01-A157-60CA9383C17B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E5C5BDC-5869-4E01-A157-60CA9383C17B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

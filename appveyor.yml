@@ -13,12 +13,13 @@ skip_commits:
 
 init:
 - cmd: git config --global core.autocrlf true
-- ps: $env:IGNORE_NORMALISATION_GIT_HEAD_MOVE = 1
-- cmd: dotnet --version
+- cmd: setx IGNORE_NORMALISATION_GIT_HEAD_MOVE "1"
+- cmd: RefreshEnv.cmd
+- pwsh: Write-Output "Target branch is '$($env:APPVEYOR_REPO_BRANCH)'"
 
 before_build:
 - cmd: gitversion /output buildserver /verbosity Minimal
-- cmd: echo "Building Tseesecake version %GitVersion_SemVer%"
+- pwsh: Write-Output "Building DubUrl version $($env:GitVersion_SemVer)"
 
 build_script:
 - dotnet build Tseesecake.sln -p:version="%GitVersion_SemVer%" -c Release /p:ContinuousIntegrationBuild=true --nologo
@@ -26,21 +27,24 @@ build_script:
 test_script:
 - dotnet test Tseesecake.Testing -c Release --test-adapter-path:. --logger:Appveyor --no-build --nologo
 
-after_test:
-- ps: >-
+- pwsh: |
     $ErrorActionPreference = "Stop"
-
     dotnet test Tseesecake.Testing -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Threshold=10 /p:ThresholdType=line --no-build --nologo
-    
     if($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode )  }
 
-- ps: >-
+- pwsh: |
     $ProgressPreference = 'SilentlyContinue'
-    
     Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
-    
     .\codecov.exe --dir "./Tseesecake.Testing"
 
+- pwsh: |
+    $force = ($env:APPVEYOR_REPO_BRANCH -eq "main") #Valid for a Pull Request or a Commit on main
+    & .\Tseesecake.QA\deploy-test-harness.ps1 -force:$force -config "Release" -frameworks @("net6.0") -exclude @("Drill", "Trino")
+    if ($lastexitcode -gt 0) {
+       throw "At least one of the test-suite was not successful. Build stopped."
+    }
+
+after_test:
 - dotnet pack Tseesecake -p:version="%GitVersion_SemVer%" -c Release --include-symbols --no-build --nologo
 
 artifacts:
