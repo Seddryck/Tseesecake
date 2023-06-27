@@ -2,6 +2,7 @@ Param(
 	[switch] $force=$false
 	, $config= "Release"
 	, [string[]] $frameworks = @("net6.0", "net7.0")
+	, [string] $version = "v0.8.0"
 )
 . $PSScriptRoot\..\Run-TestSuite.ps1
 
@@ -9,8 +10,13 @@ if ($force) {
 	Write-Host "Enforcing QA testing for DuckDB"
 }
 
-#$rootUrl = "https://github.com/duckdb/duckdb/releases/latest/download"
-$rootUrl = "https://github.com/duckdb/duckdb/releases/download/v0.8.0"
+$rootUrl = "https://github.com/duckdb/duckdb/releases"
+if ($null -eq $version) {
+	$rootUrl = "$rootUrl/latest/download"
+} else {
+	$rootUrl = "$rootUrl/download/$version"
+}
+
 if (-not($env:PATH -like "7-zip")) {
 	$env:PATH += ";C:\Program Files\7-Zip"
 }
@@ -23,7 +29,7 @@ if ($force -or ($filesChanged -like "*duckdb*")) {
 	Write-Host "Deploying DuckDB testing environment"
 
 	if (-not (Test-Path -Path $duckPath\duckdb.exe)) {
-		Write-Host "`tDownloading DuckDB CLI ..."
+		Write-Host "`tDownloading DuckDB CLI from $rootUrl ..."
 		Invoke-WebRequest "$rootUrl/duckdb_cli-windows-amd64.zip" -OutFile "$env:temp\duckdb_cli.zip"
 		Write-Host "`tDuckDB CLI downloaded."
 		Write-Host "`tExtracting from archive DuckDB CLI..."		
