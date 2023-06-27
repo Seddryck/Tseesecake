@@ -28,19 +28,19 @@ Function Deploy-TestSuite {
         $startWait = Get-Date
         Push-Location $PSScriptRoot\$name
         try {
-            Write-Host "Running test-suite for $name"
+            Write-Output "Running test-suite for $name"
             & .\deploy-$name-test-env.ps1 -force:$force -config $config -frameworks $frameworks | Out-Null
             $result = $lastexitcode
-            Write-Host $lastexitcode
+            Write-Output $lastexitcode
             $elasped = $(New-TimeSpan -Start $startWait)
             $displayElapsed =  if ($elasped.Minutes -gt 0) {"$($elasped.ToString("mm")) minute "}
             $displayElapsed += "$($elasped.ToString("ss")) seconds"
             if ($result -eq 0) {
-                Write-Host "Test-suite for $name successfully run in $displayElapsed." -ForegroundColor green
+                Write-Output "Test-suite for $name successfully run in $displayElapsed." -ForegroundColor green
             } elseif ($result -eq -1) {
-                Write-Host "Test-suite for $name was skipped." -ForegroundColor gray
+                Write-Output "Test-suite for $name was skipped." -ForegroundColor gray
             }  else {
-                Write-Host "Test-suite for $name run in $($elasped.ToString("ss")) seconds but returned some failures." -ForegroundColor red
+                Write-Output "Test-suite for $name run in $($elasped.ToString("ss")) seconds but returned some failures." -ForegroundColor red
             }
             return [PSCustomObject]@{
                 Suite = $name
@@ -72,7 +72,7 @@ if ($suites.Length -eq 0 -and "" -ne $suite -and $null -ne $suite) {
 }
 
 if ($suites.Length -eq 0) {
-    Write-Host "Executing test harness for all the test suites ..."
+    Write-Output "Executing test harness for all the test suites ..."
     $suites = Get-ChildItem -Path ".\$project" -Filter "deploy-*-test-env.ps1" -Recurse `
         | Select-Object "Name" | ForEach{$_.Name.Substring(7,$_.Name.Substring(7).IndexOf("-"))}
 
@@ -81,13 +81,13 @@ if ($suites.Length -eq 0) {
     }
 }
 if ($suites.Length -le 1) {
-    Write-Host "$($suites.Length) test-suite to run."
+    Write-Output "$($suites.Length) test-suite to run."
 } else {
-    Write-Host "$($suites.Length) test-suites to run."
+    Write-Output "$($suites.Length) test-suites to run."
 }
 
 if ($force) {
-    Write-Host "Run of these test-suites is enforced."
+    Write-Output "Run of these test-suites is enforced."
 }
 
 $results = @()
@@ -104,24 +104,24 @@ foreach ($e in $exclude) {
             }
 }
 
-$results | Sort-Object -Property "Suite" | Format-Table | Out-String | Write-Host
+$results | Sort-Object -Property "Suite" | Format-Table | Out-String | Write-Output
 
 $failureCount = 0
 $results | ForEach {$failureCount += $_.TestSuiteFailure}
 $failureCount = if ($failureCount -gt 0) {1} else {0}
 
 $elapsed = $(New-TimeSpan -Start $startHarness)
-Write-Host $elapsed
+Write-Output $elapsed
 $displayElapsed =  if ($elapsed.Minutes -gt 0) {"$($elapsed.ToString("mm")) minute "}
 $displayElapsed += "$($elapsed.ToString("ss")) seconds"
 
 $defaultBackgroundColor = [System.Console]::BackgroundColor
 $defaultForegroundColor = [System.Console]::ForegroundColor
 if ($failureCount -eq 0) {
-    Write-Host "Test-harness successfully executed in $displayElapsed." -ForegroundColor black -BackgroundColor green
+    Write-Output "Test-harness successfully executed in $displayElapsed." -ForegroundColor black -BackgroundColor green
 } else {
-    Write-Host "Test-harness has some failures during execution in $displayElapsed." -ForegroundColor black -BackgroundColor red
+    Write-Output "Test-harness has some failures during execution in $displayElapsed." -ForegroundColor black -BackgroundColor red
 }
-Write-Host ""  -ForegroundColor $defaultForegroundColor -BackgroundColor $defaultBackgroundColor
+Write-Output ""  -ForegroundColor $defaultForegroundColor -BackgroundColor $defaultBackgroundColor
 
 exit $failureCount

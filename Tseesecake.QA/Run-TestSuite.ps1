@@ -23,14 +23,14 @@ Function Run-TestSuite {
 				Write-Warning "Cannot build the Test assembly! `r`n$($buildMsg -join "`r`n")"
 			} else {
 				foreach ($category in $categories) {
-					Write-Host "`tRunning test-suite for $category ($framework)"
-					$args  = @("test", "..\..\$project")
-					$args += @("--filter", "`"TestCategory=$($category.Split("+") -join "`"`"&`"`"TestCategory=")`"")
-					$args += @("-c", $config)
-					$args += @("-f", $framework)
-					$args += @("--no-build", "--nologo")
-					$args += $adapters
-					& dotnet $args | Out-Host
+					Write-Output "`tRunning test-suite for $category ($framework)"
+					$testArgs  = @("test", "..\..\$project")
+					$testArgs += @("--filter", "`"TestCategory=$($category.Split("+") -join "`"`"&`"`"TestCategory=")`"")
+					$testArgs += @("-c", $config)
+					$testArgs += @("-f", $framework)
+					$testArgs += @("--no-build", "--nologo")
+					$testArgs += $adapters
+					& dotnet $testArgs | Out-Host
 					$testSuccessful += $lastexitcode
 				}
 			}

@@ -32,9 +32,9 @@ Function Deploy-Container {
 		$running = & docker container ls --format "{{.ID}}" --filter "name=$nickname"
 		if ($null -ne $running) {
 			$previously_running = $true
-			Write-Host "`tContainer for '$fullname' is already running with ID '$running'."
+			Write-Output "`tContainer for '$fullname' is already running with ID '$running'."
 		} else {
-			Write-Host "`tStarting new container"
+			Write-Output "`tStarting new container"
 			Start-Process -FilePath $filePath -ArgumentList $arguments
 			do {
 				$running = & docker container ls --format "{{.ID}}" --filter "name=$nickname"
@@ -42,7 +42,7 @@ Function Deploy-Container {
 					Start-Sleep -s 1
 				}
 			} while($null -eq $running)
-			Write-Host "`tContainer for '$fullname' started with ID '$running'."
+			Write-Output "`tContainer for '$fullname' started with ID '$running'."
 
 			if ($null -ne $scriptBlock) {
 				$startWait = Get-Date
@@ -51,7 +51,7 @@ Function Deploy-Container {
 					$wait = New-TimeSpan -Start $startWait
 					if (!$isRunning) {
 						if ($wait -gt (New-TimeSpan -Seconds 1)) {
-							Write-Host "`t`tWaiting since $($wait.ToString("ss")) seconds ..."
+							Write-Output "`t`tWaiting since $($wait.ToString("ss")) seconds ..."
 						}
 						Start-Sleep -s 1
 					}
@@ -60,7 +60,7 @@ Function Deploy-Container {
 					Write-Warning "Waited during $($wait.ToString("ss")) seconds. Stopping test harness."
 					exit 0
 				} else {
-					Write-Host "`tServer is available: waited $($wait.ToString("ss")) seconds to get it live."
+					Write-Output "`tServer is available: waited $($wait.ToString("ss")) seconds to get it live."
 				}
 			}
 		}
@@ -86,9 +86,9 @@ Function Remove-Container {
 	}
 
 	Process {
-		Write-Host "`tForcefully removing container '$container' ..."
+		Write-Output "`tForcefully removing container '$container' ..."
 		& docker rm --force $container | Out-Null
-		Write-Host "`tContainer removed."
+		Write-Output "`tContainer removed."
     }
 
     End { 
@@ -115,11 +115,11 @@ Function Connect-Network {
 
 	Process {
 		if ($containers.Contains($container)) {
-			Write-Host "`tContainer '$container' already connected to network '$network'."
+			Write-Output "`tContainer '$container' already connected to network '$network'."
 		} else {
-			Write-Host "`tConnecting container '$container' to network '$network' ..."
+			Write-Output "`tConnecting container '$container' to network '$network' ..."
 			& docker network connect $network $container
-			Write-Host "`tContainer '$container' connected to network '$network'."
+			Write-Output "`tContainer '$container' connected to network '$network'."
 		}
 	}
 

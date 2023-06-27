@@ -16,15 +16,15 @@ Function Start-Windows-Service {
 			throw "`Service '$serviceName' not found!"
 		} else {
 			if($service.Status -ne 'Running') {
-				Write-host "`tStarting '$serviceName' service ..."
+				Write-Output "`tStarting '$serviceName' service ..."
 				Start-Service $serviceName -ErrorAction SilentlyContinue
-				Write-host "`tService started"
+				Write-Output "`tService started"
 
 				if ((Get-Service -Name $serviceName).Status -ne 'Running') {
 					throw "`Service '$serviceName' not able to start!"
 				}
 			} else {
-				Write-host "`tService '$serviceName' already started"
+				Write-Output "`tService '$serviceName' already started"
 				$previouslyRunning = $true
 			}
 		}
@@ -49,11 +49,11 @@ Function Stop-Windows-Service {
 			throw "`Service '$serviceName' not found!"
 		} else {
 			if($service.Status -ne 'Stopped') {
-				Write-host "`tStopping '$serviceName' service ..."
+				Write-Output "`tStopping '$serviceName' service ..."
 				Stop-Service $serviceName 
-				Write-host "`tService stopped"
+				Write-Output "`tService stopped"
 			} else {
-				Write-host "`tService '$serviceName' already stopped"
+				Write-Output "`tService '$serviceName' already stopped"
 			}
 		}
     }

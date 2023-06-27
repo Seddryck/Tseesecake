@@ -15,11 +15,11 @@ init:
 - cmd: git config --global core.autocrlf true
 - cmd: setx IGNORE_NORMALISATION_GIT_HEAD_MOVE "1"
 - cmd: RefreshEnv.cmd
-- pwsh: Write-Host "Target branch is '$($env:APPVEYOR_REPO_BRANCH)'"
+- pwsh: Write-Output "Target branch is '$($env:APPVEYOR_REPO_BRANCH)'"
 
 before_build:
 - cmd: gitversion /output buildserver /verbosity Minimal
-- pwsh: Write-Host "Building DubUrl version $($env:GitVersion_SemVer)"
+- pwsh: Write-Output "Building DubUrl version $($env:GitVersion_SemVer)"
 
 build_script:
 - dotnet build Tseesecake.sln -p:version="%GitVersion_SemVer%" -c Release /p:ContinuousIntegrationBuild=true --nologo
