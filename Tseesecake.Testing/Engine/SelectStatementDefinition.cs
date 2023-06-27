@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
+using Tseesecake.Querying.Aggregations;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
@@ -44,7 +45,13 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionAggregation
             => new(WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "Maximum")
+                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), "Maximum")
+                });
+
+        public static SelectStatement ProjectionAggregationFilter
+            => new(WindEnergy
+                , new[] {
+                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } ,"Maximum")
                 });
 
         public static SelectStatement FilterSingle
