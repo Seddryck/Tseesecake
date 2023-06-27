@@ -10,7 +10,7 @@ if ($force) {
 }
 
 #$rootUrl = "https://github.com/duckdb/duckdb/releases/latest/download"
-$rootUrl = "https://github.com/duckdb/duckdb/releases/tag/v0.8.0"
+$rootUrl = "https://github.com/duckdb/duckdb/releases/download/v0.8.0"
 if (-not($env:PATH -like "7-zip")) {
 	$env:PATH += ";C:\Program Files\7-Zip"
 }
