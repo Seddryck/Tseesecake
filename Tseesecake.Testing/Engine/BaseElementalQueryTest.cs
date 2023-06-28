@@ -65,6 +65,18 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => Assert.That(new ElementalQuery(SelectStatementDefinition.ProjectionAggregationFilter).Read(Dialect, Connectivity)
                 , Is.EqualTo(ProjectionAggregationFilter));
 
+        protected abstract string ProjectionWindow { get; }
+        [Test]
+        public void Read_ProjectionWindow_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.ProjectionWindow).Read(Dialect, Connectivity)
+                , Is.EqualTo(ProjectionWindow));
+
+        protected abstract string ProjectionWindowOffset { get; }
+        [Test]
+        public void Read_ProjectionWindowOffset_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.ProjectionWindowOffset).Read(Dialect, Connectivity)
+                , Is.EqualTo(ProjectionWindowOffset));
+
         protected abstract string FilterSingle { get; }
         [Test]
         public void Read_FilterSingle_ValidStatement()
