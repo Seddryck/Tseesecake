@@ -32,9 +32,9 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string FilterTemporizer 
             => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tage(Instant) < INTERVAL '4 HOURS 30 MINUTES 0 SECONDS'\r\n";
         protected override string SlicerSingle 
-            => "SELECT\r\n\tMAX(Produced) AS maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n";
+            => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n";
         protected override string SlicerMultiple 
-            => "SELECT\r\n\tMAX(Produced) AS maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n\t, date_part('weekday', Instant)\r\n";
+            => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n\t, date_part('weekday', Instant)\r\n";
         protected override string SlicerAndGroupFilter 
             => "SELECT\r\n\tAVG(Produced) AS average\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\taverage >= 15\r\n";
         protected override string LimitOffset 

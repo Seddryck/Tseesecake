@@ -10,6 +10,9 @@
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
+	  <None Remove="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
+	  <None Remove="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
+	  <None Remove="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\Culler.sql.st" />
@@ -30,6 +33,9 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />

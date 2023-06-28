@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Aggregations;
+using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
@@ -40,7 +41,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionExpression
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("LOWER(WindPark)", "LowerWindPark")
+                    new ExpressionProjection(new LiteralExpression("LOWER(WindPark)"), "LowerWindPark")
                 });
 
         public static SelectStatement ProjectionAggregation
@@ -108,7 +109,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerSingle
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "maximum")
+                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), "Maximum")
                 }
                 , null
                 , new ISlicer[] {
@@ -118,7 +119,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerMultiple
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "maximum")
+                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), "Maximum")
                 }
                 , null
                 , new ISlicer[] {
@@ -129,7 +130,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerAndGroupFilter
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("AVG(Produced)", "average")
+                    new AggregationProjection(new AverageAggregation(), new Measurement("Produced"), "average")
                 }
                 , null
                 , new ISlicer[] {

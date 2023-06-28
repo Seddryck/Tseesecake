@@ -1,1 +1,1 @@
-$projection.Column.Name$
+$projection.Expression : {expression | $(expression.Template)()$}$
