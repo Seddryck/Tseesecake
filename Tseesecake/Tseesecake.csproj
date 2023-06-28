@@ -8,6 +8,7 @@
 	  <None Remove="Engine\DuckDB\Dictionaries\aggregations.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
@@ -20,6 +21,7 @@
 	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
 	  <None Remove="Engine\DuckDB\Projections\AggregationProjection.sql.st" />
+	  <None Remove="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
 	  <None Remove="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
@@ -27,6 +29,8 @@
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\aggregations.dic.st" />

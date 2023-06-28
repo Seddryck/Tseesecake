@@ -29,6 +29,10 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionAggregationFilter
             => "SELECT\r\n\tAVG(Produced) FILTER (WHERE Producer = 'Future Energy') AS Average\r\nFROM\r\n\tWindEnergy\r\n";
+        protected override string ProjectionWindow
+            => "SELECT\r\n\tROW_NUMBER() OVER(ORDER BY Produced DESC NULLS LAST) AS RowId\r\nFROM\r\n\tWindEnergy\r\n";
+        protected override string ProjectionWindowOffset
+            => "SELECT\r\n\tLAG(Produced, 4, 0) OVER(PARTITION BY WindPark ORDER BY Instant ASC NULLS LAST) AS FourHoursBefore\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string FilterSingle 
             => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tWindPark = 'Sea park'\r\n";
         protected override string FilterMultiple 
