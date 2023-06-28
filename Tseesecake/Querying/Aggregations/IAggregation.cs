@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.Aggregations
 {
     public interface IAggregation
     {
         string Name { get; }
+        IExpression Expression { get; }
     }
 }
