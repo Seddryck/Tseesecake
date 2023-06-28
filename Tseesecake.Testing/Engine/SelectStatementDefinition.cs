@@ -10,6 +10,7 @@ using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
 using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
+using Tseesecake.Querying.WindowFunctions;
 
 namespace Tseesecake.Testing.Engine
 {
@@ -51,7 +52,20 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionAggregationFilter
             => new(WindEnergy
                 , new[] {
-                    new AggregationProjection(new AverageAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } ,"Average")
+                    new AggregationProjection(new AverageAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } , "Average")
+                });
+
+
+        public static SelectStatement ProjectionWindow
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(new RowNumberWindowFunction(), new[] { new ColumnOrder(new Measurement("Produced"), Sorting.Descending, NullSorting.Last) }, null , "RowId")
+                });
+
+        public static SelectStatement ProjectionWindowOffset
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(new LagWindowFunction(new Measurement("Produced"), 4, 0), new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }, new[] { new FacetSlicer(new Facet("WindPark")) } , "FourHoursBefore")
                 });
 
         public static SelectStatement FilterSingle

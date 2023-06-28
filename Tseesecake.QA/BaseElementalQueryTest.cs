@@ -108,6 +108,31 @@ namespace Tseesecake.QA
         }
 
         [Test]
+        public virtual void Execute_ProjectionWindow_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindow);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            Assert.That(reader.GetName(0), Is.EqualTo("RowId"));
+            Assert.That(reader.GetValue(0), Is.EqualTo(1));
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.GetValue(0), Is.EqualTo(2));
+        }
+
+        [Test]
+        public virtual void Execute_ProjectionWindowOffset_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowOffset);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            Assert.That(reader.GetName(0), Is.EqualTo("FourHoursBefore"));
+        }
+
+        [Test]
         public virtual void Execute_FilterSingle_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();
