@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
+using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.WindowFunctions
 {
-    internal class LastWindowFunction : BaseColumnWindowFunction
+    internal class LastWindowFunction : BaseExpressionWindowFunction
     {
-        public LastWindowFunction(Column column)
-            : base(column) { }
+        public LastWindowFunction(IExpression expression)
+            : base(expression) { }
     }
 }

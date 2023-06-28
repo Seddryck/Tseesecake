@@ -13,15 +13,14 @@ namespace Tseesecake.Querying.Projections
     {
         public IAggregation Aggregation { get; }
         public IFilter[]? Filters { get; }
-        public Column Column { get; }
         public string Alias { get; }
 
         public string Template { get => nameof(AggregationProjection); }
 
-        public AggregationProjection(IAggregation aggregation, Column column, string alias)
-            : this(aggregation, column, null, alias) { }
+        public AggregationProjection(IAggregation aggregation, string alias)
+            : this(aggregation, null, alias) { }
 
-        public AggregationProjection(IAggregation aggregation, Column column, IFilter[]? filters, string alias)
-            => (Aggregation, Column, Filters, Alias) = (aggregation, column, filters?.Length==0 ? null : filters, alias);
+        public AggregationProjection(IAggregation aggregation, IFilter[]? filters, string alias)
+            => (Aggregation, Filters, Alias) = (aggregation, filters?.Length==0 ? null : filters, alias);
     }
 }

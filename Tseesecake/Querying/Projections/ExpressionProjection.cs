@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.Projections
 {
     internal class ExpressionProjection : IProjection
     {
-        public string Expression { get; }
+        public IExpression Expression { get; }
         public string Alias { get; }
 
-        public string Template { get => nameof(ExpressionProjection); }
+        public virtual string Template { get => nameof(ExpressionProjection); }
 
-        public ExpressionProjection(string expression, string alias)
+        public ExpressionProjection(IExpression expression, string alias)
             => (Expression, Alias) = (expression, alias);
     }
 }

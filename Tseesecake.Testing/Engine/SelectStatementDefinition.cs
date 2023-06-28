@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using LinqExp = System.Linq.Expressions;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Aggregations;
+using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
@@ -40,19 +41,19 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionExpression
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("LOWER(WindPark)", "LowerWindPark")
+                    new ExpressionProjection(new LiteralExpression("LOWER(WindPark)"), "LowerWindPark")
                 });
 
         public static SelectStatement ProjectionAggregation
             => new(WindEnergy
                 , new[] {
-                    new AggregationProjection(new MaxAggregation(), new Measurement("Produced"), "Maximum")
+                    new AggregationProjection(new MaxAggregation(new ColumnExpression(new Measurement("Produced"))), "Maximum")
                 });
 
         public static SelectStatement ProjectionAggregationFilter
             => new(WindEnergy
                 , new[] {
-                    new AggregationProjection(new AverageAggregation(), new Measurement("Produced"), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } , "Average")
+                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } , "Average")
                 });
 
 
@@ -65,7 +66,13 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionWindowOffset
             => new(WindEnergy
                 , new[] {
-                    new WindowProjection(new LagWindowFunction(new Measurement("Produced"), 4, 0), new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }, new[] { new FacetSlicer(new Facet("WindPark")) } , "FourHoursBefore")
+                    new WindowProjection(new LagWindowFunction(new ColumnExpression(new Measurement("Produced")), new ConstantExpression(4), new ConstantExpression(0)), new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }, new[] { new FacetSlicer(new Facet("WindPark")) } , "FourHoursBefore")
+                });
+
+        public static SelectStatement ProjectionWindowOffsetExpression
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(new LagWindowFunction(new LiteralExpression("ABS(Produced - Forecasted)"), new ConstantExpression(4), new ConstantExpression(0)), new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }, new[] { new FacetSlicer(new Facet("WindPark")) } , "FourHoursBefore")
                 });
 
         public static SelectStatement FilterSingle
@@ -93,7 +100,7 @@ namespace Tseesecake.Testing.Engine
                     new ColumnProjection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
-                    new Culler(new Measurement("Produced"), Expression.LessThan,  5)
+                    new Culler(new Measurement("Produced"), LinqExp.Expression.LessThan,  5)
                 });
 
         public static SelectStatement FilterTemporizer
@@ -108,7 +115,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerSingle
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "maximum")
+                    new AggregationProjection(new MaxAggregation(new ColumnExpression(new Measurement("Produced"))), "Maximum")
                 }
                 , null
                 , new ISlicer[] {
@@ -118,7 +125,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerMultiple
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("MAX(Produced)", "maximum")
+                    new AggregationProjection(new MaxAggregation(new ColumnExpression(new Measurement("Produced"))), "Maximum")
                 }
                 , null
                 , new ISlicer[] {
@@ -129,14 +136,14 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerAndGroupFilter
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection("AVG(Produced)", "average")
+                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "average")
                 }
                 , null
                 , new ISlicer[] {
                     new FacetSlicer(new Facet("WindPark"))
                 }
                 , new IFilter[] {
-                    new Gatherer(new Measurement("average"), Expression.GreaterThanOrEqual, 15)
+                    new Gatherer(new Measurement("average"), LinqExp.Expression.GreaterThanOrEqual, 15)
                 });
 
         public static SelectStatement LimitOffset

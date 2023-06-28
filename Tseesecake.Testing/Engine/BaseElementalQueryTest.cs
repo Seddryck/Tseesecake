@@ -77,6 +77,12 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => Assert.That(new ElementalQuery(SelectStatementDefinition.ProjectionWindowOffset).Read(Dialect, Connectivity)
                 , Is.EqualTo(ProjectionWindowOffset));
 
+        protected abstract string ProjectionWindowOffsetExpression { get; }
+        [Test]
+        public void Read_ProjectionWindowOffsetExpression_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.ProjectionWindowOffsetExpression).Read(Dialect, Connectivity)
+                , Is.EqualTo(ProjectionWindowOffsetExpression));
+
         protected abstract string FilterSingle { get; }
         [Test]
         public void Read_FilterSingle_ValidStatement()
