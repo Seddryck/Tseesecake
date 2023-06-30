@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.WindowFunctions
 {
-    internal abstract class BaseOffsetWindowFunction : BaseColumnWindowFunction
+    internal abstract class BaseOffsetWindowFunction : BaseExpressionWindowFunction
     {
-        protected BaseOffsetWindowFunction(Column column, int offset, object @default)
-            : base(column) { (Offset, Default) = (offset, @default); }
+        protected BaseOffsetWindowFunction(IExpression expression, IExpression offset, IExpression @default)
+            : base(expression) { (Offset, Default) = (offset, @default); }
 
-        public int Offset { get; }
-        public object Default { get; }
-
+        public IExpression Offset { get; }
+        public IExpression Default { get; }
     }
 }

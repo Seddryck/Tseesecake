@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.Projections
 {
-    internal class ColumnProjection : IProjection
+    internal class ColumnProjection : ExpressionProjection
     {
-        public Column Column { get; }
-
-        public string Template { get => nameof(ColumnProjection); }
+        public override string Template { get => nameof(ColumnProjection); }
 
         public ColumnProjection(Column column)
-            => Column = column;
+            : base(new ColumnExpression(column), column.Name) { }
     }
 }
