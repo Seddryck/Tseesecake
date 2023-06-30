@@ -1,0 +1,1 @@
+ColumnDefinition(name, dbType) ::=$name; format="identity"$ $types.(dbType)$$lengthTypes.(dbType)$ NOT NULL

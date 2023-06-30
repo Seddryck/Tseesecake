@@ -14,6 +14,6 @@
 "DateTimeOffset" : "TIMESTAMP WITH TIME ZONE"
 "TimeSpan" : "INTERVAL"
 
-"GUID" : "UUID"
-"STRING" : "VARCHAR"
+"Guid" : "UUID"
+"String" : "VARCHAR"
 
