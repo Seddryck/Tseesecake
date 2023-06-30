@@ -19,5 +19,9 @@ namespace Tseesecake.Modeling
         public Timeseries(string name, Timestamp timestamp, Measurement measurement, Facet[]? facets)
             => (Name, Timestamp, Measurements, Facets) 
                 = (name, timestamp, new Measurement[] { measurement }, facets ?? Array.Empty<Facet>());
+
+        public Timeseries(string name, Timestamp timestamp, Measurement[] measurements, Facet[]? facets)
+            => (Name, Timestamp, Measurements, Facets)
+                = (name, timestamp, measurements, facets ?? Array.Empty<Facet>());
     }
 }

@@ -13,5 +13,8 @@ namespace Tseesecake.Mounting
 
         public FileTimeseries(string name, Timestamp timestamp, Measurement measurement, Facet[]? facets, IFileSource file)
             : base(name, timestamp, measurement, facets) { File = file; }
+
+        public FileTimeseries(string name, Timestamp timestamp, Measurement[] measurements, Facet[]? facets, IFileSource file)
+            : base(name, timestamp, measurements, facets) { File = file; }
     }
 }

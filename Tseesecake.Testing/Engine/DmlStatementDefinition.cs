@@ -22,7 +22,7 @@ namespace Tseesecake.Testing.Engine
             => new(
                     "WindEnergy"
                     , new Timestamp("Instant")
-                    , new Measurement("Produced")
+                    , new[] { new Measurement("Forecasted"), new Measurement("Produced") }
                     , new[] { new Facet("WindPark"), new Facet("Producer") }
                 );
 
@@ -30,9 +30,9 @@ namespace Tseesecake.Testing.Engine
             => new(
                     "WindEnergy"
                     , new Timestamp("Instant")
-                    , new Measurement("Produced")
+                    , new[] { new Measurement("Forecasted"), new Measurement("Produced") }
                     , new[] { new Facet("WindPark"), new Facet("Producer") }
-                    , new FileSource(@".\data\WindEnergy.csv", new Dictionary<string, object>() { { "DELIMITER", "," }, { "HEADER", 1 } })
+                    , new FileSource(@".\..\..\..\WindEnergy.csv", new Dictionary<string, object>() { { "DELIMITER", "," }, { "HEADER", 1 }, { "TIMESTAMPFORMAT", "%d/%m/%Y %H:%M:%S" } })
                 );
 
         public static Timeseries CreateOrReplace
@@ -40,5 +40,11 @@ namespace Tseesecake.Testing.Engine
 
         public static Timeseries CopyFrom
             => WindEnergyFile;
+
+        public static SelectStatement ProjectionCount
+            => new(WindEnergy
+                , new[] {
+                    new AggregationProjection(new CountAggregation(new LiteralExpression("*")), "countOfRows")
+                });
     }
 }

@@ -11,6 +11,10 @@ skip_commits:
     - CONTRIBUTING.md
     - SECURITY.md
 
+environment:
+  GitHub_Package_Read_PAT:
+    secure: SD0+xMqsIibU7V3NrQF/X64lYPKP/JyqhrpLYqBZCjb38v9lkfMHIb+D3EnfvQts
+
 init:
 - cmd: git config --global core.autocrlf true
 - cmd: setx IGNORE_NORMALISATION_GIT_HEAD_MOVE "1"
@@ -19,6 +23,7 @@ init:
 
 before_build:
 - cmd: gitversion /output buildserver /verbosity Minimal
+- cmd: dotnet nuget add source "https://nuget.pkg.github.com/Giorgi/index.json"  --name "GitHub Package for Giorgi" --username "seddryck@gmail.com" --password %GitHub_Package_Read_PAT%
 - pwsh: Write-Output "Building DubUrl version $($env:GitVersion_SemVer)"
 
 build_script:

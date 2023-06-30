@@ -14,33 +14,11 @@ using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
 {
-    public abstract class BaseElementalQueryTest
+    public abstract class BaseElementalQueryTest : BaseQATest
     {
         [OneTimeSetUp]
         public void SetupFixture()
-        {
-            var options = new DubUrlServiceOptions();
-            Provider = new ServiceCollection()
-                .AddSingleton(EmptyDubUrlConfiguration)
-                .AddDubUrl(options)
-                .AddTransient(provider => ActivatorUtilities.CreateInstance<QueryEngine>(provider
-                    , new[] { ConnectionString }))
-                .BuildServiceProvider();
-
-            new ProviderFactoriesRegistrator().Register();
-        }
-
-        protected ServiceProvider Provider { get; set; }
-        public abstract string ConnectionString { get; }
-
-        protected static IConfiguration EmptyDubUrlConfiguration
-        {
-            get
-            {
-                var builder = new ConfigurationBuilder().AddInMemoryCollection();
-                return builder.Build();
-            }
-        }
+            => SetupEngine(new[] { typeof(QueryEngine) });
 
         [Test]
         public virtual void Execute_ProjectionSingle_ValidStatement()
