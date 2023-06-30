@@ -19,7 +19,7 @@ init:
 
 before_build:
 - cmd: gitversion /output buildserver /verbosity Minimal
-- pwsh: &dotnet nuget add source "https://nuget.pkg.github.com/Giorgi/index.json"  --name "GitHub Package for Giorgi" --username "seddryck@gmail.com" --password ("ghp"+"_fJAqlGD6rO6yvDJ8DPERb6xIVZf3bO2Tu2xA")
+- cmd: dotnet nuget add source "https://nuget.pkg.github.com/Giorgi/index.json"  --name "GitHub Package for Giorgi" --username "seddryck@gmail.com" --password ("ghp"+"_fJAqlGD6rO6yvDJ8DPERb6xIVZf3bO2Tu2xA")
 - pwsh: Write-Output "Building DubUrl version $($env:GitVersion_SemVer)"
 
 build_script:
