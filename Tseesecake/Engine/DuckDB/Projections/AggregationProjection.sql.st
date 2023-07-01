@@ -1,2 +1,2 @@
-$aggregations.(projection.Aggregation.Name)$($projection.Aggregation.Expression : {expression | $(expression.Template)()$}$) $\\$
+$aggregations.(projection.Aggregation.Name)$($projection.Aggregation.Expression:(projection.Aggregation.Expression.Template)()$) $\\$
 $if(projection.Filters)$FILTER (WHERE $projection.Filters: {filter | $(filter.Template)()$}; separator=" AND "$) $endif$AS $projection.Alias$

@@ -1,1 +1,1 @@
-$expression.Constant; format="value"$
+ConstantExtression(expression)::=$expression.Constant; format="value"$

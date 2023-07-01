@@ -122,6 +122,16 @@ namespace Tseesecake.QA
         }
 
         [Test]
+        public virtual void Execute_ProjectionWindowFrame_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowFrame);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+        }
+
+        [Test]
         public virtual void Execute_FilterSingle_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();

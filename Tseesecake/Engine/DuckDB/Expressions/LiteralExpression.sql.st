@@ -1,1 +1,1 @@
-$expression.Literal$
+LiteralExtression(expression)::=$expression.Literal$
