@@ -12,7 +12,7 @@ $if(projection.PartitionBys)$
 	PARTITION BY $projection.PartitionBys: {slicer | $slicer:(slicer.Template)()$}; separator=", "$
 $endif$
 $if(projection.OrderBys)$
-	ORDER BY $projection.OrderBys: {order | $(order.Template)()$}; separator=", "$
+	ORDER BY $projection.OrderBys: {order | $order:(order.Template)()$}; separator=", "$
 $endif$
 $if(projection.Frame)$
 	$projection.Frame:(projection.Frame.Template)()$

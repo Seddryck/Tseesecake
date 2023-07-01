@@ -20,7 +20,7 @@ HAVING
 $endif$
 $if(statement.Orders)$
 ORDER BY
-	$statement.Orders: {order | $(order.Template)()$}; separator="
+	$statement.Orders: {order | $order:(order.Template)()$}; separator="
 , "$
 $endif$
 $if(statement.Restriction)$
