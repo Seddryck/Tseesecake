@@ -1,1 +1,1 @@
-$filter.Facet.Name$ <> $filter.Value; format="value"$
+DifferentDicer(filter)::=$filter.Facet.Name$ <> $filter.Value; format="value"$

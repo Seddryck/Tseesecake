@@ -5,7 +5,7 @@ FROM
 	$statement.Timeseries.Name; format="identity"$
 $if(statement.Filters)$
 WHERE
-	$statement.Filters: {filter | $(filter.Template)()$}; separator="
+	$statement.Filters: {filter | $filter:(filter.Template)()$}; separator="
 AND "$
 $endif$
 $if(statement.Slicers)$
@@ -15,7 +15,7 @@ GROUP BY
 $endif$
 $if(statement.GroupFilters)$
 HAVING
-	$statement.GroupFilters: {filter | $(filter.Template)()$}; separator="
+	$statement.GroupFilters: {filter | $filter:(filter.Template)()$}; separator="
 , "$
 $endif$
 $if(statement.Orders)$
