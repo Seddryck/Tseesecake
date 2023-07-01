@@ -1,4 +1,4 @@
-$windowFunctions.(projection.WindowFunction.Name)$$aggregations.(projection.WindowFunction.Name)$($\\$
+WindowProjection(projection)::=$windowFunctions.(projection.WindowFunction.Name)$$aggregations.(projection.WindowFunction.Name)$($\\$
 $if(projection.WindowFunction.Expression)$$\\$
 $projection.WindowFunction.Expression:(projection.WindowFunction.Expression.Template)()$$\\$
 $endif$

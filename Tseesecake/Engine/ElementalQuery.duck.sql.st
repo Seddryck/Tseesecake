@@ -1,5 +1,5 @@
 SELECT
-	$statement.Projections: {projection | $(projection.Template)()$}; separator="
+	$statement.Projections: {projection | $projection:(projection.Template)()$}; separator="
 , "$
 FROM
 	$statement.Timeseries.Name; format="identity"$
