@@ -227,6 +227,18 @@ namespace Tseesecake.QA
         }
 
         [Test]
+        public virtual void Execute_Qualify_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.Qualify);
+            Assert.That(reader, Is.Not.Null);
+            var rowCount = 0;
+            while (reader.Read())
+                rowCount += 1;
+            Assert.That(rowCount, Is.EqualTo(10));
+        }
+
+        [Test]
         public virtual void Execute_LimitOffset_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();
