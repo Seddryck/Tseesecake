@@ -28,20 +28,20 @@ namespace Tseesecake.Testing.Engine
                 );
 
         public static SelectStatement ProjectionSingle
-            => new (WindEnergy
-                , new[] { 
+            => new(WindEnergy
+                , new[] {
                     new ColumnProjection(new Measurement("Produced"))
                 });
 
         public static SelectStatement ProjectionMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Timestamp("Instant"))
                     , new ColumnProjection(new Measurement("Produced"))
                 });
 
         public static SelectStatement ProjectionExpression
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ExpressionProjection(new LiteralExpression("LOWER(WindPark)"), "LowerWindPark")
                 });
@@ -81,7 +81,7 @@ namespace Tseesecake.Testing.Engine
                             , new ConstantExpression(0)
                         )
                         , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
-                        , new[] { new FacetSlicer(new Facet("WindPark")) } 
+                        , new[] { new FacetSlicer(new Facet("WindPark")) }
                         , "FourHoursBefore")
                 });
 
@@ -91,14 +91,14 @@ namespace Tseesecake.Testing.Engine
                     new WindowProjection(
                         new LastWindowFunction(new ColumnExpression(new Measurement("Produced")))
                         , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
-                        , new[] { new FacetSlicer(new Facet("WindPark")) } 
+                        , new[] { new FacetSlicer(new Facet("WindPark")) }
                         , new RangeBetween(new UnboundedPreceding(), new Following(new ConstantExpression(new TimeSpan(6,0,0))))
                         , "Smooth"
                     )
                 });
 
         public static SelectStatement FilterSingle
-            =>  new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Timestamp("Produced"))
                 }
@@ -107,7 +107,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Timestamp("Produced"))
                 }
@@ -117,7 +117,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterCuller
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Timestamp("Produced"))
                 }
@@ -126,7 +126,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterTemporizer
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Timestamp("Produced"))
                 }
@@ -135,7 +135,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerSingle
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new AggregationProjection(new MaxAggregation(new ColumnExpression(new Measurement("Produced"))), "Maximum")
                 }
@@ -145,7 +145,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new AggregationProjection(new MaxAggregation(new ColumnExpression(new Measurement("Produced"))), "Maximum")
                 }
@@ -156,7 +156,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerAndGroupFilter
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "average")
                 }
@@ -188,11 +188,26 @@ namespace Tseesecake.Testing.Engine
                         , new[] { new FacetSlicer(new Facet("WindPark")) }
                         , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
                         , new RangeBetween(new Preceding(new ConstantExpression(new TimeSpan(3,0,0,0))), new Following(new ConstantExpression(new TimeSpan(3,0,0,0))))
-                    )} 
+                    )}
                 );
 
+        public static SelectStatement Qualify
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(new RowNumberWindowFunction(), new[] { new ColumnOrder(new Measurement("Produced"), Sorting.Descending, NullSorting.Last) }, new[] {new FacetSlicer(new Facet("Producer")) } , "RowNb")
+                }
+                , null
+                , null
+                , null
+                , null
+                , new[] {
+                    new Gatherer(new Measurement("RowNb"), LinqExp.Expression.LessThanOrEqual, 5)
+                }
+                , null
+                , null);
+
         public static SelectStatement LimitOffset
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new ColumnProjection(new Measurement("Produced"))
                 }
@@ -200,8 +215,9 @@ namespace Tseesecake.Testing.Engine
                 , null
                 , null
                 , null
+                , null
                 , new IOrderBy[] {
                     new ColumnOrder(new Measurement("Produced"), Sorting.Descending, NullSorting.Last) }
-                , new LimitOffsetRestriction(20,40));
+                , new LimitOffsetRestriction(20, 40));
     }
 }
