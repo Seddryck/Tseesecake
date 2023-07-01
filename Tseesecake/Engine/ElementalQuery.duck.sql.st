@@ -23,6 +23,11 @@ WINDOW
 	$statement.Windows: {window | $window:NamedWindow()$}; separator="
 , "$
 $endif$
+$if(statement.Qualifiers)$
+QUALIFY
+	$statement.Qualifiers: {qualify | $qualify:(qualify.Template)()$}; separator="
+, "$
+$endif$
 $if(statement.Orders)$
 ORDER BY
 	$statement.Orders: {order | $order:(order.Template)()$}; separator="

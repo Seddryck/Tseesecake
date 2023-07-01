@@ -137,6 +137,12 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => Assert.That(new ElementalQuery(SelectStatementDefinition.NamedWindow).Read(Dialect, Connectivity)
                 , Is.EqualTo(NamedWindow));
 
+        protected abstract string Qualify { get; }
+        [Test]
+        public void Read_Qualify_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.Qualify).Read(Dialect, Connectivity)
+                , Is.EqualTo(Qualify));
+
         protected abstract string LimitOffset { get; }
         [Test]
         public void Read_LimitOffset_ValidStatement()

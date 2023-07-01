@@ -43,6 +43,8 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => "SELECT\r\n\tAVG(Produced) AS average\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\taverage >= 15\r\n";
         protected override string NamedWindow
             => "SELECT\r\n\tMIN(Produced) OVER seven AS MinSevenDays\r\n\t, MAX(Produced) OVER seven AS MaxSevenDays\r\nFROM\r\n\tWindEnergy\r\nWINDOW\r\n\tseven AS (\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t\tRANGE BETWEEN INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' PRECEDING\r\n\t\t\tAND INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t)\r\n";
+        protected override string Qualify
+            => "SELECT\r\n\tROW_NUMBER() OVER(\r\n\t\tPARTITION BY Producer\r\n\t\tORDER BY Produced DESC NULLS LAST\r\n\t) AS RowNb\r\nFROM\r\n\tWindEnergy\r\nQUALIFY\r\n\tRowNb <= 5\r\n";
         protected override string LimitOffset 
             => "SELECT\r\n\tProduced\r\nFROM\r\n\tWindEnergy\r\nORDER BY\r\n\tProduced DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n";
     }
