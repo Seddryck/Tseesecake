@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.WindowFunctions;
 
-namespace Tseesecake.Querying.Aggregations
+namespace Tseesecake.Querying.WindowFunctions
 {
-    public interface IAggregation : IExpressionWindowFunction
-    { }
+    public interface IExpressionWindowFunction : IWindowFunction
+    {
+        IExpression Expression { get; }
+    }
 }

@@ -34,6 +34,8 @@
 	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
+	  <None Remove="Engine\DuckDB\Windows\NamedWindow.sql.st" />
+	  <None Remove="Engine\DuckDB\Windows\WindowDefinition.sql.st" />
 	  <None Remove="Mounting\Engine\DuckDB\ColumnDefinition.sql.st" />
 	  <None Remove="Mounting\Engine\DuckDB\CreateOrReplace.sql.st" />
 	  <None Remove="Mounting\Engine\DuckDB\Dictionaries\lengthTypes.dic.st" />
@@ -49,6 +51,8 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Frames\RowsSingle.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Frames\RowsBetween.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\WindowProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Windows\NamedWindow.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Windows\WindowDefinition.sql.st" />
 	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\aggregations.dic.st" />

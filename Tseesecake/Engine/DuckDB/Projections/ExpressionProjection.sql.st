@@ -1,1 +1,1 @@
-$projection.Expression:(projection.Expression.Template)()$ AS $projection.Alias$
+ExpressionProjection(projection)::=$projection.Expression:(projection.Expression.Template)()$ AS $projection.Alias$

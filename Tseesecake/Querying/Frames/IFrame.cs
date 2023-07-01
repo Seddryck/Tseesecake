@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Querying.Frames
 {
-    internal interface IFrame
+    public interface IFrame
     {
         string Template { get; }
     }

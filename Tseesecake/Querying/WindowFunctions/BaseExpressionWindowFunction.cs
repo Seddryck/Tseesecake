@@ -9,7 +9,7 @@ using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Querying.WindowFunctions
 {
-    internal abstract class BaseExpressionWindowFunction : BaseWindowFunction
+    internal abstract class BaseExpressionWindowFunction : BaseWindowFunction, IExpressionWindowFunction
     {
         protected BaseExpressionWindowFunction(IExpression expression)
             => Expression = expression;

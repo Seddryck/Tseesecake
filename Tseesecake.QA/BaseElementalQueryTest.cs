@@ -219,6 +219,14 @@ namespace Tseesecake.QA
         }
 
         [Test]
+        public virtual void Execute_NamedWindow_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.NamedWindow);
+            Assert.That(reader, Is.Not.Null);
+        }
+
+        [Test]
         public virtual void Execute_LimitOffset_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();

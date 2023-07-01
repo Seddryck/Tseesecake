@@ -1,4 +1,4 @@
-$windowFunctions.(projection.WindowFunction.Name)$($\\$
+WindowProjection(projection)::=$windowFunctions.(projection.WindowFunction.Name)$$aggregations.(projection.WindowFunction.Name)$($\\$
 $if(projection.WindowFunction.Expression)$$\\$
 $projection.WindowFunction.Expression:(projection.WindowFunction.Expression.Template)()$$\\$
 $endif$
@@ -7,14 +7,8 @@ $if(projection.WindowFunction.Offset)$$\\$
 $endif$
 $if(projection.WindowFunction.Default)$$\\$
 , $projection.WindowFunction.Default:(projection.WindowFunction.Default.Template)()$$\\$
-$endif$) OVER($\\$
-$if(projection.PartitionBys)$
-	PARTITION BY $projection.PartitionBys: {slicer | $slicer:(slicer.Template)()$}; separator=", "$
+$endif$) OVER$\\$
+$if(projection.Reference)$ $projection.Reference.Name$ $else$$\\$
+($projection:WindowDefinition()$) $\\$
 $endif$
-$if(projection.OrderBys)$
-	ORDER BY $projection.OrderBys: {order | $order:(order.Template)()$}; separator=", "$
-$endif$
-$if(projection.Frame)$
-	$projection.Frame:(projection.Frame.Template)()$
-$endif$
-) AS $projection.Alias$
+AS $projection.Alias$
