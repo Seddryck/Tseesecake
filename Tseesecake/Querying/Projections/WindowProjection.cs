@@ -10,18 +10,23 @@ using Tseesecake.Querying.Frames;
 using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Slicers;
 using Tseesecake.Querying.WindowFunctions;
+using Tseesecake.Querying.Windows;
 
 namespace Tseesecake.Querying.Projections
 {
     internal class WindowProjection : IProjection
     {
         public IWindowFunction WindowFunction { get; }
+        public ReferenceWindow? Reference { get; }
         public IOrderBy[]? OrderBys { get; }
         public ISlicer[]? PartitionBys { get; }
         public IFrame? Frame { get; }
         public string Alias { get; }
 
         public string Template { get => nameof(WindowProjection); }
+
+        public WindowProjection(IWindowFunction windowFunction, ReferenceWindow? reference, string alias)
+            => (WindowFunction, Reference, Alias) = (windowFunction, reference, alias);
 
         public WindowProjection(IWindowFunction windowFunction, string alias)
             : this(windowFunction, null, null, null, alias) { }

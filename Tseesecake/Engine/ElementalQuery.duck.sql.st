@@ -18,6 +18,11 @@ HAVING
 	$statement.GroupFilters: {filter | $filter:(filter.Template)()$}; separator="
 , "$
 $endif$
+$if(statement.Windows)$
+WINDOW
+	$statement.Windows: {window | $window:NamedWindow()$}; separator="
+, "$
+$endif$
 $if(statement.Orders)$
 ORDER BY
 	$statement.Orders: {order | $order:(order.Template)()$}; separator="

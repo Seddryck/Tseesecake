@@ -13,6 +13,7 @@ using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 using Tseesecake.Querying.WindowFunctions;
 using Tseesecake.Querying.Frames;
+using Tseesecake.Querying.Windows;
 
 namespace Tseesecake.Testing.Engine
 {
@@ -167,11 +168,35 @@ namespace Tseesecake.Testing.Engine
                     new Gatherer(new Measurement("average"), LinqExp.Expression.GreaterThanOrEqual, 15)
                 });
 
+        public static SelectStatement NamedWindow
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(
+                        new MinAggregation(new ColumnExpression(new Measurement("Produced")))
+                        , new ReferenceWindow("seven")
+                        , "MinSevenDays"
+                    )
+                    , new WindowProjection(
+                        new MaxAggregation(new ColumnExpression(new Measurement("Produced")))
+                        , new ReferenceWindow("seven")
+                        , "MaxSevenDays"
+                    )}
+                , null
+                , null
+                , new[] {
+                    new NamedWindow("seven"
+                        , new[] { new FacetSlicer(new Facet("WindPark")) }
+                        , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
+                        , new RangeBetween(new Preceding(new ConstantExpression(new TimeSpan(3,0,0,0))), new Following(new ConstantExpression(new TimeSpan(3,0,0,0))))
+                    )} 
+                );
+
         public static SelectStatement LimitOffset
             => new (WindEnergy
                 , new[] {
                     new ColumnProjection(new Measurement("Produced"))
                 }
+                , null
                 , null
                 , null
                 , null
