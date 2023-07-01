@@ -6,6 +6,7 @@
 	  <None Remove="Engine\DuckDB\ColumnProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\comparisons.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\aggregations.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\sorts.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
@@ -22,7 +23,10 @@
 	  <None Remove="Engine\DuckDB\Filters\InDicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\RangeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\SinceTemporizer.sql.st" />
+	  <None Remove="Engine\DuckDB\Frames\RangeBetween.sql.st" />
+	  <None Remove="Engine\DuckDB\Frames\RowsSingle.sql.st" />
 	  <None Remove="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
+	  <None Remove="Engine\DuckDB\Ordering\WindowProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Projections\AggregationProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
@@ -36,10 +40,14 @@
 	  <None Remove="Mounting\Engine\DuckDB\ElementalQuery.duck.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Frames\RangeBetween.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Frames\RowsSingle.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Frames\RowsBetween.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\sorts.dic.st" />

@@ -1,1 +1,1 @@
-$filter.Timestamp.Column.Name$ > $filter.Instant; format="value"$
+AfterTemporizer(filter)::=$filter.Timestamp.Column.Name$ > $filter.Instant; format="value"$

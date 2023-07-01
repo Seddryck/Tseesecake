@@ -12,6 +12,7 @@ using Tseesecake.Querying.Projections;
 using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 using Tseesecake.Querying.WindowFunctions;
+using Tseesecake.Querying.Frames;
 
 namespace Tseesecake.Testing.Engine
 {
@@ -72,7 +73,27 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionWindowOffsetExpression
             => new(WindEnergy
                 , new[] {
-                    new WindowProjection(new LagWindowFunction(new LiteralExpression("ABS(Produced - Forecasted)"), new ConstantExpression(4), new ConstantExpression(0)), new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }, new[] { new FacetSlicer(new Facet("WindPark")) } , "FourHoursBefore")
+                    new WindowProjection(
+                        new LagWindowFunction(
+                            new LiteralExpression("ABS(Produced - Forecasted)")
+                            , new ConstantExpression(4)
+                            , new ConstantExpression(0)
+                        )
+                        , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
+                        , new[] { new FacetSlicer(new Facet("WindPark")) } 
+                        , "FourHoursBefore")
+                });
+
+        public static SelectStatement ProjectionWindowFrame
+            => new(WindEnergy
+                , new[] {
+                    new WindowProjection(
+                        new LastWindowFunction(new ColumnExpression(new Measurement("Produced")))
+                        , new[] { new ColumnOrder(new Timestamp("Instant"), Sorting.Ascending, NullSorting.Last) }
+                        , new[] { new FacetSlicer(new Facet("WindPark")) } 
+                        , new RangeBetween(new UnboundedPreceding(), new Following(new ConstantExpression(new TimeSpan(6,0,0))))
+                        , "Smooth"
+                    )
                 });
 
         public static SelectStatement FilterSingle

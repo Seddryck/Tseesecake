@@ -1,1 +1,1 @@
-$expression.Column.Name$
+ColumnExtression(expression)::=$expression.Column.Name$

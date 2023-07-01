@@ -1,1 +1,1 @@
-$order.Column.Name$ $sorts.(order.Sort)$ $sorts.(order.NullSort)$
+ColumnOrder(order)::=$order.Column.Name$ $sorts.(order.Sort)$ $sorts.(order.NullSort)$
