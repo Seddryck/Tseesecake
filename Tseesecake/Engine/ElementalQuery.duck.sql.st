@@ -24,5 +24,5 @@ ORDER BY
 , "$
 $endif$
 $if(statement.Restriction)$
-$(statement.Restriction.Template)()$
+$statement.Restriction:(statement.Restriction.Template)()$
 $endif$

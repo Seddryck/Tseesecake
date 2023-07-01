@@ -1,2 +1,3 @@
-LIMIT $statement.Restriction.Value$
-OFFSET $statement.Restriction.Offset$
+LimitOffsetRestriction(restriction)::=$\\$
+LIMIT $restriction.Value$
+OFFSET $restriction.Offset$

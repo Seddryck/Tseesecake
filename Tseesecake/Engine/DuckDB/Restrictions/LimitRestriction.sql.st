@@ -1,1 +1,1 @@
-LIMIT $statement.Restriction.Value$
+LimitOffset(restriction)::=LIMIT $restriction.Value$
