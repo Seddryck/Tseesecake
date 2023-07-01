@@ -9,7 +9,7 @@ $if(projection.WindowFunction.Default)$$\\$
 , $projection.WindowFunction.Default:(projection.WindowFunction.Default.Template)()$$\\$
 $endif$) OVER($\\$
 $if(projection.PartitionBys)$
-	PARTITION BY $projection.PartitionBys: {slicer | $(slicer.Template)()$}; separator=", "$
+	PARTITION BY $projection.PartitionBys: {slicer | $slicer:(slicer.Template)()$}; separator=", "$
 $endif$
 $if(projection.OrderBys)$
 	ORDER BY $projection.OrderBys: {order | $(order.Template)()$}; separator=", "$

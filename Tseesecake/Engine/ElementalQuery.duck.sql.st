@@ -10,7 +10,7 @@ AND "$
 $endif$
 $if(statement.Slicers)$
 GROUP BY
-	$statement.Slicers: {slicer | $(slicer.Template)()$}; separator="
+	$statement.Slicers: {slicer | $slicer:(slicer.Template)()$}; separator="
 , "$
 $endif$
 $if(statement.GroupFilters)$
