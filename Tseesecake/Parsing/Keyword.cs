@@ -18,5 +18,6 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> File = Parse.IgnoreCase("File").Text().Token();
         public static readonly Parser<string> As = Parse.IgnoreCase("As").Text().Token();
         public static readonly Parser<string> Select = Parse.IgnoreCase("Select").Text().Token();
+        public static readonly Parser<string> Where = Parse.IgnoreCase("Where").Text().Token();
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
+using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Projections;
 
 namespace Tseesecake.Parsing.Query
@@ -16,11 +17,17 @@ namespace Tseesecake.Parsing.Query
             from identifier in Grammar.Identifier
             select new TimeseriesReference(identifier);
 
+        public readonly static Parser<IFilter[]> Filters =
+            from @where in Keyword.Where
+            from filters in FilterParser.Filter.DelimitedBy(Parse.IgnoreCase("AND"))
+            select filters.ToArray();
+
         public readonly static Parser<SelectStatement> Query =
             from @select in Keyword.Select
             from projections in ProjectionParser.Projection.DelimitedBy(Parse.Char(','))
             from @from in Keyword.From
             from ts in TimeseriesReference
-            select new SelectStatement(ts, projections.ToArray());
+            from filters in Filters.Optional()
+            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null));
     }
 }
