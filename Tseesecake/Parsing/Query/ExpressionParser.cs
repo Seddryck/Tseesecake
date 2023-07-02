@@ -17,6 +17,8 @@ namespace Tseesecake.Parsing.Query
             from value in Grammar.SingleQuotedTextual
                 .Or(Grammar.Numeric.Select(x => (object)x))
                 .Or(Grammar.Boolean.Select(x => (object)x))
+                .Or(Grammar.Timestamp.Select(x => (object)x))
+                .Or(Grammar.Interval.Select(x => (object)x))
             select new ConstantExpression(value);
 
         protected internal static Parser<IExpression> Literal = 

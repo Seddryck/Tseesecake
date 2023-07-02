@@ -18,6 +18,16 @@ namespace Tseesecake.Parsing
         public static readonly Parser<bool> False = Parse.IgnoreCase("False").Text().Token().Return(false);
         public static readonly Parser<bool> Boolean = True.XOr(False);
 
+        public static readonly Parser<DateTime> Timestamp = 
+            from typeFixer in Parse.IgnoreCase("Timestamp").Text().Token()
+            from value in SingleQuotedTextual.Text().Token()
+            select DateTime.Parse(value);
+
+        public static readonly Parser<TimeSpan> Interval =
+            from typeFixer in Parse.IgnoreCase("Interval").Text().Token()
+            from value in SingleQuotedTextual.Text().Token()
+            select TimeSpan.Parse(value);
+
         public static readonly Parser<decimal> Numeric = Parse.DecimalInvariant.Token().Select(decimal.Parse);
 
         public static readonly Parser<string> Identifier = Textual.Or(DoubleQuotedTextual);
