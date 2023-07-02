@@ -35,5 +35,32 @@ namespace Tseesecake.Testing.Query.Filters
             Assert.That(rangeTemporizer.Start, Is.EqualTo(new DateTime(2023, 1, 1)));
             Assert.That(rangeTemporizer.End, Is.EqualTo(new DateTime(2023, 2, 1)));
         }
+
+        [Test]
+        public void Instantiate_EqualDicer_CorrectInstance()
+        {
+            var factory = new FilterFactory();
+            var filter = factory.Instantiate("Dicer", "Equal", "Producer", new object[] { "Future Energy" });
+            Assert.That(filter, Is.Not.Null);
+            Assert.That(filter, Is.TypeOf<EqualDicer>());
+
+            var typedFilter = (EqualDicer)filter;
+            Assert.That(typedFilter.Facet.Name, Is.EqualTo("Producer"));
+            Assert.That(typedFilter.Value, Is.EqualTo("Future Energy"));
+        }
+
+        [Test]
+        public void Instantiate_InDicer_CorrectInstance()
+        {
+            var factory = new FilterFactory();
+            var filter = factory.Instantiate("Dicer", "In", "Producer", new object[] { new[] { "Future Energy", "We can!" } });
+            Assert.That(filter, Is.Not.Null);
+            Assert.That(filter, Is.TypeOf<InDicer>());
+
+            var typedFilter = (InDicer)filter;
+            Assert.That(typedFilter.Facet.Name, Is.EqualTo("Producer"));
+            Assert.That(typedFilter.Values, Does.Contain("Future Energy"));
+            Assert.That(typedFilter.Values, Does.Contain("We can!"));
+        }
     }
 }

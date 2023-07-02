@@ -15,5 +15,11 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> Since = Parse.IgnoreCase("Since").Text().Token();
 
         public static readonly Parser<string> Temporizer = After.Or(Before).Or(Range).Or(Since);
+
+        public static readonly Parser<string> Equal = Parse.IgnoreCase("Equal").Text().Or(Parse.IgnoreCase("=").Text()).Token();
+        public static readonly Parser<string> Different = Parse.IgnoreCase("Equal").Text().Or(Parse.IgnoreCase("<>").Text()).Or(Parse.IgnoreCase("!=").Text()).Token();
+        public static readonly Parser<string> In = Parse.IgnoreCase("In").Text().Token();
+
+        public static readonly Parser<string> Dicer = Equal.Or(Different).Or(In);
     }
 }

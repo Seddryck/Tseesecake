@@ -17,8 +17,17 @@ namespace Tseesecake.Parsing.Query
         private static readonly Lazy<FilterFactory> lazy = new Lazy<FilterFactory>(() => new FilterFactory());
         protected static FilterFactory Factory { get { return lazy.Value; } }
 
+        private static Parser<IEnumerable<object>> SingleArgument =
+                ExpressionParser.Constant.Select(x => new[] { x });
 
-        protected internal static Parser<IEnumerable<object>> Arguments = ExpressionParser.Constant.DelimitedBy(Parse.Char(',')); 
+        private static Parser<IEnumerable<object>> ManyArgument =
+            from lpar in Parse.Char('(').Token()
+            from args in ExpressionParser.Constant.DelimitedBy(Parse.Char(','))
+            from rpar in Parse.Char(')').Token()
+            select args;
+
+        protected internal static Parser<IEnumerable<object>> Arguments =
+            ManyArgument.Or(SingleArgument);
 
         protected internal static Parser<IFilter> Temporizer =
             from identifier in Grammar.Identifier
@@ -31,6 +40,17 @@ namespace Tseesecake.Parsing.Query
                 , arguments.Cast<ConstantExpression>().Select(x => x.Constant).ToArray()
             );
 
-        public static Parser<IFilter> Filter = Temporizer;
+        protected internal static Parser<IFilter> Dicer =
+            from identifier in Grammar.Identifier
+            from predicate in Predicate.Dicer
+            from arguments in Arguments
+            select Factory.Instantiate(
+                "Dicer"
+                , predicate
+                , identifier
+                , arguments.Cast<ConstantExpression>().Select(x => x.Constant).ToArray()
+            );
+
+        public static Parser<IFilter> Filter = Temporizer.Or(Dicer);
     }
 }
