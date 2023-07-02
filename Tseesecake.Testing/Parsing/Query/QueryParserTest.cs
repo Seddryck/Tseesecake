@@ -11,6 +11,7 @@ using Tseesecake.Parsing.Dml;
 using Tseesecake.Parsing.Query;
 using Tseesecake.Querying.Aggregations;
 using Tseesecake.Querying.Expressions;
+using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Projections;
 
 namespace Tseesecake.Testing.Parsing.Query
@@ -75,6 +76,18 @@ namespace Tseesecake.Testing.Parsing.Query
                 Assert.That(aggregation.Expression, Is.TypeOf<ColumnExpression>());
                 Assert.That(((ColumnExpression)aggregation.Expression).Column.Name, Is.EqualTo("Forecasted"));
             }
+        }
+
+        [Test]
+        public virtual void Parse_TemporizerFilters_Valid()
+        {
+            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy WHERE Instant AFTER TIMESTAMP '2023-01-01' AND Instant SINCE INTERVAL '100.00:00:00'";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Filters, Has.Length.EqualTo(2));
+            foreach (var filter in query.Filters)
+                Assert.That(filter, Is.AssignableTo<Temporizer>());
         }
     }
 }
