@@ -19,9 +19,9 @@ namespace Tseesecake.Testing.Parsing.Query
 
         [Test]
         [TestCase("10", 10)]
-        //[TestCase("10.25", 10.25)]
-        //[TestCase("-10", -10)]
-        //[TestCase("-10.25", -10.25)]
+        [TestCase("10.25", 10.25)]
+        [TestCase("-10", -10)]
+        [TestCase("-10.25", -10.25)]
         public void Parse_ConstantNumeric_CorrectValue(string value, decimal expected)
             => Assert.That(((ConstantExpression)ExpressionParser.Constant.Parse(value)).Constant, Is.EqualTo(expected));
 

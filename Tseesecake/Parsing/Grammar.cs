@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Tseesecake.Parsing
 {
@@ -28,7 +29,10 @@ namespace Tseesecake.Parsing
             from value in SingleQuotedTextual.Text().Token()
             select TimeSpan.Parse(value);
 
-        public static readonly Parser<decimal> Numeric = Parse.DecimalInvariant.Token().Select(decimal.Parse);
+        public static readonly Parser<decimal> Numeric = 
+            from op in Parse.Char('-').Optional()
+            from dec in Parse.DecimalInvariant.Token()
+            select decimal.Parse(dec, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat) * (op.IsDefined ? -1 : 1);
 
         public static readonly Parser<string> Identifier = Textual.Or(DoubleQuotedTextual);
 
