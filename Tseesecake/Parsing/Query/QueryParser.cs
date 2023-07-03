@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tseesecake.Modeling;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Filters;
+using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
 
 namespace Tseesecake.Parsing.Query
@@ -22,12 +23,18 @@ namespace Tseesecake.Parsing.Query
             from filters in FilterParser.Filter.DelimitedBy(Parse.IgnoreCase("AND"))
             select filters.ToArray();
 
+        public readonly static Parser<IOrderBy[]> OrderBys =
+            from keyword in Keyword.OrderBy
+            from orderBys in OrderByParser.OrderBy
+            select orderBys.ToArray();
+
         public readonly static Parser<SelectStatement> Query =
             from @select in Keyword.Select
             from projections in ProjectionParser.Projection.DelimitedBy(Parse.Char(','))
             from @from in Keyword.From
             from ts in TimeseriesReference
             from filters in Filters.Optional()
-            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null));
+            from orderBys in OrderBys.Optional()
+            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), null, null, null, null, orderBys.GetOrElse(null), null);
     }
 }

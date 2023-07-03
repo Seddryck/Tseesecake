@@ -9,7 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     internal class AfterTemporizer : Temporizer
     {
-        protected internal DateTime Instant { get; }
+        public DateTime Instant { get; }
 
         public override string Template { get => nameof(AfterTemporizer); }
 

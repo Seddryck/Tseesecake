@@ -9,7 +9,9 @@ namespace Tseesecake.Querying.Ordering
 {
     public interface IOrderBy
     {
-        string Template { get; }       
+        string Template { get; }    
+        Sorting Sort { get; }
+        NullSorting NullSort { get; }
     }
 
     public enum Sorting

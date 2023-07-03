@@ -114,5 +114,15 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Filters.ElementAt(1), Is.AssignableTo<Dicer>());
             Assert.That(query.Filters.ElementAt(2), Is.AssignableTo<Sifter>());
         }
+
+        [Test]
+        public virtual void Parse_OrderBy_Valid()
+        {
+            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy ORDER BY Instant, Forecasted";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Orders, Has.Length.EqualTo(2));
+        }
     }
 }
