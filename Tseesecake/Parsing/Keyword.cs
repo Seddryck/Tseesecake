@@ -27,5 +27,7 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> Nulls = Parse.IgnoreCase("Nulls").Text().Token();
         public static readonly Parser<NullSorting> First = Parse.IgnoreCase("First").Text().Token().Return(NullSorting.First);
         public static readonly Parser<NullSorting> Last = Parse.IgnoreCase("Last").Text().Token().Return(NullSorting.Last);
+        public static readonly Parser<string> Limit = Parse.IgnoreCase("Limit").Text().Token();
+        public static readonly Parser<string> Offset = Parse.IgnoreCase("Offset").Text().Token();
     }
 }

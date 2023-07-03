@@ -35,6 +35,7 @@ namespace Tseesecake.Parsing.Query
             from ts in TimeseriesReference
             from filters in Filters.Optional()
             from orderBys in OrderBys.Optional()
-            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), null, null, null, null, orderBys.GetOrElse(null), null);
+            from restriction in RestrictionParser.Restriction.Optional()
+            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), null, null, null, null, orderBys.GetOrElse(null), restriction.GetOrElse(null));
     }
 }

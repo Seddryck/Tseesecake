@@ -124,5 +124,15 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
             Assert.That(query.Orders, Has.Length.EqualTo(2));
         }
+
+        [Test]
+        public virtual void Parse_Restriction_Valid()
+        {
+            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy LIMIT 20 OFFSET 30";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Restriction, Is.Not.Null);
+        }
     }
 }
