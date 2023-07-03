@@ -9,17 +9,14 @@ using Tseesecake.Modeling;
 
 namespace Tseesecake.Querying.Filters
 {
-    internal class Gatherer : IFilter
+    internal class GathererSifter : Sifter
     {
-        public Measurement Measurement { get; }
-
         protected Func<Expression, Expression, BinaryExpression> Comparison { get; }
         public string ComparisonOperator { get => Comparison.GetMethodInfo().Name; }
         public virtual object Value { get; private set; }
 
-        public virtual string Template { get => nameof(Gatherer); }
-
-        public Gatherer(Measurement measurement, Func<Expression, Expression, BinaryExpression> comparison, object value)
-            => (Measurement, Comparison, Value) = (measurement, comparison, value);
+        public override string Template { get => nameof(GathererSifter); }
+        public GathererSifter(Measurement measurement, Func<Expression, Expression, BinaryExpression> comparison, object value)
+            : base(measurement) { (Comparison, Value) = (comparison, value); }
     }
 }

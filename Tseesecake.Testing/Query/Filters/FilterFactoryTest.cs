@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Querying.Filters;
+using LinqExp = System.Linq.Expressions;
 
 namespace Tseesecake.Testing.Query.Filters
 {
@@ -61,6 +63,21 @@ namespace Tseesecake.Testing.Query.Filters
             Assert.That(typedFilter.Facet.Name, Is.EqualTo("Producer"));
             Assert.That(typedFilter.Values, Does.Contain("Future Energy"));
             Assert.That(typedFilter.Values, Does.Contain("We can!"));
+        }
+
+        [Test]
+        public void Instantiate_Gatherer_CorrectInstance()
+        {
+            var factory = new FilterFactory();
+            var filter = factory.Instantiate("Sifter", "Gatherer", "Forecasted"
+                , new object[] { (Func<Expression, Expression, BinaryExpression>)Expression.GreaterThanOrEqual, 10 });
+            Assert.That(filter, Is.Not.Null);
+            Assert.That(filter, Is.TypeOf<GathererSifter>());
+
+            var typedFilter = (GathererSifter)filter;
+            Assert.That(typedFilter.Measurement.Name, Is.EqualTo("Forecasted"));
+            Assert.That(typedFilter.ComparisonOperator, Is.EqualTo("GreaterThanOrEqual"));
+            Assert.That(typedFilter.Value, Is.EqualTo(10));
         }
     }
 }
