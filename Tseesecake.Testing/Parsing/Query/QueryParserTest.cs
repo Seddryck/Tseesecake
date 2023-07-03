@@ -101,5 +101,18 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Filters.ElementAt(0), Is.AssignableTo<Temporizer>());
             Assert.That(query.Filters.ElementAt(1), Is.AssignableTo<Dicer>());
         }
+
+        [Test]
+        public virtual void Parse_DicerAndTemporizerAndCullerFilters_Valid()
+        {
+            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy WHERE Instant BEFORE TIMESTAMP '2023-01-01' AND Producer IS NOT 'Future Energy' AND NOT(Forecasted>10)";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Filters, Has.Length.EqualTo(3));
+            Assert.That(query.Filters.ElementAt(0), Is.AssignableTo<Temporizer>());
+            Assert.That(query.Filters.ElementAt(1), Is.AssignableTo<Dicer>());
+            Assert.That(query.Filters.ElementAt(2), Is.AssignableTo<Sifter>());
+        }
     }
 }

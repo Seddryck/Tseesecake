@@ -35,7 +35,6 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(filter, Is.TypeOf(type));
         }
 
-
         [Test]
         [TestCase("Forecasted = 10", typeof(GathererSifter))]
         [TestCase("Forecasted > 10", typeof(GathererSifter))]
