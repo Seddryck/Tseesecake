@@ -134,5 +134,16 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
             Assert.That(query.Restriction, Is.Not.Null);
         }
+
+        [Test]
+        public virtual void Parse_GroupBy_Valid()
+        {
+            var text = "SELECT WindPark, Producer, MAX(Forecasted) AS MaxForecasted FROM WindEnergy GROUP BY WindPark, Producer";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Slicers, Is.Not.Null);
+            Assert.That(query.Slicers, Has.Length.EqualTo(2));
+        }
     }
 }
