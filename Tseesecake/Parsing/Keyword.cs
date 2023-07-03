@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Querying.Ordering;
 
 namespace Tseesecake.Parsing
 {
@@ -20,5 +21,13 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> Select = Parse.IgnoreCase("Select").Text().Token();
         public static readonly Parser<string> Where = Parse.IgnoreCase("Where").Text().Token();
         public static readonly Parser<string> Not = Parse.IgnoreCase("Not").Text().Token();
+        public static readonly Parser<string> OrderBy = Parse.IgnoreCase("Order").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Order By");
+        public static readonly Parser<Sorting> Asc = Parse.IgnoreCase("Asc").Text().Token().Return(Sorting.Ascending);
+        public static readonly Parser<Sorting> Desc = Parse.IgnoreCase("Desc").Text().Token().Return(Sorting.Descending);
+        public static readonly Parser<string> Nulls = Parse.IgnoreCase("Nulls").Text().Token();
+        public static readonly Parser<NullSorting> First = Parse.IgnoreCase("First").Text().Token().Return(NullSorting.First);
+        public static readonly Parser<NullSorting> Last = Parse.IgnoreCase("Last").Text().Token().Return(NullSorting.Last);
+        public static readonly Parser<string> Limit = Parse.IgnoreCase("Limit").Text().Token();
+        public static readonly Parser<string> Offset = Parse.IgnoreCase("Offset").Text().Token();
     }
 }
