@@ -93,7 +93,7 @@ namespace Tseesecake.Testing.Parsing.Query
         [Test]
         public virtual void Parse_DicerAndTemporizerFilters_Valid()
         {
-            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy WHERE Instant AFTER TIMESTAMP '2023-01-01' AND Producer EQUAL 'Future Energy'";
+            var text = "SELECT Instant, WindPark, Forecasted FROM WindEnergy WHERE Instant AFTER TIMESTAMP '2023-01-01' AND Producer IS 'Future Energy'";
             var query = QueryParser.Query.Parse(text);
             Assert.That(query, Is.Not.Null);
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));

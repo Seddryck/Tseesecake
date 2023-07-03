@@ -22,7 +22,7 @@ namespace Tseesecake.Querying.Filters
         }
 
         protected IEnumerable<Type> LocateFilters()
-            => GetType().Assembly.GetTypes().Where(x => 
+            => GetType().Assembly.GetTypes().Where(x =>
                     x.GetInterfaces().Contains(typeof(IFilter))
                     && !x.IsAbstract
                );
@@ -31,7 +31,7 @@ namespace Tseesecake.Querying.Filters
         {
             if (!Mapping.TryGetValue(name + @class, out var type))
                 throw new ArgumentOutOfRangeException();
-            
+
             Column column = @class switch
             {
                 string x when x.Equals("Temporizer") => new Timestamp(identifier),
@@ -53,6 +53,12 @@ namespace Tseesecake.Querying.Filters
 
         protected internal ConstructorInfo GetMatchingConstructor(Type type, int paramCount)
             => type.GetConstructors().SingleOrDefault(x => x.GetParameters().Length == paramCount)
-                ?? throw new ArgumentException();
+                ?? throw new FilterConstructorNotFoundException(type, paramCount);
+    }
+
+    public class FilterConstructorNotFoundException : TseesecakeException
+    {
+        public FilterConstructorNotFoundException(Type type, int length)
+            : base($"Cannot find a constructor for type {(type.Name)} accepting {length} parameters.") { }
     }
 }

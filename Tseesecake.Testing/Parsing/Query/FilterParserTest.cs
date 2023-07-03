@@ -25,8 +25,25 @@ namespace Tseesecake.Testing.Parsing.Query
         }
 
         [Test]
-        [TestCase("Producer EQUAL 'WindEnergy'", typeof(EqualDicer))]
+        [TestCase("Producer IS 'WindEnergy'", typeof(EqualDicer))]
+        [TestCase("Producer IS NOT 'WindEnergy'", typeof(DifferentDicer))]
+        [TestCase("Producer IN ('WindEnergy', 'EnergyCo')", typeof(InDicer))]
         public void Parse_Dicer_CorrectValue(string text, Type type)
+        {
+            var filter = FilterParser.Filter.Parse(text);
+            Assert.That(filter, Is.Not.Null);
+            Assert.That(filter, Is.TypeOf(type));
+        }
+
+
+        [Test]
+        [TestCase("Forecasted = 10", typeof(GathererSifter))]
+        [TestCase("Forecasted > 10", typeof(GathererSifter))]
+        [TestCase("Forecasted >= 10", typeof(GathererSifter))]
+        [TestCase("Forecasted < 10", typeof(GathererSifter))]
+        [TestCase("Forecasted <= 10", typeof(GathererSifter))]
+        [TestCase("NOT(Forecasted = 10)", typeof(CullerSifter))]
+        public void Parse_Sifter_CorrectValue(string text, Type type)
         {
             var filter = FilterParser.Filter.Parse(text);
             Assert.That(filter, Is.Not.Null);
