@@ -152,7 +152,7 @@ namespace Tseesecake.Testing.Engine
                 , null
                 , new ISlicer[] {
                     new FacetSlicer(new Facet("WindPark"))
-                    , new PartTemporalSlicer(new Timestamp("Instant"), "weekday")
+                    , new CyclicTemporalSlicer(new Timestamp("Instant"), CyclicTemporal.DayOfWeek)
                 });
 
         public static SelectStatement SlicerAndGroupFilter

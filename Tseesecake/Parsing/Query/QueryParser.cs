@@ -25,10 +25,19 @@ namespace Tseesecake.Parsing.Query
             select filters.ToArray();
 
 
-        public readonly static Parser<ISlicer[]> Slicers =
+        protected internal readonly static Parser<ISlicer[]> FacetSlicers =
             from keyword in Keyword.GroupBy
             from slicers in SlicerParser.Facet.DelimitedBy(Parse.Char(','))
             select slicers.ToArray();
+
+        protected internal readonly static Parser<ISlicer[]> TemporalSlicers =
+            from slicer in TemporalParser.Slicer.Optional()
+            select slicer.IsDefined ? new ISlicer[] { slicer.Get() } : Array.Empty<ISlicer>();
+
+        public readonly static Parser<ISlicer[]> Slicers =
+            from temporals in TemporalSlicers.Optional()
+            from facets in FacetSlicers.Optional()
+            select facets.GetOrElse(Array.Empty<ISlicer>()).Concat(temporals.GetOrElse(Array.Empty<ISlicer>())).ToArray();
 
         public readonly static Parser<IOrderBy[]> OrderBys =
             from keyword in Keyword.OrderBy

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Modeling;
 using Tseesecake.Mounting;
 using Tseesecake.Parsing.Dml;
 using Tseesecake.Parsing.Query;
@@ -13,6 +14,7 @@ using Tseesecake.Querying.Aggregations;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Projections;
+using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Parsing.Query
 {
@@ -144,6 +146,22 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
             Assert.That(query.Slicers, Is.Not.Null);
             Assert.That(query.Slicers, Has.Length.EqualTo(2));
+        }
+
+        [Test]
+        public virtual void Parse_BucketBy_Valid()
+        {
+            var text = "SELECT MAX(Forecasted) AS MaxForecasted FROM WindEnergy BUCKET Instant BY Month";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Slicers, Is.Not.Null);
+            Assert.That(query.Slicers, Has.Length.EqualTo(1));
+            Assert.That(query.Slicers.ElementAt(0), Is.TypeOf<TruncationTemporalSlicer>());
+
+            var slicer = (TruncationTemporalSlicer)query.Slicers.ElementAt(0);
+            Assert.That(slicer.Timestamp.Name, Is.EqualTo("Instant"));
+            Assert.That(slicer.Truncation, Is.EqualTo(TruncationTemporal.Month));
         }
     }
 }

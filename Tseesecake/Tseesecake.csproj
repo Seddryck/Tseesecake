@@ -6,8 +6,10 @@
 	  <None Remove="Engine\DuckDB\ColumnProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\comparisons.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\aggregations.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\cyclicTemporals.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\sorts.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\truncationTemporals.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
@@ -31,8 +33,8 @@
 	  <None Remove="Engine\DuckDB\Projections\WindowProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
 	  <None Remove="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
+	  <None Remove="Engine\DuckDB\Slicers\CyclicTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
-	  <None Remove="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	  <None Remove="Engine\DuckDB\Windows\NamedWindow.sql.st" />
 	  <None Remove="Engine\DuckDB\Windows\WindowDefinition.sql.st" />
@@ -42,6 +44,8 @@
 	  <None Remove="Mounting\Engine\DuckDB\ElementalQuery.duck.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\truncationTemporals.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
@@ -75,7 +79,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />
-	  <EmbeddedResource Include="Engine\DuckDB\Slicers\PartTemporalSlicer.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Slicers\CyclicTemporalSlicer.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\TruncateTemporalSlicer.sql.st" />
 	  <EmbeddedResource Include="Mounting\Engine\DuckDB\CreateOrReplace.sql.st" />
 	  <EmbeddedResource Include="Mounting\Engine\DuckDB\CopyFrom.sql.st" />

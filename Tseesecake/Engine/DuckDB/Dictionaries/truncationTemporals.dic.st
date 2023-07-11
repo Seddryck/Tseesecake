@@ -1,0 +1,7 @@
+"Second" : "second"
+"Minute" : "minute"
+"Hour" : "hour"
+"Day" : "day"
+"Month" : "month"
+"Quarter" : "quarter"
+"Year" : "year"
