@@ -152,10 +152,8 @@ namespace Tseesecake.Testing.Parsing.Query
         [Test]
         public virtual void Parse_BucketBy_Valid()
         {
-            var text = "SELECT MAX(Forecasted) AS MaxForecasted FROM WindEnergy BUCKET BY Month";
+            var text = "SELECT MAX(Forecasted) AS MaxForecasted FROM WindEnergy BUCKET Instant BY Month";
             var query = QueryParser.Query.Parse(text);
-            var arranger = new BucketAnonymousTimestamp();
-            arranger.Execute(query);
 
             Assert.That(query, Is.Not.Null);
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
@@ -166,17 +164,23 @@ namespace Tseesecake.Testing.Parsing.Query
             var slicer = (TruncationTemporalSlicer)query.Slicers.ElementAt(0);
             Assert.That(slicer.Timestamp.Name, Is.EqualTo("Instant"));
             Assert.That(slicer.Truncation, Is.EqualTo(TruncationTemporal.Month));
+        }
 
-            Assert.That(query.Projections, Is.Not.Null);
-            Assert.That(query.Projections, Has.Count.EqualTo(2));
-            Assert.That(query.Projections.Any(x => x is AggregationProjection), Is.True);
-            Assert.That(query.Projections.Any(x => x is ExpressionProjection), Is.True);
+        [Test]
+        public virtual void Parse_BucketByAnonymous_Valid()
+        {
+            var text = "SELECT MAX(Forecasted) AS MaxForecasted FROM WindEnergy BUCKET BY Month";
+            var query = QueryParser.Query.Parse(text);
 
-            var expression = ((ExpressionProjection) query.Projections.Single(x => x is ExpressionProjection)).Expression;
-            Assert.That(expression, Is.TypeOf<BucketExpression>());
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Slicers, Is.Not.Null);
+            Assert.That(query.Slicers, Has.Count.EqualTo(1));
+            Assert.That(query.Slicers.ElementAt(0), Is.TypeOf<TruncationTemporalSlicer>());
 
-            var projectionSlicer = ((BucketExpression)expression).Slicer;
-            Assert.That(projectionSlicer, Is.EqualTo(slicer));
+            var slicer = (TruncationTemporalSlicer)query.Slicers.ElementAt(0);
+            Assert.That(slicer.Timestamp, Is.TypeOf<AnonymousTimestamp>());
+            Assert.That(slicer.Truncation, Is.EqualTo(TruncationTemporal.Month));
         }
     }
 }
