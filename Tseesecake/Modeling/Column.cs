@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public abstract class Column
-    {
-        public string Name { get; }
-        public DbType DbType { get; }
-
-        public Column(string name, DbType dbType)
-            => (Name, DbType) = (name, dbType);
-    }
+    public abstract record class Column
+    (
+        string Name,
+        DbType DbType
+    )
+    { }
 }
