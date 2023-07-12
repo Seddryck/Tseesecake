@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <None Remove="Resources\BucketBy.sql" />
+    <None Remove="Resources\ImplicitGroupBy.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\ImplicitGroupBy.sql" />
     <EmbeddedResource Include="Resources\BucketBy.sql" />
   </ItemGroup>
 

@@ -17,12 +17,12 @@ namespace Tseesecake.Querying
     {
         public Timeseries Timeseries { get; set; }
         public List<IProjection> Projections { get; }
-        public List<IFilter>? Filters { get; }
-        public List<ISlicer>? Slicers { get; }
-        public List<IFilter>? GroupFilters { get; }
-        public NamedWindow[]? Windows { get; }
-        public List<IFilter>? Qualifiers { get; }
-        public List<IOrderBy>? Orders { get; }
+        public List<IFilter> Filters { get; }
+        public List<ISlicer> Slicers { get; }
+        public List<IFilter> GroupFilters { get; }
+        public List<NamedWindow> Windows { get; }
+        public List<IFilter> Qualifiers { get; }
+        public List<IOrderBy> Orders { get; }
         public IRestriction? Restriction { get; }
 
         public SelectStatement(Timeseries timeseries, IProjection[] projections)
@@ -44,12 +44,12 @@ namespace Tseesecake.Querying
             => (Timeseries, Projections, Filters, Slicers, GroupFilters, Windows, Qualifiers, Orders, Restriction) =
                     (timeseries
                         , projections.ToList()
-                        , filters?.Length > 0 ? filters.ToList() : null
-                        , slicers?.Length > 0 ? slicers.ToList() : null
-                        , groupFilters?.Length > 0 ? groupFilters.ToList() : null
-                        , namedWindows?.Length > 0 ? namedWindows : null
-                        , qualifiers?.Length > 0 ? qualifiers.ToList() : null
-                        , orders?.Length > 0 ? orders.ToList() : null
+                        , filters?.Length > 0 ? filters.ToList() : new List<IFilter>()
+                        , slicers?.Length > 0 ? slicers.ToList() : new List<ISlicer>()
+                        , groupFilters?.Length > 0 ? groupFilters.ToList() : new List<IFilter>()
+                        , namedWindows?.Length > 0 ? namedWindows.ToList() : new List<NamedWindow>()
+                        , qualifiers?.Length > 0 ? qualifiers.ToList() : new List<IFilter>()
+                        , orders?.Length > 0 ? orders.ToList() : new List<IOrderBy>()
                         , restriction
             );
     }
