@@ -18,7 +18,7 @@ namespace Tseesecake.Testing.Engine
 {
     public class DmlStatementDefinition
     {
-        protected static Timeseries WindEnergy
+        public static Timeseries WindEnergy
             => new(
                     "WindEnergy"
                     , new Timestamp("Instant")

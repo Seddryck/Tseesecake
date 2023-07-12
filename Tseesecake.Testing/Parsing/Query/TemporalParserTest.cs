@@ -31,9 +31,23 @@ namespace Tseesecake.Testing.Parsing.Query
             => Assert.That(TemporalParser.Cyclic.Parse(text), Is.EqualTo(expected));
 
         [Test]
+        [TestCase("BUCKET Instant BY Month Of Year")]
+        [TestCase("BUCKET Instant BY Month")]
+        public void Parse_BucketByNamed_CorrectTemplate(string text)
+            => Assert.That(TemporalParser.BucketBy.Parse(text), Is.TypeOf<Timestamp>());
+
+        [Test]
+        [TestCase("BUCKET BY Month Of Year")]
+        [TestCase("BUCKET BY Month")]
+        public void Parse_BucketByAnonymous_CorrectTemplate(string text)
+            => Assert.That(TemporalParser.BucketBy.Parse(text), Is.TypeOf<AnonymousTimestamp>());
+
+        [Test]
         [TestCase("BUCKET Instant BY Month Of Year", nameof(CyclicTemporalSlicer))]
         [TestCase("BUCKET Instant BY Month", nameof(TruncationTemporalSlicer))]
-        public void Parse_Slicer_CorrectTemplate(string text, string template)
+        [TestCase("BUCKET BY Month Of Year", nameof(CyclicTemporalSlicer))]
+        [TestCase("BUCKET BY Month", nameof(TruncationTemporalSlicer))]
+        public void Parse_SlicerAnonymous_CorrectTemplate(string text, string template)
             => Assert.That(TemporalParser.Slicer.Parse(text).Template, Is.EqualTo(template));
     }
 }

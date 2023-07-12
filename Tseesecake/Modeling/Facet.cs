@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public class Facet : Column
+    public record class Facet : Column
     {
         public Facet(string name)
             : base(name, DbType.String) { }

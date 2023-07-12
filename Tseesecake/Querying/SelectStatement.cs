@@ -15,14 +15,14 @@ namespace Tseesecake.Querying
 {
     public class SelectStatement
     {
-        public Timeseries Timeseries { get; }
-        public IProjection[] Projections { get; }
-        public IFilter[]? Filters { get; }
-        public ISlicer[]? Slicers { get; }
-        public IFilter[]? GroupFilters { get; }
+        public Timeseries Timeseries { get; set; }
+        public List<IProjection> Projections { get; }
+        public List<IFilter>? Filters { get; }
+        public List<ISlicer>? Slicers { get; }
+        public List<IFilter>? GroupFilters { get; }
         public NamedWindow[]? Windows { get; }
-        public IFilter[]? Qualifiers { get; }
-        public IOrderBy[]? Orders { get; }
+        public List<IFilter>? Qualifiers { get; }
+        public List<IOrderBy>? Orders { get; }
         public IRestriction? Restriction { get; }
 
         public SelectStatement(Timeseries timeseries, IProjection[] projections)
@@ -43,13 +43,13 @@ namespace Tseesecake.Querying
         public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters, NamedWindow[]? namedWindows, IFilter[]? qualifiers, IOrderBy[]? orders, IRestriction? restriction = null)
             => (Timeseries, Projections, Filters, Slicers, GroupFilters, Windows, Qualifiers, Orders, Restriction) =
                     (timeseries
-                        , projections
-                        , filters?.Length > 0 ? filters : null
-                        , slicers?.Length > 0 ? slicers : null
-                        , groupFilters?.Length > 0 ? groupFilters : null
+                        , projections.ToList()
+                        , filters?.Length > 0 ? filters.ToList() : null
+                        , slicers?.Length > 0 ? slicers.ToList() : null
+                        , groupFilters?.Length > 0 ? groupFilters.ToList() : null
                         , namedWindows?.Length > 0 ? namedWindows : null
-                        , qualifiers?.Length > 0 ? qualifiers : null
-                        , orders?.Length > 0 ? orders : null
+                        , qualifiers?.Length > 0 ? qualifiers.ToList() : null
+                        , orders?.Length > 0 ? orders.ToList() : null
                         , restriction
             );
     }

@@ -249,5 +249,22 @@ namespace Tseesecake.QA
                 rowCount += 1;
             Assert.That(rowCount, Is.EqualTo(20));
         }
+
+        [Test]
+        public virtual void ExecuteReader_BucketBy_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
+            var reader = engine.ExecuteReader(ResourcesReader.BucketBy);
+            Assert.That(reader, Is.Not.Null);
+            var rowCount = 0;
+            while (reader.Read())
+            {
+                var weekId = reader.GetValue(0);
+                Assert.That(weekId, Is.LessThanOrEqualTo(2).Or.GreaterThanOrEqualTo(52));
+                rowCount += 1;
+            }
+            Assert.That(rowCount, Is.EqualTo(3));
+        }
     }
 }

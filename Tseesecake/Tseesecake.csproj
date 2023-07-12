@@ -13,6 +13,7 @@
 	  <None Remove="Engine\DuckDB\Dictionaries\types.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <None Remove="Engine\DuckDB\ExpressionProjection.sql.st" />
+	  <None Remove="Engine\DuckDB\Expressions\BucketExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />
@@ -48,6 +49,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Expressions\BucketExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />

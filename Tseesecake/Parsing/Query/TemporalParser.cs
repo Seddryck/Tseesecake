@@ -11,11 +11,11 @@ namespace Tseesecake.Parsing.Query
 {
     internal class TemporalParser
     {
-        private static Parser<Timestamp> BucketBy =
+        protected internal static Parser<Timestamp> BucketBy =
             from bucket in Keyword.Bucket
-            from id in Grammar.Identifier.Optional()
+            from id in Grammar.Identifier.Except(Keyword.By).Optional()
             from byKeyword in Keyword.By
-            select id.IsDefined ? new Timestamp(id.Get()) : throw new NotImplementedException();
+            select id.IsDefined ? new Timestamp(id.Get()) : new AnonymousTimestamp();
 
         private static Parser<T> CreateEnumParser<T>()
         {
