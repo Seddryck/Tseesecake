@@ -266,5 +266,23 @@ namespace Tseesecake.QA
             }
             Assert.That(rowCount, Is.EqualTo(3));
         }
+
+        [Test]
+        public virtual void ExecuteReader_ImplicitGroupBy_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
+            var reader = engine.ExecuteReader(ResourcesReader.ImplicitGroupBy);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.FieldCount, Is.EqualTo(3));
+            var rowCount = 0;
+            while (reader.Read())
+            {
+                Assert.That(reader.GetValue(0), Is.LessThanOrEqualTo(2).Or.GreaterThanOrEqualTo(52));
+                Assert.That(reader.GetString(1), Is.AnyOf("Green Power Inc.", "Future Energy"));
+                rowCount += 1;
+            }
+            Assert.That(rowCount, Is.EqualTo(6));
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Tseesecake.Engine
 
             statement.Timeseries = Timeseries.Single(x => statement.Timeseries.Name == x.Name);
 
-            var arrangers = new ISelectArranger[] { new BucketAnonymousTimestamp(), new BucketAsProjection() };
+            var arrangers = new ISelectArranger[] { new ColumnProjectionTyped(), new BucketAnonymousTimestamp(), new BucketAsProjection(), new FacetProjectionAsSlicer() };
             foreach (var arranger in arrangers)
                 arranger.Execute(statement);
 

@@ -12,6 +12,8 @@ namespace Tseesecake.Modeling
         public Timestamp Timestamp { get; }
         public Measurement[] Measurements { get; }
         public Facet[] Facets { get; } = Array.Empty<Facet>();
+        public Column[] Columns
+            => Enumerable.Empty<Column>().Append(Timestamp).Union(Facets).Union(Measurements).ToArray();
 
         public Timeseries(string name, Timestamp timestamp, Measurement measurement)
             : this(name, timestamp, measurement, null) {}

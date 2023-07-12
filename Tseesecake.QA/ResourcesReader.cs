@@ -20,6 +20,7 @@ namespace Tseesecake.QA
 
         public static string BucketBy
             => Read(nameof(BucketBy));
-        
+        public static string ImplicitGroupBy
+            => Read(nameof(ImplicitGroupBy));
     }
 }
