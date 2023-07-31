@@ -182,5 +182,26 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(slicer.Timestamp, Is.TypeOf<AnonymousTimestamp>());
             Assert.That(slicer.Truncation, Is.EqualTo(TruncationTemporal.Month));
         }
+
+        [Test]
+        public virtual void Parse_Expressions_Valid()
+        {
+            var text = "WITH MEASUREMENT Accuracy AS (Forecasted - Produced) SELECT Accuracy FROM WindEnergy";
+            var query = QueryParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Projections, Has.Count.EqualTo(1));
+            foreach (var projection in query.Projections)
+                Assert.That(projection, Is.TypeOf<ColumnProjection>());
+            var columnName = query.Projections.Cast<ColumnProjection>().Select(x => x.Alias).First();
+            Assert.That(columnName, Is.EqualTo("Accuracy"));
+
+            Assert.That(query.MeasurementExpressions, Has.Count.EqualTo(1));
+            foreach (var expr in query.MeasurementExpressions)
+                Assert.That(expr, Is.TypeOf<MeasurementExpression>());
+            var expression = query.MeasurementExpressions.First();
+            Assert.That(expression.Name, Is.EqualTo("Accuracy"));
+            Assert.That(expression.Expression, Is.Not.Null);
+        }
     }
 }
