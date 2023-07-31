@@ -2,7 +2,7 @@ Param(
 	[switch] $force=$false
 	, $config= "Release"
 	, [string[]] $frameworks = @("net6.0", "net7.0")
-	, [string] $version = "v0.8.0"
+	, [string] $version = "v0.8.1"
 )
 . $PSScriptRoot\..\Run-TestSuite.ps1
 
@@ -64,7 +64,7 @@ if ($force -or ($filesChanged -like "*duckdb*")) {
 	foreach ($framework in $frameworks)
 	{
 		$binPath = "./../bin/$config/$framework"
-		$databasePath = "$binPath/Customer.duckdb"
+		$databasePath = "$binPath/WindEnergy.duckdb"
 		if (Test-Path -Path $databasePath) {
 			Remove-Item -Path $databasePath
 		}
