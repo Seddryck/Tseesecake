@@ -1,0 +1,1 @@
+NegateChecked(value)::=$Negate(value)$

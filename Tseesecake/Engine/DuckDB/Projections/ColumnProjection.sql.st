@@ -1,1 +1,0 @@
-ColumnProjection(projection)::=$projection.Expression:(projection.Expression.Template)()$

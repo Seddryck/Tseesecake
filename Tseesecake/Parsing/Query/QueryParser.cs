@@ -44,7 +44,12 @@ namespace Tseesecake.Parsing.Query
             from orderBys in OrderByParser.OrderBy
             select orderBys.ToArray();
 
+        protected internal readonly static Parser<VirtualMeasurement[]> MeasurementExpressions =
+            from expressions in VirtualMeasurementParser.VirtualMeasurement.DelimitedBy(Parse.Char(','))
+            select expressions.ToArray();
+
         public readonly static Parser<SelectStatement> Query =
+            from measurementExpressions in MeasurementExpressions.Optional()
             from @select in Keyword.Select
             from projections in ProjectionParser.Projection.DelimitedBy(Parse.Char(','))
             from @from in Keyword.From
@@ -53,6 +58,6 @@ namespace Tseesecake.Parsing.Query
             from slicers in Slicers.Optional()
             from orderBys in OrderBys.Optional()
             from restriction in RestrictionParser.Restriction.Optional()
-            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), slicers.GetOrElse(null), null, null, null, orderBys.GetOrElse(null), restriction.GetOrElse(null));
+            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), slicers.GetOrElse(null), null, null, null, orderBys.GetOrElse(null), restriction.GetOrElse(null), measurementExpressions.GetOrElse(null));
     }
 }

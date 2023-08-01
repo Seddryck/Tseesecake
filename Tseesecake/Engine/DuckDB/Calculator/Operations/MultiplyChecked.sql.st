@@ -1,0 +1,1 @@
+MultiplyChecked(binary)::=$Multiply(binary)$

@@ -14,20 +14,22 @@ using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Arrangers
 {
-    internal class ColumnProjectionTyped : ISelectArranger
+    internal class ColumnReferenceProjectionTyped : ISelectArranger
     {
         public void Execute(SelectStatement statement)
         {
-            var projections = statement.Projections.Where(x => x is ColumnProjection).Cast<ColumnProjection>();
+            var projections = statement.Projections
+                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
+                .Where(x => x.Expression is ColumnExpression);
             if (!projections.Any())
                 return;
 
             foreach (var projection in statement.Projections)
             {
                 if (projections.Contains(projection))
-                    ((ColumnExpression)((ColumnProjection)projection).Expression).Column 
+                    ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference 
                         = statement.Timeseries.Columns.Single(x => 
-                            x.Name == ((ColumnExpression)((ColumnProjection)projection).Expression).Column.Name
+                            x.Name == ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference.Name
                     );
             }
         }

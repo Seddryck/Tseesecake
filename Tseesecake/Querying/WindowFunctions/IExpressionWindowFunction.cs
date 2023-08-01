@@ -9,6 +9,6 @@ namespace Tseesecake.Querying.WindowFunctions
 {
     public interface IExpressionWindowFunction : IWindowFunction
     {
-        IExpression Expression { get; }
+        IExpression Expression { get; set; }
     }
 }

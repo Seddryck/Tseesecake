@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public record class Timestamp : Column
+    public class Timestamp : Column
     {
         public Timestamp(string name)
             : base(name, DbType.DateTime) { }

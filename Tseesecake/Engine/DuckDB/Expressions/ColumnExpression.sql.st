@@ -1,1 +1,1 @@
-ColumnExpression(expression)::=$expression.Column.Name$
+ColumnExpression(expression)::=$expression.Reference.Name$

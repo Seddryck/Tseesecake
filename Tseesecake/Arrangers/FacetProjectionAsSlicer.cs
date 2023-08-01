@@ -22,9 +22,9 @@ namespace Tseesecake.Arrangers
                 return;
 
             var projections = statement.Projections
-                .Where(x => x is ColumnProjection).Cast<ColumnProjection>()
+                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
                 .Where(x => x.Expression is ColumnExpression).Select(x => x.Expression).Cast<ColumnExpression>()
-                .Where(x => x.Column is Facet).Select(x => x.Column).Cast<Facet>();
+                .Where(x => x.Reference is Facet).Select(x => x.Reference).Cast<Facet>();
 
             if (!projections.Any())
                 return;

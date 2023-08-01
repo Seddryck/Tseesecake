@@ -10,7 +10,7 @@ namespace Tseesecake.Querying.Projections
 {
     internal class ExpressionProjection : IProjection
     {
-        public IExpression Expression { get; }
+        public IExpression Expression { get; set; }
         public string Alias { get; }
 
         public virtual string Template { get => nameof(ExpressionProjection); }

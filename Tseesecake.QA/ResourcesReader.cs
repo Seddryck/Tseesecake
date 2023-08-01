@@ -22,5 +22,7 @@ namespace Tseesecake.QA
             => Read(nameof(BucketBy));
         public static string ImplicitGroupBy
             => Read(nameof(ImplicitGroupBy));
+        public static string VirtualMeasurement
+            => Read(nameof(VirtualMeasurement));
     }
 }

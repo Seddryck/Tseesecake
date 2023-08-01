@@ -22,9 +22,9 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnProjection(ts.Timestamp)
-                    , new ColumnProjection(ts.Facets.ElementAt(0))
-                    , new ColumnProjection(ts.Facets.ElementAt(1))
+                    new ColumnReferenceProjection(ts.Timestamp)
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
                     , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
                 }
             );
@@ -46,10 +46,10 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnProjection(ts.Timestamp)
-                    , new ColumnProjection(ts.Facets.ElementAt(0))
-                    , new ColumnProjection(ts.Facets.ElementAt(1))
-                    , new ColumnProjection(ts.Measurements.ElementAt(0))
+                    new ColumnReferenceProjection(ts.Timestamp)
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
+                    , new ColumnReferenceProjection(ts.Measurements.ElementAt(0))
                 }
             );
 
@@ -66,9 +66,9 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnProjection(ts.Timestamp)
-                    , new ColumnProjection(ts.Facets.ElementAt(0))
-                    , new ColumnProjection(ts.Facets.ElementAt(1))
+                    new ColumnReferenceProjection(ts.Timestamp)
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
+                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
                     , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
                 }, null,
                 new ISlicer[] {

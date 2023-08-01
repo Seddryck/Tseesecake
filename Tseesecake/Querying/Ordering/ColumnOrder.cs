@@ -9,19 +9,19 @@ namespace Tseesecake.Querying.Ordering
 {
     internal class ColumnOrder : IOrderBy
     {
-        public Column Column { get; }
+        public ColumnReference Reference { get; }
         public Sorting Sort { get; }
         public NullSorting NullSort { get; }
 
         public string Template { get => nameof(ColumnOrder); }
 
-        public ColumnOrder(Column column)
-            : this(column, Sorting.Ascending) { }
+        public ColumnOrder(ColumnReference reference)
+            : this(reference, Sorting.Ascending) { }
 
-        public ColumnOrder(Column column, Sorting sort)
-            : this(column, sort, NullSorting.First) { }
+        public ColumnOrder(ColumnReference reference, Sorting sort)
+            : this(reference, sort, NullSorting.First) { }
 
-        public ColumnOrder(Column column, Sorting sort, NullSorting nullSort)
-            => (Column, Sort, NullSort) = (column, sort, nullSort);
+        public ColumnOrder(ColumnReference reference, Sorting sort, NullSorting nullSort)
+            => (Reference, Sort, NullSort) = (reference, sort, nullSort);
     }
 }

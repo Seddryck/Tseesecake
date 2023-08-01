@@ -148,5 +148,17 @@ namespace Tseesecake.Testing.Engine.DuckDB
         public void Read_LimitOffset_ValidStatement()
             => Assert.That(new ElementalQuery(SelectStatementDefinition.LimitOffset).Read(Dialect, Connectivity)
                 , Is.EqualTo(LimitOffset));
+
+        protected abstract string VirtualMeasurementProjection { get; }
+        [Test]
+        public void Read_VirtualMeasurementProjection_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.VirtualMeasurementProjection).Read(Dialect, Connectivity)
+                , Is.EqualTo(VirtualMeasurementProjection));
+
+        protected abstract string VirtualMeasurementAggregation { get; }
+        [Test]
+        public void Read_VirtualMeasurementAggregation_ValidStatement()
+            => Assert.That(new ElementalQuery(SelectStatementDefinition.VirtualMeasurementAggregation).Read(Dialect, Connectivity)
+                , Is.EqualTo(VirtualMeasurementAggregation));
     }
 }

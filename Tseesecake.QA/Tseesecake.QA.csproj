@@ -7,17 +7,19 @@
   <ItemGroup>
     <None Remove="Resources\BucketBy.sql" />
     <None Remove="Resources\ImplicitGroupBy.sql" />
+    <None Remove="Resources\VirtualMeasurement.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\VirtualMeasurement.sql" />
     <EmbeddedResource Include="Resources\ImplicitGroupBy.sql" />
     <EmbeddedResource Include="Resources\BucketBy.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="DubUrl" Version="0.1.207" />
-    <PackageReference Include="DubUrl.Extensions.DependencyInjection" Version="0.1.207" />
+    <PackageReference Include="DubUrl" Version="0.1.208" />
+    <PackageReference Include="DubUrl.Extensions.DependencyInjection" Version="0.1.208" />
     <PackageReference Include="DuckDB.NET.Data.Full" Version="0.8.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
