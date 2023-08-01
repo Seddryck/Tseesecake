@@ -21,6 +21,8 @@ namespace Tseesecake.Testing.Parsing.Query.Calculator
         [TestCase("3 * (10.25 + 5)", 45.75)]
         [TestCase("(10.25 + 5) * (6 / 2)", 45.75)]
         [TestCase("(2 + 1) * (10.25 + 5)", 45.75)]
+        [TestCase("4 % 3", 1)]
+        [TestCase("(2*2)^(1+1)", 16)]
         public void Parse_Expression_CorrectEvaluation(string value, double expected)
         {
             var expr = new SimpleCalculator().ParseExpression(value);
