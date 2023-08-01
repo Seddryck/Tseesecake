@@ -47,7 +47,9 @@ namespace Tseesecake.Testing.Engine.DuckDB
             => "SELECT\r\n\tROW_NUMBER() OVER(\r\n\t\tPARTITION BY Producer\r\n\t\tORDER BY Produced DESC NULLS LAST\r\n\t) AS RowNb\r\nFROM\r\n\tWindEnergy\r\nQUALIFY\r\n\tRowNb <= 5\r\n";
         protected override string LimitOffset 
             => "SELECT\r\n\tProduced AS Produced\r\nFROM\r\n\tWindEnergy\r\nORDER BY\r\n\tProduced DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n";
-        protected override string VirtualMeasurement
+        protected override string VirtualMeasurementProjection
             => "SELECT\r\n\t(Forecasted - Produced) AS Accuracy\r\nFROM\r\n\tWindEnergy\r\nORDER BY\r\n\tAccuracy DESC NULLS LAST\r\n";
+        protected override string VirtualMeasurementAggregation
+            => "SELECT\r\n\tMIN((Forecasted - Produced)) AS MinAccuracy\r\nFROM\r\n\tWindEnergy\r\n";
     }
 }

@@ -220,7 +220,7 @@ namespace Tseesecake.Testing.Engine
                     new ColumnOrder(new Measurement("Produced"), Sorting.Descending, NullSorting.Last) }
                 , new LimitOffsetRestriction(20,40));
 
-        public static SelectStatement VirtualMeasurement
+        public static SelectStatement VirtualMeasurementProjection
             => new(WindEnergy
                 , new[] {
                     new ColumnReferenceProjection(new ColumnReference("Accuracy"))
@@ -242,5 +242,18 @@ namespace Tseesecake.Testing.Engine
                     new ColumnOrder(new ColumnReference("Accuracy"), Sorting.Descending, NullSorting.Last) }
                 , null
                 );
+
+        public static SelectStatement VirtualMeasurementAggregation
+            => new(WindEnergy
+                , new[] {
+                    new AggregationProjection(new MinAggregation(
+                        new VirtualColumnExpression(
+                            LinqExpr.Expression.Subtract(
+                                LinqExpr.Expression.Parameter(typeof(double), "Forecasted"),
+                                LinqExpr.Expression.Parameter(typeof(double), "Produced")
+                             )
+                        )
+                    ), "MinAccuracy")
+                });
     }
 }

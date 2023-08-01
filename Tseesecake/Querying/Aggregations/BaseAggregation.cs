@@ -10,7 +10,7 @@ namespace Tseesecake.Querying.Aggregations
     internal abstract class BaseAggregation : IAggregation
     {
         public string Name => GetType().Name.Replace("Aggregation", "").ToLowerInvariant();
-        public IExpression Expression { get; }
+        public IExpression Expression { get; set; }
 
         public BaseAggregation(IExpression expression)
             => Expression = expression;

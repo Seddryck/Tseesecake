@@ -292,16 +292,16 @@ namespace Tseesecake.QA
             engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
             var reader = engine.ExecuteReader(ResourcesReader.VirtualMeasurement);
             Assert.That(reader, Is.Not.Null);
-            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            Assert.That(reader.FieldCount, Is.EqualTo(2));
             var rowCount = 0;
             var previousValue = double.MaxValue;
             while (reader.Read())
             {
-                Assert.That(reader.GetDouble(0), Is.LessThanOrEqualTo(previousValue));
+                Assert.That(reader.GetDouble(1), Is.LessThanOrEqualTo(previousValue));
                 rowCount += 1;
-                previousValue = reader.GetDouble(0);
+                previousValue = reader.GetDouble(1);
             }
-            Assert.That(rowCount, Is.EqualTo(2280)); 
+            Assert.That(rowCount, Is.EqualTo(5)); 
         }
     }
 }

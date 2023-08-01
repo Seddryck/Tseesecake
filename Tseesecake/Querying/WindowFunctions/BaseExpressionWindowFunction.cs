@@ -14,6 +14,6 @@ namespace Tseesecake.Querying.WindowFunctions
         protected BaseExpressionWindowFunction(IExpression expression)
             => Expression = expression;
 
-        public IExpression Expression { get; }
+        public IExpression Expression { get; set; }
     }
 }

@@ -3,8 +3,9 @@ WITH MEASUREMENT Accuracy AS (
 )
 
 SELECT
-	Accuracy
+	WindPark,
+	MIN(Accuracy) AS MinAccuracy
 FROM
 	WindEnergy
 ORDER BY
-	Accuracy DESC
+	MinAccuracy DESC
