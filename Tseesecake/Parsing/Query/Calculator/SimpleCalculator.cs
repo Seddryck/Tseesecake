@@ -29,7 +29,7 @@ namespace Tseesecake.Parsing.Query.Calculator
         protected internal virtual Parser<Expression> Constant =>
             Decimal.Select(x => Expression.Constant(double.Parse(x, CultureInfo.InvariantCulture))).Named("Constant");
 
-        protected internal Parser<ExpressionType> Operator(string op, ExpressionType opType) =>
+        protected internal static Parser<ExpressionType> Operator(string op, ExpressionType opType) =>
             Parse.String(op).Token().Return(opType);
 
         protected internal virtual Parser<ExpressionType> Add =>

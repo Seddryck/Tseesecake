@@ -1,0 +1,1 @@
+VirtualColumnExpression(expression)::=$expression.Expression:(expression.Expression.NodeType)()$

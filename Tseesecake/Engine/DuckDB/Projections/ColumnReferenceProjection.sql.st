@@ -1,1 +1,1 @@
-ColumnReferenceProjection(projection)::=$projection.Expression:(projection.Expression.Template)()$
+ColumnReferenceProjection(projection)::=$projection.Expression:(projection.Expression.Template)()$ AS $projection.Alias$

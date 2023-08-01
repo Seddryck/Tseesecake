@@ -17,7 +17,7 @@ namespace Tseesecake.Parsing.Query
 {
     internal class OrderByParser
     {
-        private static Parser<IOrderBy> OrderByColumn =
+        private static readonly Parser<IOrderBy> OrderByColumn =
             from column in Grammar.Identifier
             from asc in Keyword.Asc.Or(Keyword.Desc).Optional()
             from first in Keyword.Nulls.Then(_ => Keyword.First.Or(Keyword.Last)).Optional()

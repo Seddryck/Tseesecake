@@ -7,9 +7,11 @@
   <ItemGroup>
     <None Remove="Resources\BucketBy.sql" />
     <None Remove="Resources\ImplicitGroupBy.sql" />
+    <None Remove="Resources\VirtualMeasurement.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\VirtualMeasurement.sql" />
     <EmbeddedResource Include="Resources\ImplicitGroupBy.sql" />
     <EmbeddedResource Include="Resources\BucketBy.sql" />
   </ItemGroup>

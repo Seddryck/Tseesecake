@@ -27,7 +27,10 @@ namespace Tseesecake.Querying
         public List<VirtualMeasurement> VirtualMeasurements { get; set; }
 
         public SelectStatement(Timeseries timeseries, IProjection[] projections)
-            : this(timeseries, projections, null) { }
+            : this(timeseries, projections, null, null, null, null, null, null, null, null) { }
+        
+        public SelectStatement(Timeseries timeseries, IProjection[] projections, VirtualMeasurement[] expressions)
+            : this(timeseries, projections, null, null, null, null, null, null, null, expressions) { }
 
         public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters)
             : this(timeseries, projections, filters, Array.Empty<ISlicer>()) { }

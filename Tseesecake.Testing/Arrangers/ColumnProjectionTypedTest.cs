@@ -29,7 +29,7 @@ namespace Tseesecake.Testing.Arrangers
                 }
             );
 
-            var arranger = new ColumnProjectionTyped();
+            var arranger = new ColumnReferenceProjectionTyped();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
@@ -41,5 +41,7 @@ namespace Tseesecake.Testing.Arrangers
                 Assert.That(((ColumnExpression)projection.Expression).Reference, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
             }
         }
+
+        
     }
 }

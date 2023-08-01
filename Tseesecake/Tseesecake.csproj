@@ -35,6 +35,7 @@
 	  <None Remove="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />
+	  <None Remove="Engine\DuckDB\Expressions\VirtualColumnExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\AfterTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\BeforeTemporizer.sql.st" />
 	  <None Remove="Engine\DuckDB\Filters\CullerSifter.sql.st" />
@@ -86,6 +87,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\windowFunctions.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\BucketExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Expressions\VirtualColumnExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ConstantExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\ColumnExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Expressions\LiteralExpression.sql.st" />

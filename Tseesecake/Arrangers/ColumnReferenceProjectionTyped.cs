@@ -14,11 +14,13 @@ using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Arrangers
 {
-    internal class ColumnProjectionTyped : ISelectArranger
+    internal class ColumnReferenceProjectionTyped : ISelectArranger
     {
         public void Execute(SelectStatement statement)
         {
-            var projections = statement.Projections.Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>();
+            var projections = statement.Projections
+                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
+                .Where(x => x.Expression is ColumnExpression);
             if (!projections.Any())
                 return;
 

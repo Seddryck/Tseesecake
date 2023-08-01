@@ -284,5 +284,24 @@ namespace Tseesecake.QA
             }
             Assert.That(rowCount, Is.EqualTo(6));
         }
+
+        [Test]
+        public virtual void ExecuteReader_VirtualMeasurement_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<QueryEngine>();
+            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
+            var reader = engine.ExecuteReader(ResourcesReader.VirtualMeasurement);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            var rowCount = 0;
+            var previousValue = double.MaxValue;
+            while (reader.Read())
+            {
+                Assert.That(reader.GetDouble(0), Is.LessThanOrEqualTo(previousValue));
+                rowCount += 1;
+                previousValue = reader.GetDouble(0);
+            }
+            Assert.That(rowCount, Is.EqualTo(2280)); 
+        }
     }
 }
