@@ -44,8 +44,8 @@ namespace Tseesecake.Parsing.Query
             from orderBys in OrderByParser.OrderBy
             select orderBys.ToArray();
 
-        protected internal readonly static Parser<MeasurementExpression[]> MeasurementExpressions =
-            from expressions in MeasurementExpressionParser.MeasurementExpression.DelimitedBy(Parse.Char(','))
+        protected internal readonly static Parser<VirtualMeasurement[]> MeasurementExpressions =
+            from expressions in VirtualMeasurementParser.VirtualMeasurement.DelimitedBy(Parse.Char(','))
             select expressions.ToArray();
 
         public readonly static Parser<SelectStatement> Query =

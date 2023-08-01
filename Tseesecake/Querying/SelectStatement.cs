@@ -24,7 +24,7 @@ namespace Tseesecake.Querying
         public List<IFilter> Qualifiers { get; }
         public List<IOrderBy> Orders { get; }
         public IRestriction? Restriction { get; }
-        public List<MeasurementExpression> MeasurementExpressions { get; set; }
+        public List<VirtualMeasurement> VirtualMeasurements { get; set; }
 
         public SelectStatement(Timeseries timeseries, IProjection[] projections)
             : this(timeseries, projections, null) { }
@@ -41,8 +41,8 @@ namespace Tseesecake.Querying
         public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters)
             : this(timeseries, projections, filters, slicers, groupFilters, Array.Empty<NamedWindow>(), Array.Empty<IFilter>(), Array.Empty<IOrderBy>(), null, null) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters, NamedWindow[]? namedWindows, IFilter[]? qualifiers, IOrderBy[]? orders, IRestriction? restriction = null, MeasurementExpression[]? expressions = null)
-            => (Timeseries, Projections, Filters, Slicers, GroupFilters, Windows, Qualifiers, Orders, Restriction, MeasurementExpressions) =
+        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters, NamedWindow[]? namedWindows, IFilter[]? qualifiers, IOrderBy[]? orders, IRestriction? restriction = null, VirtualMeasurement[]? expressions = null)
+            => (Timeseries, Projections, Filters, Slicers, GroupFilters, Windows, Qualifiers, Orders, Restriction, VirtualMeasurements) =
                     (timeseries
                         , projections.ToList()
                         , filters?.Length > 0 ? filters.ToList() : new List<IFilter>()
@@ -52,7 +52,7 @@ namespace Tseesecake.Querying
                         , qualifiers?.Length > 0 ? qualifiers.ToList() : new List<IFilter>()
                         , orders?.Length > 0 ? orders.ToList() : new List<IOrderBy>()
                         , restriction
-                        , expressions?.Length >0 ? expressions.ToList() : new List<MeasurementExpression>()
+                        , expressions?.Length >0 ? expressions.ToList() : new List<VirtualMeasurement>()
             );
     }
 }

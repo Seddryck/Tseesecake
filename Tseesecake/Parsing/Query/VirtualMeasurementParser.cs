@@ -11,9 +11,9 @@ using Tseesecake.Parsing.Query.Calculator;
 
 namespace Tseesecake.Parsing.Query
 {
-    internal class MeasurementExpressionParser
+    internal class VirtualMeasurementParser
     {
-        public static Parser<MeasurementExpression> MeasurementExpression =
+        public static Parser<VirtualMeasurement> VirtualMeasurement =
             from with in Keyword.With
             from measurement in Keyword.Measurement
             from name in Grammar.Identifier
@@ -21,6 +21,6 @@ namespace Tseesecake.Parsing.Query
             from lp in Parse.Char('(').Token()
             from expression in new ParameterCalculator().Expr
             from rp in Parse.Char(')').Token()
-            select new MeasurementExpression(name, expression);
+            select new VirtualMeasurement(name, expression);
     }
 }

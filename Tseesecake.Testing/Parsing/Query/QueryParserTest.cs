@@ -196,10 +196,10 @@ namespace Tseesecake.Testing.Parsing.Query
             var columnName = query.Projections.Cast<ColumnProjection>().Select(x => x.Alias).First();
             Assert.That(columnName, Is.EqualTo("Accuracy"));
 
-            Assert.That(query.MeasurementExpressions, Has.Count.EqualTo(1));
-            foreach (var expr in query.MeasurementExpressions)
-                Assert.That(expr, Is.TypeOf<MeasurementExpression>());
-            var expression = query.MeasurementExpressions.First();
+            Assert.That(query.VirtualMeasurements, Has.Count.EqualTo(1));
+            foreach (var expr in query.VirtualMeasurements)
+                Assert.That(expr, Is.TypeOf<VirtualMeasurement>());
+            var expression = query.VirtualMeasurements.First();
             Assert.That(expression.Name, Is.EqualTo("Accuracy"));
             Assert.That(expression.Expression, Is.Not.Null);
         }

@@ -9,14 +9,14 @@ using Tseesecake.Parsing.Query;
 
 namespace Tseesecake.Testing.Parsing.Query
 {
-    public class MeasurementExpressionParserTest
+    public class VirtualMeasurementParserTest
     {
         [Test]
         [TestCase("WITH MEASUREMENT Accuracy AS (Forecasted - Produced)", "Accuracy", typeof(BinaryExpression))]
         [TestCase("WITH MEASUREMENT \"Forecasted (GW)\" AS (Forecasted / 1000)", "Forecasted (GW)", typeof(BinaryExpression))]
         public void Parse_OrderByColumns_CorrectValue(string text, string name, Type expressionType)
         {
-            var measurement = MeasurementExpressionParser.MeasurementExpression.Parse(text);
+            var measurement = VirtualMeasurementParser.VirtualMeasurement.Parse(text);
             Assert.That(measurement, Is.Not.Null);
             Assert.That(measurement.Name, Is.EqualTo(name));
             Assert.That(measurement.Expression, Is.AssignableTo(expressionType));

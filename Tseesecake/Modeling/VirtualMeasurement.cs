@@ -7,6 +7,6 @@ using System.Linq.Expressions;
 
 namespace Tseesecake.Modeling
 {
-    public record class MeasurementExpression(string Name, Expression Expression)
+    public record class VirtualMeasurement(string Name, Expression Expression)
     { }
 }
