@@ -30,14 +30,14 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionSingle
             => new (WindEnergy
                 , new[] { 
-                    new ColumnProjection(new Measurement("Produced"))
+                    new ColumnReferenceProjection(new Measurement("Produced"))
                 });
 
         public static SelectStatement ProjectionMultiple
             => new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Timestamp("Instant"))
-                    , new ColumnProjection(new Measurement("Produced"))
+                    new ColumnReferenceProjection(new Timestamp("Instant"))
+                    , new ColumnReferenceProjection(new Measurement("Produced"))
                 });
 
         public static SelectStatement ProjectionExpression
@@ -100,7 +100,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement FilterSingle
             =>  new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Timestamp("Produced"))
+                    new ColumnReferenceProjection(new Timestamp("Produced"))
                 }
                 , new[] {
                     new EqualDicer(new Facet("WindPark"), "Sea park")
@@ -109,7 +109,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement FilterMultiple
             => new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Timestamp("Produced"))
+                    new ColumnReferenceProjection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
                     new InDicer(new Facet("WindPark"), new[] {"Sea park", "Children of tomorrow park" })
@@ -119,7 +119,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement FilterCuller
             => new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Timestamp("Produced"))
+                    new ColumnReferenceProjection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
                     new CullerSifter(new Measurement("Produced"), LinqExp.Expression.LessThan,  5)
@@ -128,7 +128,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement FilterTemporizer
             => new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Timestamp("Produced"))
+                    new ColumnReferenceProjection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
                     new SinceTemporizer(new Timestamp("Instant"), new TimeSpan(4, 30, 0))
@@ -208,7 +208,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement LimitOffset
             => new (WindEnergy
                 , new[] {
-                    new ColumnProjection(new Measurement("Produced"))
+                    new ColumnReferenceProjection(new Measurement("Produced"))
                 }
                 , null
                 , null

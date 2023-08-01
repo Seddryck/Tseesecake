@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    internal record class AnonymousTimestamp : Timestamp
+    internal class AnonymousTimestamp : Timestamp
     {
         public AnonymousTimestamp()
             : base("_anonymous_") { }

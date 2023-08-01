@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public record class Measurement : Column
+    public class Measurement : Column
     {
         public Measurement(string name)
             : base(name, DbType.Decimal) { }

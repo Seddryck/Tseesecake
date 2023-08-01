@@ -15,7 +15,7 @@ namespace Tseesecake.Parsing.Query
     {
         protected internal static Parser<IProjection> Column =
             from identifier in Grammar.Identifier
-            select new ColumnProjection(new ColumnReference(identifier));
+            select new ColumnReferenceProjection(new ColumnReference(identifier));
 
         protected internal static Parser<IProjection> Expression =
             from expression in ExpressionParser.Expression

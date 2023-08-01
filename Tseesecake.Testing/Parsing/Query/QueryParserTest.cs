@@ -30,8 +30,8 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
             Assert.That(query.Projections, Has.Count.EqualTo(3));
             foreach (var projection in query.Projections)
-                Assert.That(projection, Is.TypeOf<ColumnProjection>());
-            var columnNames = query.Projections.Cast<ColumnProjection>().Select(x => x.Alias);
+                Assert.That(projection, Is.TypeOf<ColumnReferenceProjection>());
+            var columnNames = query.Projections.Cast<ColumnReferenceProjection>().Select(x => x.Alias);
             Assert.That(columnNames, Does.Contain("Instant"));
             Assert.That(columnNames, Does.Contain("WindPark"));
             Assert.That(columnNames, Does.Contain("Forecasted"));
@@ -77,7 +77,7 @@ namespace Tseesecake.Testing.Parsing.Query
             foreach (var aggregation in aggregations)
             {
                 Assert.That(aggregation.Expression, Is.TypeOf<ColumnExpression>());
-                Assert.That(((ColumnExpression)aggregation.Expression).Column.Name, Is.EqualTo("Forecasted"));
+                Assert.That(((ColumnExpression)aggregation.Expression).Reference.Name, Is.EqualTo("Forecasted"));
             }
         }
 
@@ -192,8 +192,8 @@ namespace Tseesecake.Testing.Parsing.Query
             Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
             Assert.That(query.Projections, Has.Count.EqualTo(1));
             foreach (var projection in query.Projections)
-                Assert.That(projection, Is.TypeOf<ColumnProjection>());
-            var columnName = query.Projections.Cast<ColumnProjection>().Select(x => x.Alias).First();
+                Assert.That(projection, Is.TypeOf<ColumnReferenceProjection>());
+            var columnName = query.Projections.Cast<ColumnReferenceProjection>().Select(x => x.Alias).First();
             Assert.That(columnName, Is.EqualTo("Accuracy"));
 
             Assert.That(query.VirtualMeasurements, Has.Count.EqualTo(1));

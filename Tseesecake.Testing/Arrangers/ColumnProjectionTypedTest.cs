@@ -22,9 +22,9 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnProjection(new ColumnReference(ts.Timestamp.Name))
-                    , new ColumnProjection(new ColumnReference(ts.Facets.ElementAt(0).Name))
-                    , new ColumnProjection(new ColumnReference(ts.Facets.ElementAt(1).Name))
+                    new ColumnReferenceProjection(new ColumnReference(ts.Timestamp.Name))
+                    , new ColumnReferenceProjection(new ColumnReference(ts.Facets.ElementAt(0).Name))
+                    , new ColumnReferenceProjection(new ColumnReference(ts.Facets.ElementAt(1).Name))
                     , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
                 }
             );
@@ -33,12 +33,12 @@ namespace Tseesecake.Testing.Arrangers
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
-            Assert.That(statement.Projections.Where(x => x is ColumnProjection).ToArray(), Has.Length.EqualTo(3));
-            foreach (var projection in statement.Projections.Where(x => x is ColumnProjection).Cast<ColumnProjection>())
+            Assert.That(statement.Projections.Where(x => x is ColumnReferenceProjection).ToArray(), Has.Length.EqualTo(3));
+            foreach (var projection in statement.Projections.Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>())
             {
                 Assert.That(projection.Expression, Is.TypeOf<ColumnExpression>());
-                Assert.That(((ColumnExpression)projection.Expression).Column, Is.Not.TypeOf<ColumnReference>());
-                Assert.That(((ColumnExpression)projection.Expression).Column, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
+                Assert.That(((ColumnExpression)projection.Expression).Reference, Is.Not.TypeOf<ColumnReference>());
+                Assert.That(((ColumnExpression)projection.Expression).Reference, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
             }
         }
     }

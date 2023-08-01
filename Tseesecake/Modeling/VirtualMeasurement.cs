@@ -7,6 +7,10 @@ using System.Linq.Expressions;
 
 namespace Tseesecake.Modeling
 {
-    public record class VirtualMeasurement(string Name, Expression Expression)
-    { }
+    public class VirtualMeasurement : Measurement
+    {
+        public Expression Expression { get; }
+        public VirtualMeasurement(string name, Expression expression)
+            : base(name) { Expression = expression; }
+    }
 }

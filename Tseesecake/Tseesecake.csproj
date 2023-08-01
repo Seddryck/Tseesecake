@@ -77,7 +77,7 @@
 	  <EmbeddedResource Include="Engine\DuckDB\Ordering\ColumnOrder.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\AggregationProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Projections\ExpressionProjection.sql.st" />
-	  <EmbeddedResource Include="Engine\DuckDB\Projections\ColumnProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Projections\ColumnReferenceProjection.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitOffsetRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Restrictions\LimitRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Slicers\FacetSlicer.sql.st" />

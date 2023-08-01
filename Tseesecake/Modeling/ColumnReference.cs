@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public record class ColumnReference : Column
+    public class ColumnReference
     {
+        public string Name { get; }
+
         public ColumnReference(string name)
-            : base(name, DbType.Object) { }
+            => Name = name;
     }
 }

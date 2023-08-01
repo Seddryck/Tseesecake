@@ -10,8 +10,8 @@ namespace Tseesecake.Querying.Expressions
 {
     internal class ColumnExpression : BaseExpression
     {
-        public Column Column { get; set; }
-        public ColumnExpression(Column column)
-            => Column = column;
+        public ColumnReference Reference { get; set; }
+        public ColumnExpression(ColumnReference reference)
+            => Reference = reference;
     }
 }
