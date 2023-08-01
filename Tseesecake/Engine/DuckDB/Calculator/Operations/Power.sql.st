@@ -1,0 +1,1 @@
+Power(binary)::=$BinaryCall(binary)$

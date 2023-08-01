@@ -3,9 +3,27 @@
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Engine\DuckDB\Calculator\Addition.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\BinaryCall.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\BinaryExpression.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Constant.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Multiply.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\operations.dic.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\AddChecked.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\Divide.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\Modulo.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\MultiplyChecked.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\Negate.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\NegateChecked.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\Power.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\Subtract.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Operations\SubtractChecked.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\Parameter.sql.st" />
+	  <None Remove="Engine\DuckDB\Calculator\UnaryExpression.sql.st" />
 	  <None Remove="Engine\DuckDB\ColumnProjection.sql.st" />
 	  <None Remove="Engine\DuckDB\comparisons.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\aggregations.dic.st" />
+	  <None Remove="Engine\DuckDB\Dictionaries\arithmetics.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\cyclicTemporals.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
 	  <None Remove="Engine\DuckDB\Dictionaries\sorts.dic.st" />
@@ -45,6 +63,24 @@
 	  <None Remove="Mounting\Engine\DuckDB\ElementalQuery.duck.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\BinaryCall.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\NegateChecked.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Negate.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\UnaryExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\AddChecked.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Modulo.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\MultiplyChecked.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Power.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\SubtractChecked.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Parameter.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Divide.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Subtract.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Add.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Operations\Multiply.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\Constant.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Calculator\BinaryExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\arithmetics.dic.st" />
+	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\operations.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\truncationTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\DuckDB\Dictionaries\framePosition.dic.st" />
@@ -89,7 +125,7 @@
 	  <EmbeddedResource Include="Mounting\Engine\DuckDB\ColumnDefinition.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="DubUrl" Version="0.1.207" />
+	  <PackageReference Include="DubUrl" Version="0.1.208" />
 	  <PackageReference Include="Sprache" Version="2.3.1" />
 	</ItemGroup>
 </Project>

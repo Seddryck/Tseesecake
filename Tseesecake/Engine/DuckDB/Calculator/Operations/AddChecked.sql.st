@@ -1,0 +1,1 @@
+AddChecked(binary)::=$Add(binary)$
