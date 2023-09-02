@@ -10,6 +10,7 @@ namespace Tseesecake.Modeling
     public abstract class Column : ColumnReference
     {
         public DbType DbType { get; }
+        public string Family { get => GetType().Name; }
 
         public Column(string name, DbType dbType)
             : base(name) { DbType = dbType; }
