@@ -44,7 +44,12 @@ namespace Tseesecake.Parsing.Query
             from expression in ArgumentExpression
             select new MedianAggregation(expression);
 
+        protected internal static Parser<IAggregation> Sum =
+            from _ in Parse.IgnoreCase("Sum").Text().Token()
+            from expression in ArgumentExpression
+            select new MedianAggregation(expression);
+
         public static Parser<IAggregation> Aggregation =
-            Average.Or(Max).Or(Min).Or(Median).Or(Count);
+            Average.Or(Max).Or(Min).Or(Median).Or(Count).Or(Sum);
     }
 }

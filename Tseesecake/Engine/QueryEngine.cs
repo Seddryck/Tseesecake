@@ -18,10 +18,10 @@ namespace Tseesecake.Engine
     {
         
         private DatabaseUrl DatabaseUrl { get; }
-        public Timeseries[] Timeseries { get; set; }
+        public Timeseries[] Timeseries { get; }
 
-        public QueryEngine(IDatabaseUrlFactory factory, string url)
-            : this(factory, url, Array.Empty<Timeseries>()) { }
+        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries)
+            => (DatabaseUrl, Timeseries) = (databaseUrl, timeseries);
 
         public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
             => (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
