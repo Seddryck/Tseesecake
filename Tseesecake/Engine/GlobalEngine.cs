@@ -14,7 +14,7 @@ using Tseesecake.Querying;
 
 namespace Tseesecake.Engine
 {
-    internal class GlobalEngine
+    public class GlobalEngine
     {
         private DatabaseUrl DatabaseUrl { get; }  
         public Timeseries[] Timeseries { get; }
