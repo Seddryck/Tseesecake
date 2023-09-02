@@ -16,7 +16,7 @@ namespace Tseesecake.Engine
 {
     internal class GlobalEngine
     {
-        private DatabaseUrl DatabaseUrl { get; }
+        private DatabaseUrl DatabaseUrl { get; }  
         public Timeseries[] Timeseries { get; }
 
         public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)

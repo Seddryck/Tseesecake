@@ -254,7 +254,6 @@ namespace Tseesecake.QA
         public virtual void ExecuteReader_BucketBy_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();
-            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
             var reader = engine.ExecuteReader(ResourcesReader.BucketBy);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -271,7 +270,6 @@ namespace Tseesecake.QA
         public virtual void ExecuteReader_ImplicitGroupBy_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();
-            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
             var reader = engine.ExecuteReader(ResourcesReader.ImplicitGroupBy);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.FieldCount, Is.EqualTo(3));
@@ -289,7 +287,6 @@ namespace Tseesecake.QA
         public virtual void ExecuteReader_VirtualMeasurement_ValidStatement()
         {
             var engine = Provider.GetRequiredService<QueryEngine>();
-            engine.Timeseries = new[] { DmlStatementDefinition.WindEnergy };
             var reader = engine.ExecuteReader(ResourcesReader.VirtualMeasurement);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.FieldCount, Is.EqualTo(2));
