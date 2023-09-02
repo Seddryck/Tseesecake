@@ -13,7 +13,7 @@ using Tseesecake.Querying.Windows;
 
 namespace Tseesecake.Querying
 {
-    public class SelectStatement
+    public class SelectStatement : IStatement
     {
         public Timeseries Timeseries { get; set; }
         public List<IProjection> Projections { get; }

@@ -34,5 +34,6 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> By = Parse.IgnoreCase("By").Text().Token();
         public static readonly Parser<string> With = Parse.IgnoreCase("With").Text().Token();
         public static readonly Parser<string> Measurement = Parse.IgnoreCase("Measurement").Text().Token();
+        public static readonly Parser<string> Show = Parse.IgnoreCase("Show").Text().Token();
     }
 }

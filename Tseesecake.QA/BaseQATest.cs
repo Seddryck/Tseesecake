@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Engine;
+using Tseesecake.Modeling;
+using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
 {
@@ -38,8 +41,14 @@ namespace Tseesecake.QA
                .AddDubUrl(options);
 
             foreach (var engine in engines)
+            {
+                var parameters = engine == typeof(DmlEngine)
+                                    ? new object[] { ConnectionString }
+                                    : new object[] { ConnectionString, new Timeseries[] { DmlStatementDefinition.WindEnergy } };
                 services = services.AddTransient(engine, provider => ActivatorUtilities.CreateInstance(provider
-                    , engine, new[] { ConnectionString }));
+                    , engine, parameters));
+            }
+                
             Provider = services.BuildServiceProvider();
 
             new ProviderFactoriesRegistrator().Register();
