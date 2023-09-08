@@ -1,4 +1,5 @@
-﻿using DubUrl.Querying.Parametrizing;
+﻿using DubUrl.Querying;
+using DubUrl.Querying.Parametrizing;
 using DubUrl.Querying.Templating;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,13 @@ namespace Tseesecake.Mounting.Engine
 {
     public class DmlStatement : EmbeddedSqlTemplateCommand
     {
-        public DmlStatement(Timeseries ts)
+        public DmlStatement(Timeseries ts, IQueryLogger? logger = null)
             : base(
                    $"{typeof(DmlStatement).Namespace}.{nameof(DmlStatement)}"
                   , $"{typeof(DmlStatement).Namespace}"
                   , $"{typeof(DmlStatement).Namespace}"
                   , new Dictionary<string, object?>() { { "ts", ts } }
+                  , logger ?? NullQueryLogger.Instance
             )
         { }
     }

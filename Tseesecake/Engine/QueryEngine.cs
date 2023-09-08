@@ -34,7 +34,7 @@ namespace Tseesecake.Engine
             foreach (var arranger in arrangers)
                 arranger.Execute(statement);
 
-            return DatabaseUrl.ExecuteReader(new ElementalQuery(statement));
+            return DatabaseUrl.ExecuteReader(new ElementalQuery(statement, DatabaseUrl.QueryLogger));
         }
 
         public IDataReader ExecuteReader(string query)

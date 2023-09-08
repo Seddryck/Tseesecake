@@ -1,4 +1,5 @@
 ﻿using DubUrl;
+using DubUrl.Querying;
 using Sprache;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace Tseesecake.Engine
 
         public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
             => (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
+
+        public GlobalEngine WithLogger(IQueryLogger queryLogger)
+        {
+            DatabaseUrl.WithLogger(queryLogger);
+            return this;
+        }
 
         public IDataReader ExecuteReader(string query)
         {

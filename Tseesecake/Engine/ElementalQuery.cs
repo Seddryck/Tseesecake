@@ -1,4 +1,5 @@
-﻿using DubUrl.Querying.Parametrizing;
+﻿using DubUrl.Querying;
+using DubUrl.Querying.Parametrizing;
 using DubUrl.Querying.Templating;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,13 @@ namespace Tseesecake.Engine
 {
     public class ElementalQuery : EmbeddedSqlTemplateCommand
     {
-        public ElementalQuery(SelectStatement statement)
+        public ElementalQuery(SelectStatement statement, IQueryLogger? logger = null)
             : base(
                    $"{typeof(ElementalQuery).Namespace}.{nameof(ElementalQuery)}"
                   , $"{typeof(ElementalQuery).Namespace}"
                   , $"{typeof(ElementalQuery).Namespace}"
                   , new Dictionary<string, object?>() { { "statement", statement } }
+                  , logger ?? NullQueryLogger.Instance
             )
         { }
     }

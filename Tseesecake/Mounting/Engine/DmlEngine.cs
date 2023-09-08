@@ -1,4 +1,5 @@
 ﻿using DubUrl;
+using DubUrl.Querying;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,7 +25,7 @@ namespace Tseesecake.Engine
             try
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = new DmlStatement(ts).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
+                cmd.CommandText = new DmlStatement(ts, NullQueryLogger.Instance).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
                 cmd.ExecuteNonQuery();
             }
             catch { throw; }
