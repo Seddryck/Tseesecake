@@ -1,0 +1,1 @@
+Culler(filter)::=NOT($filter.Measurement.Name; format="identity"$ $comparisons.(filter.ComparisonOperator)$ $filter.Value; format="value"$)

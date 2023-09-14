@@ -1,0 +1,1 @@
+Gatherer(filter)::=$filter.Measurement.Name; format="identity"$ $comparisons.(filter.ComparisonOperator)$ $filter.Value; format="value"$

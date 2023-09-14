@@ -11,4 +11,4 @@ $endif$) OVER$\\$
 $if(projection.Reference)$ $projection.Reference.Name$ $else$$\\$
 ($projection:WindowDefinition()$) $\\$
 $endif$
-AS $projection.Alias$
+AS $projection.Alias; format="identity"$

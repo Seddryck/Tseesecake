@@ -1,7 +1,4 @@
-﻿using DubUrl.Mapping;
-using DubUrl.Querying.Dialects;
-using DubUrl.Registering;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +7,7 @@ using Tseesecake.Engine;
 using Tseesecake.Mounting.Engine;
 using Tseesecake.Testing.Engine;
 
-namespace Tseesecake.QA.DuckDB
+namespace Tseesecake.QA
 {
     public abstract class BaseDmlStatementTest : BaseQATest
     {

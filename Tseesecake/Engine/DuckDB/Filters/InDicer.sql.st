@@ -1,1 +1,0 @@
-InDicer(filter)::=$filter.Facet.Name$ IN ($filter.Values: {value | $value; format="value"$}; separator=", "$)

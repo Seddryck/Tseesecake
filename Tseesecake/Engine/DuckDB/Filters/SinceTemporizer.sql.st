@@ -1,1 +1,0 @@
-SinceTemporizer(filter)::=age($filter.Timestamp.Name$) < $filter.Interval; format="value"$

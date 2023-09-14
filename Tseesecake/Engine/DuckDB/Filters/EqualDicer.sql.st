@@ -1,1 +1,0 @@
-EqualDicer(filter)::=$filter.Facet.Name$ = $filter.Value; format="value"$

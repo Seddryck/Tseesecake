@@ -44,7 +44,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionExpression
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection(new LiteralExpression("LOWER(WindPark)"), "LowerWindPark")
+                    new ExpressionProjection(new LiteralExpression("LOWER(\"WindPark\")"), "LowerWindPark")
                 });
 
         public static SelectStatement ProjectionAggregation
@@ -77,7 +77,7 @@ namespace Tseesecake.Testing.Engine
                 , new[] {
                     new WindowProjection(
                         new LagWindowFunction(
-                            new LiteralExpression("ABS(Produced - Forecasted)")
+                            new LiteralExpression("ABS(\"Produced\" - \"Forecasted\")")
                             , new ConstantExpression(4)
                             , new ConstantExpression(0)
                         )
