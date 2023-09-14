@@ -1,0 +1,6 @@
+"DayOfWeek" : "dow"
+"DayOfMonth" : "day"
+"DayOfYear" : "doy"
+"WeekOfYear" : "week"
+"MonthOfYear" : "month"
+"QuarterOfYear" : "quarter"
