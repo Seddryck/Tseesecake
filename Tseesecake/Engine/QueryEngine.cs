@@ -1,4 +1,5 @@
 ﻿using DubUrl;
+using DubUrl.Querying;
 using Sprache;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,16 @@ namespace Tseesecake.Engine
     {
         private DatabaseUrl DatabaseUrl { get; }
         public Timeseries[] Timeseries { get; }
+        public IQueryLogger QueryLogger { get; } = NullQueryLogger.Instance;
         private ISelectArranger[] Arrangers { get; }
 
+        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, IQueryLogger logger)
+            => (DatabaseUrl, Timeseries, QueryLogger) = (databaseUrl, timeseries, logger);
         protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers)
             => (DatabaseUrl, Timeseries, Arrangers) = (databaseUrl, timeseries, arrangers);
 
+        public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
+            => (DatabaseUrl, Timeseries, QueryLogger) = (factory.Instantiate(url), timeseries, factory.QueryLogger);
         public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ISelectArranger[] arrangers)
             => (DatabaseUrl, Timeseries, Arrangers) = (factory.Instantiate(url), timeseries, arrangers);
 
@@ -33,7 +39,9 @@ namespace Tseesecake.Engine
             foreach (var arranger in Arrangers)
                 arranger.Execute(statement);
 
-            return DatabaseUrl.ExecuteReader(new ElementalQuery(statement));
+            var query = new ElementalQuery(statement, QueryLogger);
+
+            return DatabaseUrl.ExecuteReader(query);
         }
 
         public IDataReader ExecuteReader(string query)

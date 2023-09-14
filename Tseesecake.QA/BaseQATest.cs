@@ -1,4 +1,5 @@
 ﻿using DubUrl.Extensions.DependencyInjection;
+using DubUrl.Querying;
 using DubUrl.Registering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,12 +34,18 @@ namespace Tseesecake.QA
             }
         }
 
+        public class ConsoleLogger : IQueryLogger
+        {
+            public void Log(string message) => Console.WriteLine(message);
+        }
+
         protected void SetupEngine(Type[] engines)
         {
             var options = new DubUrlServiceOptions();
             var services = new ServiceCollection()
                .AddSingleton(EmptyDubUrlConfiguration)
-               .AddDubUrl(options);
+               .AddDubUrl(options)
+               .WithQueryLogger(new ConsoleLogger());
 
             foreach (var engine in engines)
             {

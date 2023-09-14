@@ -1,8 +1,4 @@
-﻿using DubUrl.Extensions.DependencyInjection;
-using DubUrl.Mapping;
-using DubUrl.Querying.Dialects;
-using DubUrl.Registering;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
