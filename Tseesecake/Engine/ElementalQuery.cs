@@ -1,4 +1,5 @@
-﻿using DubUrl.Querying.Parametrizing;
+﻿using DubUrl.Querying;
+using DubUrl.Querying.Parametrizing;
 using DubUrl.Querying.Templating;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Tseesecake.Engine
                   , $"{typeof(ElementalQuery).Namespace}"
                   , $"{typeof(ElementalQuery).Namespace}"
                   , new Dictionary<string, object?>() { { "statement", statement } }
+                  , NullQueryLogger.Instance
             )
         { }
     }

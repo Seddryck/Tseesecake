@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-    <PackageReference Include="DubUrl" Version="0.1.208" />
-    <PackageReference Include="DubUrl.Extensions.DependencyInjection" Version="0.1.208" />
+    <PackageReference Include="DubUrl" Version="0.1.227" />
+    <PackageReference Include="DubUrl.Extensions.DependencyInjection" Version="0.1.227" />
     <PackageReference Include="DuckDB.NET.Data.Full" Version="0.8.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />

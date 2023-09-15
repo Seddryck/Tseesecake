@@ -16,22 +16,21 @@ namespace Tseesecake.Engine
 {
     public class QueryEngine
     {
-
         private DatabaseUrl DatabaseUrl { get; }
         public Timeseries[] Timeseries { get; }
+        private ISelectArranger[] Arrangers { get; }
 
-        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries)
-            => (DatabaseUrl, Timeseries) = (databaseUrl, timeseries);
+        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers)
+            => (DatabaseUrl, Timeseries, Arrangers) = (databaseUrl, timeseries, arrangers);
 
-        public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
-            => (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
+        public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ISelectArranger[] arrangers)
+            => (DatabaseUrl, Timeseries, Arrangers) = (factory.Instantiate(url), timeseries, arrangers);
 
         public IDataReader ExecuteReader(SelectStatement statement)
         {
             statement.Timeseries = Timeseries.Single(x => statement.Timeseries.Name == x.Name);
 
-            var arrangers = new ISelectArranger[] { new VirtualColumnAssignment(), new ColumnReferenceProjectionTyped(), new BucketAnonymousTimestamp(), new BucketAsProjection(), new FacetProjectionAsSlicer() };
-            foreach (var arranger in arrangers)
+            foreach (var arranger in Arrangers)
                 arranger.Execute(statement);
 
             return DatabaseUrl.ExecuteReader(new ElementalQuery(statement));
