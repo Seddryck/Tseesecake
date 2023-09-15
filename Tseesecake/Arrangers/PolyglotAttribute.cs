@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tseesecake.Modeling
+namespace Tseesecake.Arrangers
 {
-    public interface IStatement
+    internal class PolyglotAttribute : Attribute
     { }
 }

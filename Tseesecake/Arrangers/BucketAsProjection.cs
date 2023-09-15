@@ -14,6 +14,7 @@ using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Arrangers
 {
+    [Polyglot]
     internal class BucketAsProjection : ISelectArranger
     {
         public void Execute(SelectStatement statement)

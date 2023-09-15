@@ -18,9 +18,14 @@ namespace Tseesecake.Engine
     {
         private DatabaseUrl DatabaseUrl { get; }  
         public Timeseries[] Timeseries { get; }
+        private ISelectArranger[] Arrangers { get; }
 
-        public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
-            => (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
+        public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ArrangerCollectionProvider provider)
+        {
+            (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
+            var dialect = DatabaseUrl.Dialect.GetType();
+            Arrangers = provider.Get(dialect).Instantiate<IStatement>();
+        }
 
         public IDataReader ExecuteReader(string query)
         {
@@ -28,7 +33,7 @@ namespace Tseesecake.Engine
             var statement = parser.Parse(query);
             return statement switch
             {
-                SelectStatement select => new QueryEngine(DatabaseUrl, Timeseries).ExecuteReader(select),
+                SelectStatement select => new QueryEngine(DatabaseUrl, Timeseries, Arrangers).ExecuteReader(select),
                 IShowStatement show => new MetaEngine(Timeseries).ExecuteReader(show),
                 _ => throw new NotImplementedException()
             };

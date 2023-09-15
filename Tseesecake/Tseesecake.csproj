@@ -127,7 +127,7 @@
 	  <EmbeddedResource Include="Mounting\Engine\DuckDB\ColumnDefinition.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="DubUrl" Version="0.1.208" />
+	  <PackageReference Include="DubUrl" Version="0.1.227" />
 	  <PackageReference Include="Sprache" Version="2.3.1" />
 	</ItemGroup>
 </Project>
