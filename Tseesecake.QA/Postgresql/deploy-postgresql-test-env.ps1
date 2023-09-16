@@ -37,13 +37,13 @@ if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*p
 	}
 
 	# Deploying database based on script
-	Write-host "`tDeploying database ..."
+	Write-host "`tDeploying databases ..."
 	If (-not($env:PATH -like $pgPath)) {
 		$env:PATH += ";$pgPath"
 	}
 	$env:PGPASSWORD = "Password12!"
 	& psql -U "postgres" -h "localhost" -p "5432" -f ".\deploy-postgresql-database.sql" | Out-Null
-	Write-host "`tDatabase deployed"
+	Write-host "`tDatabases deployed"
 
 	# Copying data
 	if ($env:APPVEYOR -ne "True") {
@@ -54,7 +54,7 @@ if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*p
 	} else {
 		$csvPath = "../WindEnergy.csv" 
 	}
-	& psql -U "postgres" -h "localhost" -p "5432" -d "`"""Energy`"""" -c "TRUNCATE `"""WindEnergy`""";SET DateStyle TO euro;COPY `"""WindEnergy`""" FROM '$csvPath' WITH CSV Header" | Out-Null
+	& psql -U "postgres" -h "localhost" -p "5432" -d "Energy" -c "SET DateStyle TO euro;COPY `"WindEnergy`" FROM '$csvPath' WITH CSV Header" | Out-Null
 	
 	# Running QA tests
 	Write-Host "Running QA tests related to PostgreSQL"

@@ -9,6 +9,6 @@ namespace Tseesecake.QA.Postgresql
     [Category("Postgresql")]
     public class DmlStatementPostgresqlTest : BaseDmlStatementTest
     {
-        public override string ConnectionString => $"pgsql://localhost/WindEnergy";
+        public override string ConnectionString => $"pgsql://postgres:Password12!@localhost/EnergyMounting";
     }
 }

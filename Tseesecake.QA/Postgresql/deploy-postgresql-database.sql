@@ -1,4 +1,7 @@
-DROP DATABASE IF EXISTS "WindEnergy";
+DROP DATABASE IF EXISTS "EnergyMounting";
+CREATE DATABASE "EnergyMounting";
+
+DROP DATABASE IF EXISTS "Energy";
 CREATE DATABASE "Energy";
 
 \connect "Energy"
