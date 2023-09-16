@@ -127,7 +127,7 @@ namespace Tseesecake.Testing.Engine
 
         protected abstract string SlicerAndGroupFilter { get; }
         [Test]
-        public void Read_SlicerAndGroupFilter_ValidStatement()
+        public virtual void Read_SlicerAndGroupFilter_ValidStatement()
             => Assert.That(new ElementalQuery(SelectStatementDefinition.SlicerAndGroupFilter).Read(Dialect, Connectivity)
                 , Is.EqualTo(SlicerAndGroupFilter));
 

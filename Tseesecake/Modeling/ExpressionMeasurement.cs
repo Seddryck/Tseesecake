@@ -10,6 +10,7 @@ namespace Tseesecake.Modeling
 {
     internal class ExpressionMeasurement : Measurement
     {
+        public override string Template { get => "LiteralExpression"; }
         public IExpression Expression { get; }
         public ExpressionMeasurement(string name, IExpression expression)
             : base(name) { Expression = expression; }

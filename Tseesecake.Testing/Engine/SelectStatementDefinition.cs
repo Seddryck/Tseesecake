@@ -159,14 +159,14 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerAndGroupFilter
             => new (WindEnergy
                 , new[] {
-                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "average")
+                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "AvgProduced")
                 }
                 , null
                 , new ISlicer[] {
                     new FacetSlicer(new Facet("WindPark"))
                 }
                 , new IFilter[] {
-                    new GathererSifter(new Measurement("average"), LinqExp.Expression.GreaterThanOrEqual, 15)
+                    new GathererSifter(new Measurement("AvgProduced"), LinqExp.Expression.GreaterThanOrEqual, 15)
                 });
 
         public static SelectStatement NamedWindow

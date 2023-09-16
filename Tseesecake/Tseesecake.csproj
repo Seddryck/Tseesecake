@@ -32,6 +32,7 @@
 	  <None Remove="Engine\Common\Dictionaries\windowFunctions.dic.st" />
 	  <None Remove="Engine\Common\ExpressionProjection.sql.st" />
 	  <None Remove="Engine\Common\Expressions\AggregationExpression.sql.st" />
+	  <None Remove="Engine\Common\Expressions\AggregationMeasurement.sql.st" />
 	  <None Remove="Engine\Common\Expressions\BucketExpression.sql.st" />
 	  <None Remove="Engine\Common\Expressions\ColumnExpression.sql.st" />
 	  <None Remove="Engine\Common\Expressions\ConstantExpression.sql.st" />
@@ -94,6 +95,7 @@
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\Common\Expressions\AggregationMeasurement.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\AggregationExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\BucketExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\VirtualColumnExpression.sql.st" />

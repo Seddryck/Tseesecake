@@ -9,6 +9,7 @@ namespace Tseesecake.Modeling
 {
     internal class AggregationMeasurement : Measurement
     {
+        public override string Template { get => "AggregationMeasurement"; }
         public IAggregation Aggregation { get; }
         public AggregationMeasurement(string name, IAggregation aggregation)
             : base(name) { Aggregation = aggregation; }

@@ -35,14 +35,18 @@ namespace Tseesecake.Engine
         public IDataReader ExecuteReader(SelectStatement statement)
         {
             statement.Timeseries = Timeseries.Single(x => statement.Timeseries.Name == x.Name);
+            var query = new ElementalQuery(Arrange(statement), QueryLogger);
+            return DatabaseUrl.ExecuteReader(query);
+        }
 
+        protected internal SelectStatement Arrange(SelectStatement statement)
+        {
             foreach (var arranger in Arrangers)
                 arranger.Execute(statement);
 
-            var query = new ElementalQuery(statement, QueryLogger);
-
-            return DatabaseUrl.ExecuteReader(query);
+            return statement;
         }
+
 
         public IDataReader ExecuteReader(string query)
         {
