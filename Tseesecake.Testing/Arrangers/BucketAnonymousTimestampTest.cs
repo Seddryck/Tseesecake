@@ -34,9 +34,11 @@ namespace Tseesecake.Testing.Arrangers
             Assert.That(statement.Slicers, Has.Count.EqualTo(1));
             var slicer = statement.Slicers.ElementAt(0);
             Assert.That(slicer, Is.TypeOf<CyclicTemporalSlicer>());
-            Assert.That(((CyclicTemporalSlicer)slicer).Timestamp, Is.Not.TypeOf<AnonymousTimestamp>());
-            Assert.That(((CyclicTemporalSlicer)slicer).Timestamp.Name, Is.EqualTo(ts.Timestamp.Name));
+            Assert.Multiple(() =>
+            {
+                Assert.That(((CyclicTemporalSlicer)slicer).Timestamp, Is.Not.TypeOf<AnonymousTimestamp>());
+                Assert.That(((CyclicTemporalSlicer)slicer).Timestamp.Name, Is.EqualTo(ts.Timestamp.Name));
+            });
         }
-
     }
 }

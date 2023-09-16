@@ -59,7 +59,6 @@ namespace Tseesecake.Testing.Engine
                     new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } , "Average")
                 });
 
-
         public static SelectStatement ProjectionWindow
             => new(WindEnergy
                 , new[] {

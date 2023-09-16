@@ -16,8 +16,6 @@ namespace Tseesecake.QA
         public void SetupFixture()
             => SetupEngine(new[] { typeof(QueryEngine) });
 
-        
-
         [Test]
         public virtual void Execute_ProjectionSingle_ValidStatement()
         {

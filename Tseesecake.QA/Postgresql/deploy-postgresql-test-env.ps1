@@ -9,18 +9,18 @@ Param(
 . $PSScriptRoot\..\Docker-Container.ps1
 
 if ($force) {
-	Write-Host "Enforcing QA testing for PostgreSQL"
+	Write-Output "Enforcing QA testing for PostgreSQL"
 }
 
 $pgPath = "C:\Program Files\PostgreSQL\$($databaseService.Split('-')[2])\bin"
 If (-not (Test-Path -Path $pgPath)) {
 	$pgPath = $pgPath -replace "C:", "E:"
 }
-Write-Host "Using '$pgPath' as PostgreSQL installation folder"
+Write-Output "Using '$pgPath' as PostgreSQL installation folder"
 
 $filesChanged = & git diff --name-only HEAD HEAD~1
 if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*postgresql*")) {
-	Write-Host "Deploying PostgreSQL testing environment"
+	Write-Output "Deploying PostgreSQL testing environment"
 
 	# Starting database service or docker container
 	if ($env:APPVEYOR -eq "True") {
@@ -37,30 +37,30 @@ if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*p
 	}
 
 	# Deploying database based on script
-	Write-host "`tDeploying databases ..."
+	Write-Output "`tDeploying databases ..."
 	If (-not($env:PATH -like $pgPath)) {
 		$env:PATH += ";$pgPath"
 	}
 	$env:PGPASSWORD = "Password12!"
 	& psql -U "postgres" -h "localhost" -p "5432" -f ".\deploy-postgresql-database.sql" | Out-Null
-	Write-host "`tDatabases deployed"
+	Write-Output "`tDatabases deployed"
 
 	# Copying data
-	Write-host "`tCopying data to table ..."
+	Write-Output "`tCopying data to table ..."
 	if ($env:APPVEYOR -ne "True") {
 		$csvPath = "/home/WindEnergy.csv" 
-		Write-host "`t`tCopying data on container ..."
+		Write-Output "`t`tCopying data on container ..."
 		& docker cp "../WindEnergy.csv" postgresql:"$csvPath" 
-		Write-host "`t`tData copied on container"
+		Write-Output "`t`tData copied on container"
 	} else {
 		$csvPath = "$pwd\..\WindEnergy.csv" 
 	}
-	Write-host "`t`tCopying from $csvPath"
+	Write-Output "`t`tCopying from $csvPath"
 	& psql -U "postgres" -h "localhost" -p "5432" -d "Energy" -c "SET DateStyle TO euro;COPY `"WindEnergy`" FROM '$csvPath' WITH CSV Header" | Out-Null
-	Write-host "`tData copied to table"
+	Write-Output "`tData copied to table"
 
 	# Running QA tests
-	Write-Host "Running QA tests related to PostgreSQL"
+	Write-Output "Running QA tests related to PostgreSQL"
 	$testSuccessful = Run-TestSuite @("Postgresql") -config $config -frameworks $frameworks
 
 	# Stopping database Service

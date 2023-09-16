@@ -47,7 +47,6 @@ namespace Tseesecake.Engine
             return statement;
         }
 
-
         public IDataReader ExecuteReader(string query)
         {
             var parser = QueryParser.Query;

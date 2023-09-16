@@ -41,7 +41,5 @@ namespace Tseesecake.Testing.Arrangers
                 Assert.That(((ColumnExpression)projection.Expression).Reference, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
             }
         }
-
-        
     }
 }
