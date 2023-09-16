@@ -1,3 +1,4 @@
+BaseQuery(statement)::=$\\$
 SELECT
 	$statement.Projections: {projection | $projection:(projection.Template)()$}; separator="
 , "$
