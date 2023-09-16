@@ -1,4 +1,6 @@
 CopyFrom(ts)::=$\\$
+SET DateStyle TO euro;
+
 COPY
 	$ts.Name; format="identity"$
 FROM

@@ -67,6 +67,8 @@
 	  <None Remove="Mounting\Engine\Common\Dictionaries\lengthTypes.dic.st" />
 	  <None Remove="Mounting\Engine\Common\ElementalQuery.duck.sql.st" />
 	  <None Remove="Mounting\Engine\DmlStatement.pgsql.sql.st" />
+	  <None Remove="Mounting\Engine\Postgresql\CopyFrom.sql.st" />
+	  <None Remove="Mounting\Engine\Postgresql\CreateOrReplace.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\Common\Calculator\BinaryCall.sql.st" />
@@ -135,6 +137,8 @@
 	  <EmbeddedResource Include="Mounting\Engine\DmlStatement.pgsql.sql.st" />
 	  <EmbeddedResource Include="Mounting\Engine\DmlStatement.duck.sql.st" />
 	  <EmbeddedResource Include="Mounting\Engine\Common\ColumnDefinition.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Postgresql\CopyFrom.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Postgresql\CreateOrReplace.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="DubUrl" Version="0.1.227" />
