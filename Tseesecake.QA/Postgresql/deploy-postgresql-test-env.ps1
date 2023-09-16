@@ -46,16 +46,19 @@ if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*p
 	Write-host "`tDatabases deployed"
 
 	# Copying data
+	Write-host "`tCopying data to table ..."
 	if ($env:APPVEYOR -ne "True") {
 		$csvPath = "/home/WindEnergy.csv" 
 		Write-host "`t`tCopying data on container ..."
 		& docker cp "../WindEnergy.csv" postgresql:"$csvPath" 
-		Write-host "`t`tData copied"
+		Write-host "`t`tData copied on container"
 	} else {
-		$csvPath = "../WindEnergy.csv" 
+		$csvPath = "$pwd/WindEnergy.csv" 
 	}
+	Write-host "`t`tCopying from $csvPath"
 	& psql -U "postgres" -h "localhost" -p "5432" -d "Energy" -c "SET DateStyle TO euro;COPY `"WindEnergy`" FROM '$csvPath' WITH CSV Header" | Out-Null
-	
+	Write-host "`tData copied to table"
+
 	# Running QA tests
 	Write-Host "Running QA tests related to PostgreSQL"
 	$testSuccessful = Run-TestSuite @("Postgresql") -config $config -frameworks $frameworks
