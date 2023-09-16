@@ -53,7 +53,7 @@ if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*p
 		& docker cp "../WindEnergy.csv" postgresql:"$csvPath" 
 		Write-host "`t`tData copied on container"
 	} else {
-		$csvPath = "$pwd/WindEnergy.csv" 
+		$csvPath = "$pwd\..\WindEnergy.csv" 
 	}
 	Write-host "`t`tCopying from $csvPath"
 	& psql -U "postgres" -h "localhost" -p "5432" -d "Energy" -c "SET DateStyle TO euro;COPY `"WindEnergy`" FROM '$csvPath' WITH CSV Header" | Out-Null
