@@ -1,3 +1,5 @@
+.open <path>
+
 CREATE TABLE WindEnergy (
 	Instant TIMESTAMP NOT NULL,
 	WindPark VARCHAR(50),

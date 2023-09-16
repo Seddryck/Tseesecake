@@ -8,6 +8,6 @@ namespace Tseesecake.QA.DuckDB
     [Category("DuckDB")]
     public class DmlStatementDuckDBTest : BaseDmlStatementTest
     {
-        public override string ConnectionString => $"duckdb:///WindEnergyMount.duckdb";
+        public override string ConnectionString => $"duckdb:///EnergyMount.duckdb";
     }
 }

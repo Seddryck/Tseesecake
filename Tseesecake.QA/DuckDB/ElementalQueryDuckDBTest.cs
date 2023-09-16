@@ -8,6 +8,6 @@ namespace Tseesecake.QA.DuckDB
     [Category("DuckDB")]
     public class ElementalQueryDuckDBTest : BaseElementalQueryTest
     {
-        public override string ConnectionString => $"duckdb:///WindEnergy.duckdb";
+        public override string ConnectionString => $"duckdb:///Energy.duckdb";
     }
 }

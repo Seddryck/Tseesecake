@@ -17,6 +17,6 @@ namespace Tseesecake.QA.DuckDB
     [Category("DuckDB")]
     public class GlobalEngineDuckDBTest : BaseGlobalEngineTest
     {
-        public override string ConnectionString => $"duckdb:///WindEnergy.duckdb";
+        public override string ConnectionString => $"duckdb:///Energy.duckdb";
     }
 }

@@ -64,7 +64,7 @@ if ($force -or ($filesChanged -like "*duckdb*")) {
 	foreach ($framework in $frameworks)
 	{
 		$binPath = "./../bin/$config/$framework"
-		$databasePath = "$binPath/WindEnergy.duckdb"
+		$databasePath = "$binPath/Energy.duckdb"
 		if (Test-Path -Path $databasePath) {
 			Remove-Item -Path $databasePath
 		}
