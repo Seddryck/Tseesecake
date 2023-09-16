@@ -25,7 +25,7 @@ namespace Tseesecake.Testing.Engine
         protected IDictionary<string, string> GetSubTemplates()
         {
             var asm = typeof(QueryEngine).Assembly;
-            var resources = asm.GetManifestResourceNames().Where(x => x.Contains("Calculator") && x.EndsWith(".st"));
+            var resources = asm.GetManifestResourceNames().Where(x => x.Contains("Calculator") && x.EndsWith(".st")).Where(x => x.Contains("Engine.Common"));
             var dico = new Dictionary<string, string>();
             foreach (var resource in resources) 
             { 
@@ -40,7 +40,7 @@ namespace Tseesecake.Testing.Engine
         protected IDictionary<string, IDictionary<string, object?>> ReadDictionaries()
         {
             var asm = typeof(QueryEngine).Assembly;
-            var resources = asm.GetManifestResourceNames().Where(x => x.EndsWith("dic.st"));
+            var resources = asm.GetManifestResourceNames().Where(x => x.EndsWith("dic.st")).Where(x => x.Contains("Engine.Common"));
             var dico = new Dictionary<string, IDictionary<string, object?>>();
             foreach (var resource in resources)
                 dico.Add(resource.Split('.')[^3], ReadDictionary(asm, resource));
