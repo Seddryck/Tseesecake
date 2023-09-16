@@ -9,7 +9,7 @@ namespace Tseesecake.Querying.Filters
 {
     public abstract class Sifter : IFilter
     {
-        public Measurement Measurement { get; }
+        public Measurement Measurement { get; set; }
 
         public abstract string Template { get; }
 

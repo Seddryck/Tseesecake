@@ -13,6 +13,6 @@ namespace Tseesecake.Engine.DuckDB
     internal class PostgresqlArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
         protected override ISelectArranger[] InstantiateDialect()
-            => Array.Empty<ISelectArranger>();
+            => new[] { new ExpressionForwardedToHavingClause() };
     }
 }
