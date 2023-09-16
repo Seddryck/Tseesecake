@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Security.AccessControl;
 
-namespace Tseesecake.Testing.Engine.DuckDB.Calculator
+namespace Tseesecake.Testing.Engine.Common.Calculator
 {
     public class UnaryExpressionTest
     {

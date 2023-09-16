@@ -62,10 +62,11 @@
 	  <None Remove="Engine\Postgresql\BaseQuery.sql.st" />
 	  <None Remove="Engine\Postgresql\Dictionaries\cyclicTemporals.dic.st" />
 	  <None Remove="Engine\Postgresql\Dictionaries\windowFunctions.dic.st" />
-	  <None Remove="Mounting\Engine\DuckDB\ColumnDefinition.sql.st" />
-	  <None Remove="Mounting\Engine\DuckDB\CreateOrReplace.sql.st" />
-	  <None Remove="Mounting\Engine\DuckDB\Dictionaries\lengthTypes.dic.st" />
-	  <None Remove="Mounting\Engine\DuckDB\ElementalQuery.duck.sql.st" />
+	  <None Remove="Mounting\Engine\Common\ColumnDefinition.sql.st" />
+	  <None Remove="Mounting\Engine\Common\CreateOrReplace.sql.st" />
+	  <None Remove="Mounting\Engine\Common\Dictionaries\lengthTypes.dic.st" />
+	  <None Remove="Mounting\Engine\Common\ElementalQuery.duck.sql.st" />
+	  <None Remove="Mounting\Engine\DmlStatement.pgsql.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\Common\Calculator\BinaryCall.sql.st" />
@@ -108,8 +109,8 @@
 	  <EmbeddedResource Include="Engine\Postgresql\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\Postgresql\Dictionaries\windowFunctions.dic.st" />
 	  <EmbeddedResource Include="Engine\Postgresql\BaseQuery.sql.st" />
-	  <EmbeddedResource Include="Mounting\Engine\DuckDB\Dictionaries\lengthTypes.dic.st" />
-	  <EmbeddedResource Include="Mounting\Engine\DuckDB\Dictionaries\types.dic.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Common\Dictionaries\lengthTypes.dic.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Common\Dictionaries\types.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\comparisons.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Filters\AfterTemporizer.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Filters\BeforeTemporizer.sql.st" />
@@ -129,10 +130,11 @@
 	  <EmbeddedResource Include="Engine\Common\Slicers\FacetSlicer.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Slicers\CyclicTemporalSlicer.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Slicers\TruncateTemporalSlicer.sql.st" />
-	  <EmbeddedResource Include="Mounting\Engine\DuckDB\CreateOrReplace.sql.st" />
-	  <EmbeddedResource Include="Mounting\Engine\DuckDB\CopyFrom.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Common\CreateOrReplace.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Common\CopyFrom.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\DmlStatement.pgsql.sql.st" />
 	  <EmbeddedResource Include="Mounting\Engine\DmlStatement.duck.sql.st" />
-	  <EmbeddedResource Include="Mounting\Engine\DuckDB\ColumnDefinition.sql.st" />
+	  <EmbeddedResource Include="Mounting\Engine\Common\ColumnDefinition.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="DubUrl" Version="0.1.227" />

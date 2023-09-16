@@ -13,7 +13,7 @@ using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 
-namespace Tseesecake.Testing.Engine.DuckDB
+namespace Tseesecake.Testing.Engine
 {
     public abstract class BaseElementalQueryTest
     {

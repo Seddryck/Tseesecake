@@ -9,7 +9,7 @@ using Tseesecake.Engine;
 using Tseesecake.Mounting;
 using Tseesecake.Mounting.Engine;
 
-namespace Tseesecake.Testing.Engine.DuckDB
+namespace Tseesecake.Testing.Engine
 {
     public abstract class BaseDmlStatementTest
     {
