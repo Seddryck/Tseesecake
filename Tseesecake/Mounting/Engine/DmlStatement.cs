@@ -14,13 +14,20 @@ namespace Tseesecake.Mounting.Engine
 {
     public class DmlStatement : EmbeddedSqlTemplateCommand
     {
-        public DmlStatement(Timeseries ts)
+        internal DmlStatement(Timeseries ts)
+            : this(
+                   ts
+                  , NullQueryLogger.Instance
+            )
+        { }
+
+        public DmlStatement(Timeseries ts, IQueryLogger logger)
             : base(
                    $"{typeof(DmlStatement).Namespace}.{nameof(DmlStatement)}"
                   , $"{typeof(DmlStatement).Namespace}"
                   , $"{typeof(DmlStatement).Namespace}"
                   , new Dictionary<string, object?>() { { "ts", ts } }
-                  , NullQueryLogger.Instance
+                  , logger
             )
         { }
     }

@@ -39,6 +39,5 @@ namespace Tseesecake.Testing.Arrangers
             var expression = (BucketExpression)((ExpressionProjection)projection).Expression;
             Assert.That(expression.Slicer, Is.EqualTo(slicer));
         }
-
     }
 }

@@ -1,1 +1,0 @@
-FacetSlicer(slicer)::=$slicer.Facet.Name$

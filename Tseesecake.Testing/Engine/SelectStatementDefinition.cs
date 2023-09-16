@@ -44,7 +44,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionExpression
             => new (WindEnergy
                 , new[] {
-                    new ExpressionProjection(new LiteralExpression("LOWER(WindPark)"), "LowerWindPark")
+                    new ExpressionProjection(new LiteralExpression("LOWER(\"WindPark\")"), "LowerWindPark")
                 });
 
         public static SelectStatement ProjectionAggregation
@@ -58,7 +58,6 @@ namespace Tseesecake.Testing.Engine
                 , new[] {
                     new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), new[] { new EqualDicer(new Facet("Producer"), "Future Energy") } , "Average")
                 });
-
 
         public static SelectStatement ProjectionWindow
             => new(WindEnergy
@@ -77,7 +76,7 @@ namespace Tseesecake.Testing.Engine
                 , new[] {
                     new WindowProjection(
                         new LagWindowFunction(
-                            new LiteralExpression("ABS(Produced - Forecasted)")
+                            new LiteralExpression("ABS(\"Produced\" - \"Forecasted\")")
                             , new ConstantExpression(4)
                             , new ConstantExpression(0)
                         )
@@ -159,14 +158,14 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement SlicerAndGroupFilter
             => new (WindEnergy
                 , new[] {
-                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "average")
+                    new AggregationProjection(new AverageAggregation(new ColumnExpression(new Measurement("Produced"))), "AvgProduced")
                 }
                 , null
                 , new ISlicer[] {
                     new FacetSlicer(new Facet("WindPark"))
                 }
                 , new IFilter[] {
-                    new GathererSifter(new Measurement("average"), LinqExp.Expression.GreaterThanOrEqual, 15)
+                    new GathererSifter(new Measurement("AvgProduced"), LinqExp.Expression.GreaterThanOrEqual, 15)
                 });
 
         public static SelectStatement NamedWindow

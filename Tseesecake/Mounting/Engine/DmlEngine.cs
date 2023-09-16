@@ -43,6 +43,5 @@ namespace Tseesecake.Engine
             catch { throw; }
             finally { conn.Close(); }
         }
-            
     }
 }

@@ -1,0 +1,1 @@
+RangeTemporizer(filter)::=$filter.Timestamp.Column.Name; format="identity"$ BETWEEN $filter.Start; format="value"$ AND $filter.End; format="value"$

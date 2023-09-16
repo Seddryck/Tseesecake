@@ -56,7 +56,7 @@ Function Deploy-TestSuite {
                 Suite = $name
                 Run = $true
                 HarnessFailure = $true
-                TestSuiteFailure = if ($null -eq $result) {0}
+                TestSuiteFailure = if ($null -eq $result) {0} else {TestSuiteFailure}
                 Elapsed = if ($null -eq $result) {New-TimeSpan -Start $startWait}
             }
         }

@@ -9,5 +9,6 @@ namespace Tseesecake.Querying.Projections
     public interface IProjection
     {
         string Template { get; }
+        string Alias { get; }
     }
 }

@@ -13,13 +13,20 @@ namespace Tseesecake.Engine
 {
     public class ElementalQuery : EmbeddedSqlTemplateCommand
     {
-        public ElementalQuery(SelectStatement statement)
+        internal ElementalQuery(SelectStatement statement)
+            : this(
+                  statement
+                  , NullQueryLogger.Instance
+            )
+        { }
+
+        public ElementalQuery(SelectStatement statement, IQueryLogger logger)
             : base(
                    $"{typeof(ElementalQuery).Namespace}.{nameof(ElementalQuery)}"
                   , $"{typeof(ElementalQuery).Namespace}"
                   , $"{typeof(ElementalQuery).Namespace}"
                   , new Dictionary<string, object?>() { { "statement", statement } }
-                  , NullQueryLogger.Instance
+                  , logger
             )
         { }
     }

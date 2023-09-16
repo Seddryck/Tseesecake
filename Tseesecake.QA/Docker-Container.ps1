@@ -30,19 +30,21 @@ Function Deploy-Container {
 
 	Process {
 		$running = & docker container ls --format "{{.ID}}" --filter "name=$nickname"
+		Write-Host $running + '!'
 		if ($null -ne $running) {
 			$previously_running = $true
-			Write-Output "`tContainer for '$fullname' is already running with ID '$running'."
+			Write-Host "`tContainer for '$fullname' is already running with ID '$running'."
 		} else {
-			Write-Output "`tStarting new container"
-			Start-Process -FilePath $filePath -ArgumentList $arguments
+			Write-Host "`tStarting new container"
+			Write-Host $arguments
+			Start-Process -FilePath $filePath
 			do {
 				$running = & docker container ls --format "{{.ID}}" --filter "name=$nickname"
 				if ($null -eq $running) {
 					Start-Sleep -s 1
 				}
 			} while($null -eq $running)
-			Write-Output "`tContainer for '$fullname' started with ID '$running'."
+			Write-Host "`tContainer for '$fullname' started with ID '$running'."
 
 			if ($null -ne $scriptBlock) {
 				$startWait = Get-Date
@@ -60,7 +62,7 @@ Function Deploy-Container {
 					Write-Warning "Waited during $($wait.ToString("ss")) seconds. Stopping test harness."
 					exit 0
 				} else {
-					Write-Output "`tServer is available: waited $($wait.ToString("ss")) seconds to get it live."
+					Write-Host "`tServer is available: waited $($wait.ToString("ss")) seconds to get it live."
 				}
 			}
 		}

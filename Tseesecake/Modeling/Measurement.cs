@@ -9,6 +9,8 @@ namespace Tseesecake.Modeling
 {
     public class Measurement : Column
     {
+        public virtual string Template { get => "ColumnExpression"; }
+
         public Measurement(string name)
             : base(name, DbType.Decimal) { }
     }

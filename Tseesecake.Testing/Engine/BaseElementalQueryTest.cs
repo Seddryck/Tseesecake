@@ -13,7 +13,7 @@ using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Restrictions;
 using Tseesecake.Querying.Slicers;
 
-namespace Tseesecake.Testing.Engine.DuckDB
+namespace Tseesecake.Testing.Engine
 {
     public abstract class BaseElementalQueryTest
     {
@@ -127,7 +127,7 @@ namespace Tseesecake.Testing.Engine.DuckDB
 
         protected abstract string SlicerAndGroupFilter { get; }
         [Test]
-        public void Read_SlicerAndGroupFilter_ValidStatement()
+        public virtual void Read_SlicerAndGroupFilter_ValidStatement()
             => Assert.That(new ElementalQuery(SelectStatementDefinition.SlicerAndGroupFilter).Read(Dialect, Connectivity)
                 , Is.EqualTo(SlicerAndGroupFilter));
 

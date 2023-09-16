@@ -14,7 +14,7 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string ProjectionMultiple 
             => "SELECT\r\n\tInstant AS Instant\r\n\t, Produced AS Produced\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionExpression 
-            => "SELECT\r\n\tLOWER(WindPark) AS LowerWindPark\r\nFROM\r\n\tWindEnergy\r\n";
+            => "SELECT\r\n\tLOWER(\"WindPark\") AS LowerWindPark\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionAggregation
             => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionAggregationFilter
@@ -24,7 +24,7 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string ProjectionWindowOffset
             => "SELECT\r\n\tLAG(Produced, 4, 0) OVER(\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t) AS FourHoursBefore\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionWindowOffsetExpression
-            => "SELECT\r\n\tLAG(ABS(Produced - Forecasted), 4, 0) OVER(\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t) AS FourHoursBefore\r\nFROM\r\n\tWindEnergy\r\n";
+            => "SELECT\r\n\tLAG(ABS(\"Produced\" - \"Forecasted\"), 4, 0) OVER(\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t) AS FourHoursBefore\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionWindowFrame
             => "SELECT\r\n\tLAST(Produced) OVER(\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t\tRANGE BETWEEN UNBOUNDED PRECEDING\r\n\t\t\tAND INTERVAL '6 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t) AS Smooth\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string FilterSingle 
@@ -40,7 +40,7 @@ namespace Tseesecake.Testing.Engine.DuckDB
         protected override string SlicerMultiple 
             => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\n\t, date_part('dayofweek', Instant)\r\n";
         protected override string SlicerAndGroupFilter 
-            => "SELECT\r\n\tAVG(Produced) AS average\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\taverage >= 15\r\n";
+            => "SELECT\r\n\tAVG(Produced) AS AvgProduced\r\nFROM\r\n\tWindEnergy\r\nGROUP BY\r\n\tWindPark\r\nHAVING\r\n\tAvgProduced >= 15\r\n";
         protected override string NamedWindow
             => "SELECT\r\n\tMIN(Produced) OVER seven AS MinSevenDays\r\n\t, MAX(Produced) OVER seven AS MaxSevenDays\r\nFROM\r\n\tWindEnergy\r\nWINDOW\r\n\tseven AS (\r\n\t\tPARTITION BY WindPark\r\n\t\tORDER BY Instant ASC NULLS LAST\r\n\t\tRANGE BETWEEN INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' PRECEDING\r\n\t\t\tAND INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t)\r\n";
         protected override string Qualify

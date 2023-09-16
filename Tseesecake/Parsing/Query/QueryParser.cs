@@ -24,7 +24,6 @@ namespace Tseesecake.Parsing.Query
             from filters in FilterParser.Filter.DelimitedBy(Parse.IgnoreCase("AND"))
             select filters.ToArray();
 
-
         protected internal readonly static Parser<ISlicer[]> FacetSlicers =
             from keyword in Keyword.GroupBy
             from slicers in SlicerParser.Facet.DelimitedBy(Parse.Char(','))

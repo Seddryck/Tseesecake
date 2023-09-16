@@ -1,1 +1,0 @@
-BeforeTemporizer(filter)::=$filter.Timestamp.Column.Name$ < $filter.Instant; format="value"$
