@@ -18,5 +18,24 @@ namespace Tseesecake.QA.Postgresql
     public class ElementalQueryPostgresqlTest : BaseElementalQueryTest
     {
         public override string ConnectionString => $"pgsql://postgres:Password12!@localhost/Energy";
+
+        private bool CheckPostgresqlVersion()
+            => (Environment.GetEnvironmentVariable("APPVEYOR")?.ToLowerInvariant()) != "true";
+
+        [Test]
+        public override void Execute_ProjectionWindowOffset_ValidStatement()
+        {
+            if (!CheckPostgresqlVersion())
+                Assert.Ignore("This version of Postgresql is not supporting some needed features");
+            base.Execute_ProjectionWindowOffset_ValidStatement();
+        }
+
+        [Test]
+        public override void Execute_ProjectionWindowOffsetExpression_ValidStatement()
+        {
+            if (!CheckPostgresqlVersion())
+                Assert.Ignore("This version of Postgresql is not supporting some needed features");
+            base.Execute_ProjectionWindowOffsetExpression_ValidStatement();
+        }
     }
 }

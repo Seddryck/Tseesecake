@@ -16,8 +16,7 @@ namespace Tseesecake.QA
         public void SetupFixture()
             => SetupEngine(new[] { typeof(QueryEngine) });
 
-        private bool CheckPostgresqlVersion()
-            => (Environment.GetEnvironmentVariable("APPVEYOR")?.ToLowerInvariant()) != "true";
+        
 
         [Test]
         public virtual void Execute_ProjectionSingle_ValidStatement()
@@ -101,9 +100,6 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionWindowOffset_ValidStatement()
         {
-            if (!CheckPostgresqlVersion())
-                Assert.Ignore("This version of Postgresql is not supporting some needed features");
-            
             var engine = Provider.GetRequiredService<QueryEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowOffset);
             Assert.That(reader, Is.Not.Null);
