@@ -19,14 +19,12 @@ namespace Tseesecake.Engine
         private QueryEngine QueryEngine { get; }
         private MetaEngine MetaEngine { get; }
         public Timeseries[] Timeseries { get; }
-        private ISelectArranger[] Arrangers { get; }
 
         public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ArrangerCollectionProvider provider)
         {
-            (DatabaseUrl, Timeseries) = (factory.Instantiate(url), timeseries);
-            var dialect = DatabaseUrl.Dialect.GetType();
-            Arrangers = provider.Get(dialect).Instantiate<IStatement>();
-            QueryEngine =  new QueryEngine(DatabaseUrl, timeseries, Arrangers);
+            var databaseUrl = factory.Instantiate(url);
+            var arrangers = provider.Get(databaseUrl.Dialect.GetType()).Instantiate<IStatement>();
+            QueryEngine =  new QueryEngine(databaseUrl, timeseries, arrangers, factory.QueryLogger);
             MetaEngine = new MetaEngine(timeseries);
             Timeseries = timeseries;
         }

@@ -22,15 +22,11 @@ namespace Tseesecake.Engine
         public IQueryLogger QueryLogger { get; } = NullQueryLogger.Instance;
         private ISelectArranger[] Arrangers { get; }
 
-        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, IQueryLogger logger)
-            => (DatabaseUrl, Timeseries, QueryLogger) = (databaseUrl, timeseries, logger);
-        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers)
-            => (DatabaseUrl, Timeseries, Arrangers) = (databaseUrl, timeseries, arrangers);
+        protected internal QueryEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers, IQueryLogger logger)
+            => (DatabaseUrl, Timeseries, Arrangers, QueryLogger) = (databaseUrl, timeseries, arrangers, logger);
 
-        public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries)
-            => (DatabaseUrl, Timeseries, QueryLogger) = (factory.Instantiate(url), timeseries, factory.QueryLogger);
         public QueryEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ISelectArranger[] arrangers)
-            => (DatabaseUrl, Timeseries, Arrangers) = (factory.Instantiate(url), timeseries, arrangers);
+            => (DatabaseUrl, Timeseries, QueryLogger, Arrangers) = (factory.Instantiate(url), timeseries, factory.QueryLogger, arrangers);
 
         public IDataReader ExecuteReader(SelectStatement statement)
         {
