@@ -9,7 +9,7 @@ $else$
 $BaseQuery(statement)$$\\$
 $endif$
 $if(statement.Orders)$$\\$
-ORDER By
+ORDER BY
 	$statement.Orders: {order | $order:(order.Template)()$}; separator="
 , "$
 $endif$
