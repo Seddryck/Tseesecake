@@ -1,0 +1,6 @@
+"DayOfWeek" : "weekday"
+"DayOfMonth" : "day"
+"DayOfYear" : "dayofyear"
+"WeekOfYear" : "week"
+"MonthOfYear" : "month"
+"QuarterOfYear" : "quarter"
