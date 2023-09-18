@@ -21,6 +21,7 @@
     <PackageReference Include="DubUrl" Version="0.1.231" />
     <PackageReference Include="DubUrl.Extensions.DependencyInjection" Version="0.1.231" />
     <PackageReference Include="DuckDB.NET.Data.Full" Version="0.8.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
     <PackageReference Include="Npgsql" Version="7.0.6" />
