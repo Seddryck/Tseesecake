@@ -9,7 +9,7 @@ namespace Tseesecake.Modeling.Statements.Ordering
 {
     internal class ColumnOrder : IOrderBy
     {
-        public ColumnReference Reference { get; }
+        public ColumnReference Reference { get; set; }
         public Sorting Sort { get; }
         public NullSorting NullSort { get; }
         public bool IsNullSortOpposing { get => Sort == Sorting.Ascending && NullSort == NullSorting.Last
