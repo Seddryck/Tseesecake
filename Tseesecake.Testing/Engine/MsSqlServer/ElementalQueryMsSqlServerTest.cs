@@ -77,7 +77,7 @@ namespace Tseesecake.Testing.Engine.MsSqlServer
         protected override string NamedWindow
             => "SELECT\r\n\tMIN([Produced]) OVER seven AS [MinSevenDays]\r\n\t, MAX([Produced]) OVER seven AS [MaxSevenDays]\r\nFROM\r\n\t[WindEnergy]\r\nWINDOW\r\n\tseven AS (\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY [Instant] ASC NULLS LAST\r\n\t\tRANGE BETWEEN INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' PRECEDING\r\n\t\t\tAND INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t)\r\n";
         protected override string Qualify
-            => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY [Producer]\r\n\t\t\tORDER BY [Produced] DESC NULLS LAST\r\n\t\t) AS [RowNb]\r\n\tFROM\r\n\t\t[WindEnergy]\r\n) AS T1\r\nWHERE\r\n\t[RowNb] <= 5\r\n";
+            => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY [Producer]\r\n\t\t\tORDER BY [Produced] DESC\r\n\t\t) AS [RowNb]\r\n\tFROM\r\n\t\t[WindEnergy]\r\n) AS T1\r\nWHERE\r\n\t[RowNb] <= 5\r\n";
         protected override string LimitOffset 
             => "SELECT\r\n\t[Produced] AS [Produced]\r\nFROM\r\n\t[WindEnergy]\r\nORDER BY\r\n\tCASE WHEN [Produced] IS NULL THEN 1 ELSE 0 END DESC \r\n\t, [Produced] DESC\r\nOFFSET 40 ROWS\r\nFETCH NEXT 20 ROWS ONLY\r\n";
         protected override string VirtualMeasurementProjection
