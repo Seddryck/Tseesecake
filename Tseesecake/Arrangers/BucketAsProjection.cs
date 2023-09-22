@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;
@@ -19,6 +20,9 @@ namespace Tseesecake.Arrangers
     {
         public void Execute(SelectStatement statement)
         {
+            if (statement.Timeseries is not Timeseries)
+                throw new InvalidOperationException();
+
             if (statement.Slicers is null)
                 return;
             
@@ -26,7 +30,7 @@ namespace Tseesecake.Arrangers
             if (slicer is null)
                 return;
 
-            statement.Projections.Insert(0, new ExpressionProjection(new BucketExpression(slicer), statement.Timeseries.Timestamp.Name));
+            statement.Projections.Insert(0, new ExpressionProjection(new BucketExpression(slicer), (statement.Timeseries as Timeseries)!.Timestamp.Name));
         }
     }
 }

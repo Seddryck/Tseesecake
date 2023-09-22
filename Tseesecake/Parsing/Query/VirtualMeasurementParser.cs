@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
 using System.Linq.Expressions;
 using System.Globalization;
 using Tseesecake.Parsing.Query.Calculator;
+using Tseesecake.Modeling.Catalog;
 
 namespace Tseesecake.Parsing.Query
 {

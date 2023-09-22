@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Querying.Expressions;
 
-namespace Tseesecake.Querying.Aggregations
+namespace Tseesecake.Modeling.Statements.Aggregations
 {
     internal abstract class BaseAggregation : IAggregation
     {

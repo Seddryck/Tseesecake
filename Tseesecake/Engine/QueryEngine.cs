@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Mounting.Engine;
 using Tseesecake.Parsing.Query;
 using Tseesecake.Querying;
@@ -34,7 +36,7 @@ namespace Tseesecake.Engine
 
         public IDataReader ExecuteReader(SelectStatement statement)
         {
-            statement.Timeseries = Timeseries.Single(x => statement.Timeseries.Name == x.Name);
+            statement.Timeseries = statement.Timeseries is IReference<Timeseries> reference ? Timeseries.Single(x => reference.Name == x.Name) : statement.Timeseries;
             var query = new ElementalQuery(Arrange(statement), QueryLogger);
             return DatabaseUrl.ExecuteReader(query);
         }

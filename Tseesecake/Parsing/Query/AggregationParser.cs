@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Parsing.Query

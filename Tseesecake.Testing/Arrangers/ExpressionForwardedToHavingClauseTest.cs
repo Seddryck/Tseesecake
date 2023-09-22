@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Projections;
@@ -24,8 +25,7 @@ namespace Tseesecake.Testing.Arrangers
             var statement = new SelectStatement(ts,
                 new IProjection[] {
                     new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
-                }
-                , null, null,
+                },
                 new IFilter[] {
                     new GathererSifter(new Measurement("Maximum"), LinqExp.Expression.LessThan,  5)
                 }

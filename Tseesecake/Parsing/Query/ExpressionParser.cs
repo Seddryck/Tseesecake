@@ -5,7 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;
 

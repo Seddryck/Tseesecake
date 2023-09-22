@@ -5,10 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Projections;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Parsing.Query

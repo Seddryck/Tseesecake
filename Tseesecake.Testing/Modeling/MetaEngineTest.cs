@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Modeling
 {
@@ -29,7 +31,7 @@ namespace Tseesecake.Testing.Modeling
         public void Execute_ShowAllTimeseries_AllOfThem()
         {
             var statement = new ShowAllTimeseries();
-            var engine = new MetaEngine(new[] { WindEnergy, SolarEnergy });
+            var engine = new CatalogEngine(new[] { WindEnergy, SolarEnergy });
             var reader = engine.ExecuteReader(statement);
 
             Assert.That(reader, Is.Not.Null );
@@ -45,7 +47,7 @@ namespace Tseesecake.Testing.Modeling
         public void Execute_ShowFieldsTimeseries_AllOfThem()
         {
             var statement = new ShowFieldsTimeseries(WindEnergy.Name);
-            var engine = new MetaEngine(new[] { WindEnergy, SolarEnergy });
+            var engine = new CatalogEngine(new[] { WindEnergy, SolarEnergy });
             var reader = engine.ExecuteReader(statement);
 
             Assert.That(reader, Is.Not.Null);

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    public class TimeseriesReference : Timeseries
+    public interface IReference<T> where T : ICatalogItem
     {
-        public TimeseriesReference(string name)
-            : base(name, new Timestamp(""), new Measurement("")) { }
+        public string Name { get; }
     }
 }

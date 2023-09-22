@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Projections;
@@ -30,7 +30,7 @@ namespace Tseesecake.Arrangers
                         sifter.Measurement = expr switch
                         {
                             AggregationProjection aggrProjection => new AggregationMeasurement(sifter.Measurement.Name, aggrProjection.Aggregation),
-                            ExpressionProjection exprProjection => new ExpressionMeasurement(sifter.Measurement.Name, exprProjection.Expression),
+                            ExpressionProjection exprProjection => new LiteralMeasurement(sifter.Measurement.Name, exprProjection.Expression),
                             _ => throw new ArgumentOutOfRangeException()
                         };
                 }

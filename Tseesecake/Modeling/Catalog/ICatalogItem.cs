@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling
 {
-    internal class AnonymousTimestamp : Timestamp
+    public interface ICatalogItem
     {
-        public AnonymousTimestamp()
-            : base("_anonymous_") { }
+        public string Name { get; }
     }
 }

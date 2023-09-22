@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;

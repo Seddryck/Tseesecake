@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Parsing;
 
 namespace Tseesecake.Querying.Filters

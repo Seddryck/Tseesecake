@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;
@@ -19,6 +20,9 @@ namespace Tseesecake.Arrangers
     {
         public void Execute(SelectStatement statement)
         {
+            if (statement.Timeseries is not Timeseries)
+                throw new InvalidOperationException();
+
             var projections = statement.Projections
                 .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
                 .Where(x => x.Expression is ColumnExpression);
@@ -28,8 +32,8 @@ namespace Tseesecake.Arrangers
             foreach (var projection in statement.Projections)
             {
                 if (projections.Contains(projection))
-                    ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference 
-                        = statement.Timeseries.Columns.Single(x => 
+                    ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference
+                        = (statement.Timeseries as Timeseries).Columns.Single(x =>
                             x.Name == ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference.Name
                     );
             }

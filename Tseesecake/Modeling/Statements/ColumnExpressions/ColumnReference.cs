@@ -4,10 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Modeling.Catalog;
 
-namespace Tseesecake.Modeling
+namespace Tseesecake.Modeling.Statements.ColumnExpressions
 {
-    public class ColumnReference
+    public class ColumnReference : IReference<Column>, IColumn
     {
         public string Name { get; }
 

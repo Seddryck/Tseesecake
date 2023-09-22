@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
-using Tseesecake.Modeling;
 using Sprache;
 using System.Diagnostics.Tracing;
 using Tseesecake.Mounting;
+using Tseesecake.Modeling.Catalog;
 
 namespace Tseesecake.Parsing.Dml
 {

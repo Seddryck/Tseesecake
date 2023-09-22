@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;

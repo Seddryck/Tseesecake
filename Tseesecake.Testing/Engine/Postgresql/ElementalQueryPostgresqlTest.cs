@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Tseesecake.Engine;
 using Tseesecake.Engine.DuckDB;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Engine.Postgresql
 {

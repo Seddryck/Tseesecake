@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Frames;
 using Tseesecake.Querying.Ordering;

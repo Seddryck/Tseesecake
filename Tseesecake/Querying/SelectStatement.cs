@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
@@ -15,7 +16,7 @@ namespace Tseesecake.Querying
 {
     public class SelectStatement : IStatement
     {
-        public Timeseries Timeseries { get; set; }
+        public ITimeseries Timeseries { get; set; }
         public List<IProjection> Projections { get; }
         public List<IFilter> Filters { get; }
         public List<ISlicer> Slicers { get; }
@@ -26,25 +27,25 @@ namespace Tseesecake.Querying
         public IRestriction? Restriction { get; }
         public List<VirtualMeasurement> VirtualMeasurements { get; set; }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections)
             : this(timeseries, projections, null, null, null, null, null, null, null, null) { }
         
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, VirtualMeasurement[] expressions)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, VirtualMeasurement[] expressions)
             : this(timeseries, projections, null, null, null, null, null, null, null, expressions) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, IFilter[]? filters)
             : this(timeseries, projections, filters, Array.Empty<ISlicer>()) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers)
             : this(timeseries, projections, filters, slicers, Array.Empty<IFilter>(), Array.Empty<NamedWindow>(), Array.Empty<IFilter>(), Array.Empty<IOrderBy>(), null, null) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, NamedWindow[]? namedWindows)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, NamedWindow[]? namedWindows)
             : this(timeseries, projections, filters, slicers, Array.Empty<IFilter>(), namedWindows, Array.Empty<IFilter>(), Array.Empty<IOrderBy>(), null, null) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters)
             : this(timeseries, projections, filters, slicers, groupFilters, Array.Empty<NamedWindow>(), Array.Empty<IFilter>(), Array.Empty<IOrderBy>(), null, null) { }
 
-        public SelectStatement(Timeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters, NamedWindow[]? namedWindows, IFilter[]? qualifiers, IOrderBy[]? orders, IRestriction? restriction = null, VirtualMeasurement[]? expressions = null)
+        public SelectStatement(ITimeseries timeseries, IProjection[] projections, IFilter[]? filters, ISlicer[]? slicers, IFilter[]? groupFilters, NamedWindow[]? namedWindows, IFilter[]? qualifiers, IOrderBy[]? orders, IRestriction? restriction = null, VirtualMeasurement[]? expressions = null)
             => (Timeseries, Projections, Filters, Slicers, GroupFilters, Windows, Qualifiers, Orders, Restriction, VirtualMeasurements) =
                     (timeseries
                         , projections.ToList()

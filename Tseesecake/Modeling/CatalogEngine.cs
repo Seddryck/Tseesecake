@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Parsing.Meta;
 using Tseesecake.Parsing.Query;
 
 namespace Tseesecake.Modeling
 {
-    internal class MetaEngine
+    internal class CatalogEngine
     {
         public Timeseries[] Timeseries { get; set; }
 
-        public MetaEngine(Timeseries[] timeseries)
+        public CatalogEngine(Timeseries[] timeseries)
             => (Timeseries) = (timeseries);
 
         public IDataReader ExecuteReader(IShowStatement statement)
@@ -61,12 +63,15 @@ namespace Tseesecake.Modeling
                 var pos = 1;
                 foreach (var column in ts.Columns)
                 {
+                    if (column is not Column col)
+                        throw new InvalidOperationException();
+
                     var row = table.NewRow();
                     row["TimeseriesName"] = ts.Name;
                     row["ColumnName"] = column.Name;
                     row["Position"] = pos;
-                    row["FamilyType"] = column.Family;
-                    row["DataType"] = column.DbType;
+                    row["FamilyType"] = col.Family;
+                    row["DataType"] = col.DbType;
                     table.Rows.Add(row);
                     pos += 1;
                 }

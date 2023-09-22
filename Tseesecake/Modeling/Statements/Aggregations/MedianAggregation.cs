@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Querying.Expressions;
 
-namespace Tseesecake.Querying.Aggregations
+namespace Tseesecake.Modeling.Statements.Aggregations
 {
-    internal class CountAggregation : BaseAggregation
+    internal class MedianAggregation : BaseAggregation
     {
-        public CountAggregation(IExpression expression)
+        public MedianAggregation(IExpression expression)
             : base(expression) { }
     }
 }

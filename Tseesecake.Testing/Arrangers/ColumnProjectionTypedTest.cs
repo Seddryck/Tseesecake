@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.Testing.Arrangers

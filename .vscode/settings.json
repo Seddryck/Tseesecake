@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "name": "DuckDB",
+            "accessMode": "Read Only",
+            "previewLimit": 50,
+            "driver": "DuckDB",
+            "databaseFilePath": "C:\\Users\\cedri\\Projects\\Tseesecake\\Tseesecake.QA\\bin\\Debug\\net6.0\\Energy.duckdb"
+        }
+    ]
+}

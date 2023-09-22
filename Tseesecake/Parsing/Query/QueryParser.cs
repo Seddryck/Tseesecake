@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Querying;
 using Tseesecake.Querying.Filters;
 using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Projections;
 using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Parsing.Query
 {
     internal class QueryParser
     {
-        protected internal readonly static Parser<Timeseries> TimeseriesReference =
+        protected internal readonly static Parser<TimeseriesReference> TimeseriesReference =
             from identifier in Grammar.Identifier
             select new TimeseriesReference(identifier);
 

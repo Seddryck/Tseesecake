@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 using Tseesecake.Querying.Expressions;
 using Tseesecake.Querying.Projections;
 

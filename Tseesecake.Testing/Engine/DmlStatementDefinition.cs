@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LinqExp = System.Linq.Expressions;
-using Tseesecake.Modeling;
 using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
 using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Restrictions;
-using Tseesecake.Querying.Slicers;
-using Tseesecake.Querying.WindowFunctions;
 using Tseesecake.Mounting;
+using Tseesecake.Modeling.Catalog;
 
 namespace Tseesecake.Testing.Engine
 {

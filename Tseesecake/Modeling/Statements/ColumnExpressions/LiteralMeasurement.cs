@@ -5,14 +5,15 @@ using Tseesecake.Querying.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Tseesecake.Modeling.Catalog;
 
-namespace Tseesecake.Modeling
+namespace Tseesecake.Modeling.Statements.ColumnExpressions
 {
-    internal class ExpressionMeasurement : Measurement
+    internal class LiteralMeasurement : Measurement
     {
         public override string Template { get => "LiteralExpression"; }
         public IExpression Expression { get; }
-        public ExpressionMeasurement(string name, IExpression expression)
+        public LiteralMeasurement(string name, IExpression expression)
             : base(name) { Expression = expression; }
     }
 }

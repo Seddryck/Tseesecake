@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Mounting.Engine;
 using Tseesecake.Querying;
 

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying.Aggregations;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.Aggregations;
 
-namespace Tseesecake.Modeling
+namespace Tseesecake.Modeling.Statements.ColumnExpressions
 {
     internal class AggregationMeasurement : Measurement
     {

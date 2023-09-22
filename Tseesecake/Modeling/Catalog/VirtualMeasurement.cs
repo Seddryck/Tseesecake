@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tseesecake.Modeling
+namespace Tseesecake.Modeling.Catalog
 {
     public class VirtualMeasurement : Measurement
     {
