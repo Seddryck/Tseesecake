@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 using Tseesecake.Parsing.Query;
-using Tseesecake.Querying.Expressions;
 
 namespace Tseesecake.Testing.Parsing.Query
 {

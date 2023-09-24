@@ -6,11 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Projections;
-using Tseese = Tseesecake.Querying.Expressions;
+using Tseesecake.Modeling.Statements.Filters;
 
 namespace Tseesecake.Parsing.Query
 {
@@ -39,7 +35,7 @@ namespace Tseesecake.Parsing.Query
                 "Temporizer"
                 , predicate
                 , identifier
-                , arguments.Cast<Tseese.ConstantExpression>().Select(x => x.Constant).ToArray()
+                , arguments.Cast<Modeling.Statements.ColumnExpressions.ConstantExpression>().Select(x => x.Constant).ToArray()
             );
 
         protected internal static Parser<IFilter> ArrayDicer =
@@ -50,7 +46,7 @@ namespace Tseesecake.Parsing.Query
                 "Dicer"
                 , predicate
                 , identifier
-                , new object[] { arguments.Cast<Tseese.ConstantExpression>().Select(x => x.Constant).Cast<string>().ToArray() }
+                , new object[] { arguments.Cast<Modeling.Statements.ColumnExpressions.ConstantExpression>().Select(x => x.Constant).Cast<string>().ToArray() }
             );
 
         protected internal static Parser<IFilter> NonArrayDicer =
@@ -61,7 +57,7 @@ namespace Tseesecake.Parsing.Query
                 "Dicer"
                 , predicate
                 , identifier
-                , arguments.Cast<Tseese.ConstantExpression>().Select(x => x.Constant).ToArray()
+                , arguments.Cast<Modeling.Statements.ColumnExpressions.ConstantExpression>().Select(x => x.Constant).ToArray()
             );
 
         protected internal static Parser<IFilter> Dicer = NonArrayDicer.Or(ArrayDicer);

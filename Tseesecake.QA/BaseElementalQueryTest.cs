@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Tseesecake.Engine;
+using Tseesecake.Modeling;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
@@ -14,12 +14,12 @@ namespace Tseesecake.QA
     {
         [OneTimeSetUp]
         public void SetupFixture()
-            => SetupEngine(new[] { typeof(QueryEngine) });
+            => SetupEngine(new[] { typeof(SelectEngine) });
 
         [Test]
         public virtual void Execute_ProjectionSingle_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionSingle);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -31,7 +31,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionMultiple_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionMultiple);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -45,7 +45,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionExpression_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionExpression);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -57,7 +57,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionAggregation_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionAggregation);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -70,7 +70,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionAggregationFilter_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionAggregationFilter);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -84,7 +84,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionWindow_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindow);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -98,7 +98,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionWindowOffset_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowOffset);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -109,7 +109,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionWindowOffsetExpression_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowOffsetExpression);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -120,7 +120,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_ProjectionWindowFrame_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionWindowFrame);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.Read(), Is.True);
@@ -130,7 +130,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_FilterSingle_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.FilterSingle);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -143,7 +143,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_FilterMultiple_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.FilterMultiple);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -156,7 +156,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_FilterCuller_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.FilterCuller);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -169,7 +169,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_FilterTemporizer_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.FilterTemporizer);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -181,7 +181,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_SlicerSingle_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.SlicerSingle);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -193,7 +193,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_SlicerMultiple_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.SlicerMultiple);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -205,7 +205,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_SlicerAndGroupFilter_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.SlicerAndGroupFilter);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -217,7 +217,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_NamedWindow_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.NamedWindow);
             Assert.That(reader, Is.Not.Null);
         }
@@ -225,7 +225,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_Qualify_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.Qualify);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -237,7 +237,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void Execute_LimitOffset_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(SelectStatementDefinition.LimitOffset);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -249,7 +249,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void ExecuteReader_BucketBy_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(ResourcesReader.BucketBy);
             Assert.That(reader, Is.Not.Null);
             var rowCount = 0;
@@ -265,7 +265,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void ExecuteReader_ImplicitGroupBy_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(ResourcesReader.ImplicitGroupBy);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.FieldCount, Is.EqualTo(3));
@@ -282,7 +282,7 @@ namespace Tseesecake.QA
         [Test]
         public virtual void ExecuteReader_VirtualMeasurement_ValidStatement()
         {
-            var engine = Provider.GetRequiredService<QueryEngine>();
+            var engine = Provider.GetRequiredService<SelectEngine>();
             var reader = engine.ExecuteReader(ResourcesReader.VirtualMeasurement);
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.FieldCount, Is.EqualTo(2));

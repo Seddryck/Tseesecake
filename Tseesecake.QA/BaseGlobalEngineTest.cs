@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Tseesecake.Engine;
+using Tseesecake.Modeling;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA

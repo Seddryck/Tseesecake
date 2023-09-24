@@ -1,1 +1,1 @@
-AggregationMeasurement(measurement)::=$measurement.Aggregation:AggregationExpression()$
+AggregationMeasurement(measurement)::=$measurement:AggregationExpression()$

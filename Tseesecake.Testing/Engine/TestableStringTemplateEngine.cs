@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Engine;
+using Tseesecake.Modeling;
 
 namespace Tseesecake.Testing.Engine
 {
@@ -24,7 +24,7 @@ namespace Tseesecake.Testing.Engine
 
         protected IDictionary<string, string> GetSubTemplates()
         {
-            var asm = typeof(QueryEngine).Assembly;
+            var asm = typeof(SelectEngine).Assembly;
             var resources = asm.GetManifestResourceNames().Where(x => x.Contains("Calculator") && x.EndsWith(".st")).Where(x => x.Contains("Engine.Common"));
             var dico = new Dictionary<string, string>();
             foreach (var resource in resources) 
@@ -39,7 +39,7 @@ namespace Tseesecake.Testing.Engine
 
         protected IDictionary<string, IDictionary<string, object?>> ReadDictionaries()
         {
-            var asm = typeof(QueryEngine).Assembly;
+            var asm = typeof(SelectEngine).Assembly;
             var resources = asm.GetManifestResourceNames().Where(x => x.EndsWith("dic.st")).Where(x => x.Contains("Engine.Common"));
             var dico = new Dictionary<string, IDictionary<string, object?>>();
             foreach (var resource in resources)

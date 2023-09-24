@@ -6,17 +6,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Arrangers
 {
     [Polyglot]
-    internal class ColumnReferenceProjectionTyped : ISelectArranger
+    internal class ProjectionTyped : ISelectArranger
     {
         public void Execute(SelectStatement statement)
         {
@@ -24,18 +21,19 @@ namespace Tseesecake.Arrangers
                 throw new InvalidOperationException();
 
             var projections = statement.Projections
-                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
-                .Where(x => x.Expression is ColumnExpression);
+                .Where(x => x.Expression is ColumnReference);
+            
             if (!projections.Any())
                 return;
 
             foreach (var projection in statement.Projections)
             {
                 if (projections.Contains(projection))
-                    ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference
-                        = (statement.Timeseries as Timeseries).Columns.Single(x =>
-                            x.Name == ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference.Name
-                    );
+                    projection.Expression
+                        = new ColumnExpression(
+                                (Column)((Timeseries)statement.Timeseries).Columns.Single(x =>
+                                    x.Name == ((ColumnReference)projection.Expression).Name
+                            ));
             }
         }
     }

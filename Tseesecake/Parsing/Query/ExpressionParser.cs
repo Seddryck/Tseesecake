@@ -4,11 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
 using Tseesecake.Modeling.Statements.ColumnExpressions;
-using Tseesecake.Modeling.Statements.Aggregations;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
 
 namespace Tseesecake.Parsing.Query
 {
@@ -28,7 +24,7 @@ namespace Tseesecake.Parsing.Query
 
         protected internal static Parser<IExpression> Column = 
             from identifier in Grammar.Identifier
-            select new ColumnExpression(new ColumnReference(identifier));
+            select new ColumnReference(identifier);
 
         public static Parser<IExpression> Expression = Constant.Or(Literal).Or(Column);
     }

@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Modeling.Statements.Restrictions;
 using Tseesecake.Parsing.Query;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Restrictions;
 
 namespace Tseesecake.Testing.Parsing.Query
 {

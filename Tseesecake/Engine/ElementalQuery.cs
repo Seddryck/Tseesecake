@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Engine
 {

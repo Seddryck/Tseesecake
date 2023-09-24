@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Parsing.Query;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
 
 namespace Tseesecake.Testing.Parsing.Query
 {

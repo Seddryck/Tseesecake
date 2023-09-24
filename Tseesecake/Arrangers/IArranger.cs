@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Arrangers
 {

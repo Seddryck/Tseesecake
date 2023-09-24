@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying.Filters;
+using Tseesecake.Modeling.Statements.Filters;
 using LinqExp = System.Linq.Expressions;
 
 namespace Tseesecake.Testing.Query.Filters

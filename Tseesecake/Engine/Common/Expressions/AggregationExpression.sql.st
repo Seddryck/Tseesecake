@@ -1,2 +1,5 @@
-AggregationExpression(aggregation)::=$\\$
-$aggregations.(aggregation.Name)$($aggregation.Expression:(aggregation.Expression.Template)()$)
+AggregationExpression(expression)::=$\\$
+$aggregations.(expression.Aggregation.Name)$$\\$
+($\\$
+$expression.Aggregation.Expression:(expression.Aggregation.Expression.Template)()$$\\$
+)

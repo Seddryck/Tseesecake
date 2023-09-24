@@ -8,7 +8,7 @@ using Tseesecake.Modeling.Statements.Aggregations;
 
 namespace Tseesecake.Modeling.Statements.ColumnExpressions
 {
-    internal class AggregationMeasurement : Measurement
+    internal class AggregationMeasurement : Measurement, IExpression
     {
         public override string Template { get => "AggregationMeasurement"; }
         public IAggregation Aggregation { get; }

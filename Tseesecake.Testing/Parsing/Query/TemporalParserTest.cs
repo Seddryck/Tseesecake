@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements.Arguments;
 using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Parsing.Query;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Parsing.Query
 {

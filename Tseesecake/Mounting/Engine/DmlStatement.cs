@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Querying;
 
 namespace Tseesecake.Mounting.Engine
 {

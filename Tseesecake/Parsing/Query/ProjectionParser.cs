@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
 using Tseesecake.Modeling.Statements.ColumnExpressions;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
+using Tseesecake.Modeling.Statements.Projections;
 
 namespace Tseesecake.Parsing.Query
 {
@@ -16,19 +15,19 @@ namespace Tseesecake.Parsing.Query
     {
         protected internal static Parser<IProjection> Column =
             from identifier in Grammar.Identifier
-            select new ColumnReferenceProjection(new ColumnReference(identifier));
+            select new Projection(new ColumnReference(identifier), identifier);
 
         protected internal static Parser<IProjection> Expression =
             from expression in ExpressionParser.Expression
             from _ in Keyword.As
             from alias in Grammar.Identifier
-            select new ExpressionProjection(expression, alias);
+            select new Projection(expression, alias);
 
         public static Parser<IProjection> Aggregation =
             from aggregation in AggregationParser.Aggregation
             from _ in Keyword.As
             from alias in Grammar.Identifier
-            select new AggregationProjection(aggregation, null, alias);
+            select new Projection(new AggregationExpression(aggregation), alias);
 
         public static Parser<IProjection> Projection = Aggregation.Or(Column).Or(Expression);
     }

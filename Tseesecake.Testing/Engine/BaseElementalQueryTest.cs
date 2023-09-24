@@ -6,12 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Tseesecake.Engine;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Restrictions;
-using Tseesecake.Querying.Slicers;
 
 namespace Tseesecake.Testing.Engine
 {

@@ -14,6 +14,6 @@ namespace Tseesecake.Parsing
     {
         public readonly static Parser<IStatement> Global = 
             TimeseriesMetaParser.Show
-            .Or((Parser<IStatement>)QueryParser.Query);
+            .Or((Parser<IStatement>)SelectStatementParser.Query);
     }
 }

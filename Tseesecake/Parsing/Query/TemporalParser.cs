@@ -8,7 +8,7 @@ using Tseesecake.Modeling;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements.Arguments;
 using Tseesecake.Modeling.Statements.ColumnExpressions;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements.Slicers;
 
 namespace Tseesecake.Parsing.Query
 {

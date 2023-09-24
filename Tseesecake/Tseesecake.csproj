@@ -3,74 +3,7 @@
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Engine\Common\Calculator\Addition.sql.st" />
-	  <None Remove="Engine\Common\Calculator\BinaryCall.sql.st" />
-	  <None Remove="Engine\Common\Calculator\BinaryExpression.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Constant.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Multiply.sql.st" />
-	  <None Remove="Engine\Common\Calculator\operations.dic.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\AddChecked.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\Divide.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\Modulo.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\MultiplyChecked.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\Negate.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\NegateChecked.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\Power.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\Subtract.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Operations\SubtractChecked.sql.st" />
-	  <None Remove="Engine\Common\Calculator\Parameter.sql.st" />
-	  <None Remove="Engine\Common\Calculator\UnaryExpression.sql.st" />
-	  <None Remove="Engine\Common\ColumnProjection.sql.st" />
-	  <None Remove="Engine\Common\comparisons.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\aggregations.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\arithmetics.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\cyclicTemporals.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\framePosition.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\sorts.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\truncationTemporals.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\types.dic.st" />
-	  <None Remove="Engine\Common\Dictionaries\windowFunctions.dic.st" />
-	  <None Remove="Engine\Common\ExpressionProjection.sql.st" />
-	  <None Remove="Engine\Common\Expressions\AggregationExpression.sql.st" />
-	  <None Remove="Engine\Common\Expressions\AggregationMeasurement.sql.st" />
-	  <None Remove="Engine\Common\Expressions\BucketExpression.sql.st" />
-	  <None Remove="Engine\Common\Expressions\ColumnExpression.sql.st" />
-	  <None Remove="Engine\Common\Expressions\ConstantExpression.sql.st" />
-	  <None Remove="Engine\Common\Expressions\LiteralExpression.sql.st" />
-	  <None Remove="Engine\Common\Expressions\VirtualColumnExpression.sql.st" />
-	  <None Remove="Engine\Common\Filters\AfterTemporizer.sql.st" />
-	  <None Remove="Engine\Common\Filters\BeforeTemporizer.sql.st" />
-	  <None Remove="Engine\Common\Filters\CullerSifter.sql.st" />
-	  <None Remove="Engine\Common\Filters\DifferentDicer.sql.st" />
-	  <None Remove="Engine\Common\Filters\EqualDicer.sql.st" />
-	  <None Remove="Engine\Common\Filters\GathererSifter.sql.st" />
-	  <None Remove="Engine\Common\Filters\InDicer.sql.st" />
-	  <None Remove="Engine\Common\Filters\RangeTemporizer.sql.st" />
-	  <None Remove="Engine\Common\Filters\SinceTemporizer.sql.st" />
-	  <None Remove="Engine\Common\Frames\RangeBetween.sql.st" />
-	  <None Remove="Engine\Common\Frames\RowsSingle.sql.st" />
-	  <None Remove="Engine\Common\Ordering\ColumnOrder.sql.st" />
-	  <None Remove="Engine\Common\Ordering\WindowProjection.sql.st" />
-	  <None Remove="Engine\Common\Projections\AggregationProjection.sql.st" />
-	  <None Remove="Engine\Common\Projections\WindowProjection.sql.st" />
-	  <None Remove="Engine\Common\Restrictions\LimitOffsetRestriction.sql.st" />
-	  <None Remove="Engine\Common\Restrictions\LimitRestriction.sql.st" />
-	  <None Remove="Engine\Common\Slicers\CyclicTemporalSlicer.sql.st" />
-	  <None Remove="Engine\Common\Slicers\FacetSlicer.sql.st" />
-	  <None Remove="Engine\Common\Slicers\TruncateTemporalSlicer.sql.st" />
-	  <None Remove="Engine\Common\Windows\NamedWindow.sql.st" />
-	  <None Remove="Engine\Common\Windows\WindowDefinition.sql.st" />
-	  <None Remove="Engine\ElementalQuery.pg.sql.st" />
-	  <None Remove="Engine\Postgresql\BaseQuery.sql.st" />
-	  <None Remove="Engine\Postgresql\Dictionaries\cyclicTemporals.dic.st" />
-	  <None Remove="Engine\Postgresql\Dictionaries\windowFunctions.dic.st" />
-	  <None Remove="Mounting\Engine\Common\ColumnDefinition.sql.st" />
-	  <None Remove="Mounting\Engine\Common\CreateOrReplace.sql.st" />
-	  <None Remove="Mounting\Engine\Common\Dictionaries\lengthTypes.dic.st" />
-	  <None Remove="Mounting\Engine\Common\ElementalQuery.duck.sql.st" />
-	  <None Remove="Mounting\Engine\DmlStatement.pgsql.sql.st" />
-	  <None Remove="Mounting\Engine\Postgresql\CopyFrom.sql.st" />
-	  <None Remove="Mounting\Engine\Postgresql\CreateOrReplace.sql.st" />
+	  <None Remove="Engine\Common\Expressions\FilteredAggregationExpression.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\Common\Calculator\BinaryCall.sql.st" />
@@ -95,6 +28,7 @@
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\framePosition.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\Common\Expressions\FilteredAggregationExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\AggregationMeasurement.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\AggregationExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Expressions\BucketExpression.sql.st" />
@@ -105,7 +39,7 @@
 	  <EmbeddedResource Include="Engine\Common\Frames\RangeBetween.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Frames\RowsSingle.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Frames\RowsBetween.sql.st" />
-	  <EmbeddedResource Include="Engine\Common\Projections\WindowProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\Common\Expressions\WindowExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Windows\NamedWindow.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Windows\WindowDefinition.sql.st" />
 	  <EmbeddedResource Include="Engine\ElementalQuery.pg.sql.st" />
@@ -128,9 +62,7 @@
 	  <EmbeddedResource Include="Engine\Common\Filters\RangeTemporizer.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Filters\SinceTemporizer.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Ordering\ColumnOrder.sql.st" />
-	  <EmbeddedResource Include="Engine\Common\Projections\AggregationProjection.sql.st" />
-	  <EmbeddedResource Include="Engine\Common\Projections\ExpressionProjection.sql.st" />
-	  <EmbeddedResource Include="Engine\Common\Projections\ColumnReferenceProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\Common\Projections\Projection.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Restrictions\LimitOffsetRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Restrictions\LimitRestriction.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Slicers\FacetSlicer.sql.st" />
@@ -150,5 +82,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Engine\DuckDB\" />
+	  <Folder Include="Querying\" />
 	</ItemGroup>
 </Project>

@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Mounting.Engine;
-using Tseesecake.Querying;
 
 namespace Tseesecake.Engine
 {

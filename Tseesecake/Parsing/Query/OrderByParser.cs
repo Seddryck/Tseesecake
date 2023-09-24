@@ -6,13 +6,8 @@ using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
 using Tseesecake.Modeling.Statements.ColumnExpressions;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Projections;
-using Tseese = Tseesecake.Querying.Expressions;
+using Tseesecake.Modeling.Statements.Ordering;
 
 namespace Tseesecake.Parsing.Query
 {

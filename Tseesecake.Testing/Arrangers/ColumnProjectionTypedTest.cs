@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Aggregations;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Projections;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.Testing.Arrangers
@@ -22,24 +21,24 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnReferenceProjection(new ColumnReference(ts.Timestamp.Name))
-                    , new ColumnReferenceProjection(new ColumnReference(ts.Facets.ElementAt(0).Name))
-                    , new ColumnReferenceProjection(new ColumnReference(ts.Facets.ElementAt(1).Name))
-                    , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
+                    new Projection(new ColumnReference(ts.Timestamp.Name))
+                    , new Projection(new ColumnReference(ts.Facets[0].Name))
+                    , new Projection(new ColumnReference(ts.Facets[1].Name))
+                    , new Projection(new AggregationExpression(new MaxAggregation(ts.Measurements[0])), "Maximum")
                 }
             );
 
-            var arranger = new ColumnReferenceProjectionTyped();
+            var arranger = new ProjectionTyped();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
-            Assert.That(statement.Projections.Where(x => x is ColumnReferenceProjection).ToArray(), Has.Length.EqualTo(3));
-            foreach (var projection in statement.Projections.Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>())
-            {
-                Assert.That(projection.Expression, Is.TypeOf<ColumnExpression>());
-                Assert.That(((ColumnExpression)projection.Expression).Reference, Is.Not.TypeOf<ColumnReference>());
-                Assert.That(((ColumnExpression)projection.Expression).Reference, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
-            }
+            Assert.That(statement.Projections.Where(x => x.Expression is ColumnReference).ToArray(), Has.Length.EqualTo(0));
+            Assert.That(statement.Projections.Where(x => x.Expression is ColumnExpression).ToArray(), Has.Length.EqualTo(3));
+
+            foreach (var projection in statement.Projections.Where(x => x.Expression is ColumnExpression)
+                            .Select(x => x.Expression)
+                            .Cast<ColumnExpression>())
+                Assert.That(projection.Column, Is.TypeOf<Facet>().Or.TypeOf<Timestamp>());
         }
     }
 }

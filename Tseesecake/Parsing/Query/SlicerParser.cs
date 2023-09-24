@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements.Slicers;
 
 namespace Tseesecake.Parsing.Query
 {

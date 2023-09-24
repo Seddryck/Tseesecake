@@ -8,9 +8,11 @@ using Tseesecake.Modeling.Catalog;
 
 namespace Tseesecake.Modeling.Statements.ColumnExpressions
 {
-    public class ColumnReference : IReference<Column>, IColumn
+    public class ColumnReference : IReference<Column>, IColumn, IExpression
     {
         public string Name { get; }
+
+        public string Template => "ColumnExpression";
 
         public ColumnReference(string name)
             => Name = name;

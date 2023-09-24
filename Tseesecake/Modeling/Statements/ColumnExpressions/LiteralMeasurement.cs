@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tseesecake.Querying.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
@@ -12,8 +11,8 @@ namespace Tseesecake.Modeling.Statements.ColumnExpressions
     internal class LiteralMeasurement : Measurement
     {
         public override string Template { get => "LiteralExpression"; }
-        public IExpression Expression { get; }
-        public LiteralMeasurement(string name, IExpression expression)
-            : base(name) { Expression = expression; }
+        public string Literal { get; }
+        public LiteralMeasurement(string name, string literal)
+            : base(name) { Literal = literal; }
     }
 }

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements.Aggregations;
-using Tseesecake.Querying.Expressions;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
 
 namespace Tseesecake.Parsing.Query
 {

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Arguments;
-using Tseesecake.Querying;
-using Tseesecake.Modeling.Statements.Aggregations;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Projections;
+using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.Testing.Arrangers
@@ -32,11 +31,10 @@ namespace Tseesecake.Testing.Arrangers
 
             Assert.That(statement.Projections, Has.Count.EqualTo(1));
             var projection = statement.Projections.ElementAt(0);
-            Assert.That(projection, Is.TypeOf<ExpressionProjection>());
-            Assert.That(((ExpressionProjection)projection).Alias, Is.EqualTo(ts.Timestamp.Name));
-            Assert.That(((ExpressionProjection)projection).Expression, Is.TypeOf<BucketExpression>());
+            Assert.That(((Projection)projection).Alias, Is.EqualTo(ts.Timestamp.Name));
+            Assert.That(((Projection)projection).Expression, Is.TypeOf<BucketExpression>());
 
-            var expression = (BucketExpression)((ExpressionProjection)projection).Expression;
+            var expression = (BucketExpression)((Projection)projection).Expression;
             Assert.That(expression.Slicer, Is.EqualTo(slicer));
         }
     }
