@@ -12,7 +12,7 @@ using Tseesecake.Engine;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Mounting.Engine;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Modeling
 {

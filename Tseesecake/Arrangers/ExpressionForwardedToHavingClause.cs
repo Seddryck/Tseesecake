@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Aggregations;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Filters;
 
 namespace Tseesecake.Arrangers

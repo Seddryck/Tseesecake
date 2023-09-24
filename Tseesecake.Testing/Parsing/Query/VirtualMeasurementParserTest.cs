@@ -5,9 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Select;
 
-namespace Tseesecake.Testing.Parsing.Query
+namespace Tseesecake.Testing.Parsing.Select
 {
     public class VirtualMeasurementParserTest
     {

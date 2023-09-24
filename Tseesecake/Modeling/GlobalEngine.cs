@@ -10,7 +10,7 @@ using Tseesecake.Arrangers;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Parsing;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Modeling
 {

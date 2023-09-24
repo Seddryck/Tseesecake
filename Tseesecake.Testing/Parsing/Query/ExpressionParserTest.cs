@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Parsing.Select;
 
-namespace Tseesecake.Testing.Parsing.Query
+namespace Tseesecake.Testing.Parsing.Select
 {
     public class ExpressionParserTest
     {

@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements.Arguments;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Slicers;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Select;
 
-namespace Tseesecake.Testing.Parsing.Query
+namespace Tseesecake.Testing.Parsing.Select
 {
     public class TemporalParserTest
     {

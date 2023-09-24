@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Arrangers

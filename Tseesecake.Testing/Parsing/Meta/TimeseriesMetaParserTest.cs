@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements;
-using Tseesecake.Parsing.Meta;
+using Tseesecake.Parsing.Catalog;
 
-namespace Tseesecake.Testing.Parsing.Meta
+namespace Tseesecake.Testing.Parsing.Catalog
 {
     internal class TimeseriesMetaParserTest
     {

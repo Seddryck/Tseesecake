@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements;
-using Tseesecake.Parsing.Meta;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Catalog;
+using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Parsing
 {

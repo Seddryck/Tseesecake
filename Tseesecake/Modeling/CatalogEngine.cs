@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
-using Tseesecake.Parsing.Meta;
-using Tseesecake.Parsing.Query;
+using Tseesecake.Parsing.Catalog;
+using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Modeling
 {

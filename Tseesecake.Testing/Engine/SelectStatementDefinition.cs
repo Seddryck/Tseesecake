@@ -5,7 +5,7 @@ using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Modeling.Statements.Arguments;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Filters;
 using Tseesecake.Modeling.Statements.Frames;
 using Tseesecake.Modeling.Statements.Ordering;

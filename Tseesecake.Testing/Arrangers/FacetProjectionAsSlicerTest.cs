@@ -10,7 +10,7 @@ using Tseesecake.Modeling.Statements.Projections;
 using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Testing.Engine;
 using Tseesecake.Modeling.Statements;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Testing.Arrangers
 {

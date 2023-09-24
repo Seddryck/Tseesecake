@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Arguments;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Projections;
 using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Testing.Engine;

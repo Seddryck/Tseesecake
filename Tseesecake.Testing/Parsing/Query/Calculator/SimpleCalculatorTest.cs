@@ -5,11 +5,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Parsing.Query;
-using Tseesecake.Parsing.Query.Calculator;
+using Tseesecake.Parsing.Select;
+using Tseesecake.Parsing.Select.Calculator;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Tseesecake.Testing.Parsing.Query.Calculator
+namespace Tseesecake.Testing.Parsing.Select.Calculator
 {
     internal class SimpleCalculatorTest
     {

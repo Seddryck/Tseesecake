@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
 using Tseesecake.Modeling.Catalog;
-using Tseesecake.Modeling.Statements.ColumnExpressions;
+using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Modeling.Statements.Projections;
