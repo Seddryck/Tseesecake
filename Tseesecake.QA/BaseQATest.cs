@@ -47,7 +47,7 @@ namespace Tseesecake.QA
             var services = new ServiceCollection()
                .AddSingleton(EmptyDubUrlConfiguration)
                .AddDubUrl(options)
-               //.WithQueryLogger(new ConsoleLogger())
+               .WithQueryLogger(new ConsoleLogger())
                .AddSingleton(new ArrangerCollectionProvider());
 
             foreach (var engine in engines)
