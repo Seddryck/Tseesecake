@@ -12,7 +12,6 @@ using Tseesecake.Modeling.Statements.Projections;
 using Tseesecake.Testing.Engine;
 using LinqExpr = System.Linq.Expressions;
 
-
 namespace Tseesecake.Testing.Arrangers
 {
     public class VirtualColumnAssignmentTest

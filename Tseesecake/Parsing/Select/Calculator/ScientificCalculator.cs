@@ -32,7 +32,7 @@ namespace Tseesecake.Parsing.Select.Calculator
                     throw new ParseException(bin + " cannot be parsed as binary number");
                 }
 
-                return result * 2 + c - '0';
+                return (result * 2) + c - '0';
             });
         }
 
