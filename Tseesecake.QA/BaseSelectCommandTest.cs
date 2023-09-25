@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Tseesecake.Modeling;
+using Tseesecake.Testing.Engine;
 using Tseesecake.Testing.Engine.Statements;
 
 namespace Tseesecake.QA
