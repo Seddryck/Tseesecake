@@ -9,8 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Engine;
+using Tseesecake.Engine.Mounting;
 using Tseesecake.Modeling;
+using Tseesecake.Modeling.Catalog;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
@@ -46,7 +47,7 @@ namespace Tseesecake.QA
             var services = new ServiceCollection()
                .AddSingleton(EmptyDubUrlConfiguration)
                .AddDubUrl(options)
-               //.WithQueryLogger(new ConsoleLogger())
+               .WithQueryLogger(new ConsoleLogger())
                .AddSingleton(new ArrangerCollectionProvider());
 
             foreach (var engine in engines)

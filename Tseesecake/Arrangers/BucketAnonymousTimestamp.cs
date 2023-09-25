@@ -6,11 +6,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Slicers;
 
 namespace Tseesecake.Arrangers
 {
@@ -28,7 +27,7 @@ namespace Tseesecake.Arrangers
             if (temporal.Timestamp is not AnonymousTimestamp)
                 return;
 
-            temporal.Timestamp= statement.Timeseries.Timestamp;
+            temporal.Timestamp= (statement.Timeseries as Timeseries)?.Timestamp ?? throw new InvalidOperationException();
         }
     }
 }

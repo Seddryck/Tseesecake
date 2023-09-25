@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Testing.Engine;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Aggregations;
+using Tseesecake.Modeling.Statements.Projections;
+using Tseesecake.Modeling.Statements.Filters;
 using LinqExp = System.Linq.Expressions;
+using Tseesecake.Testing.Engine;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Arrangers
 {
@@ -23,9 +23,8 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
-                }
-                , null, null,
+                    new Projection(new AggregationExpression(new MaxAggregation(new ColumnReference(ts.Measurements[0].Name))), "Maximum")
+                }, null, null,
                 new IFilter[] {
                     new GathererSifter(new Measurement("Maximum"), LinqExp.Expression.LessThan,  5)
                 }
@@ -42,10 +41,10 @@ namespace Tseesecake.Testing.Arrangers
             var measurement = sifter.Measurement as AggregationMeasurement ?? throw new InvalidCastException();
             Assert.Multiple(() =>
             {
-                Assert.That(measurement.Aggregation.Name, Is.EqualTo("max"));
-                Assert.That(measurement.Aggregation.Expression, Is.TypeOf(typeof(ColumnExpression)));
-                var column = measurement.Aggregation.Expression as ColumnExpression ?? throw new InvalidCastException();
-                Assert.That(column.Reference.Name, Is.EqualTo(ts.Measurements.ElementAt(0).Name));
+                Assert.That(measurement.Aggregation, Is.TypeOf<MaxAggregation>());
+                Assert.That(measurement.Aggregation.Expression, Is.TypeOf<ColumnReference>());
+                var column = measurement.Aggregation.Expression as ColumnReference ?? throw new InvalidCastException();
+                Assert.That(column.Name, Is.EqualTo(ts.Measurements.ElementAt(0).Name));
             });
         }
     }

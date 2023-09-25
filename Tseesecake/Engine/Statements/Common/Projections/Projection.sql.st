@@ -1,0 +1,1 @@
+Projection(projection)::=$projection.Expression:(projection.Expression.Template)()$ AS $projection.Alias; format="identity"$

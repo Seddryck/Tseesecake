@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using Tseesecake.Engine;
-using Tseesecake.Mounting.Engine;
+using Tseesecake.Engine.Mounting;
+using Tseesecake.Modeling;
 using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
@@ -13,7 +12,7 @@ namespace Tseesecake.QA
     {
         [OneTimeSetUp]
         public void SetupFixture()
-            => SetupEngine(new[] { typeof(DmlEngine), typeof(QueryEngine) });
+            => SetupEngine(new[] { typeof(DmlEngine), typeof(SelectEngine) });
 
         [Test]
         public virtual void Mount_CreateOrReplace_ValidStatement()

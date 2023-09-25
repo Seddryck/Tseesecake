@@ -6,11 +6,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Projections;
+using Tseesecake.Modeling.Statements.Slicers;
 
 namespace Tseesecake.Arrangers
 {
@@ -19,25 +19,24 @@ namespace Tseesecake.Arrangers
     {
         public void Execute(SelectStatement statement)
         {
-            if (!statement.Projections.Any(x => x is AggregationProjection))
+            if (!statement.Projections.Any(x => x.Expression is AggregationExpression))
                 return;
 
-            var projections = statement.Projections
-                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
+            var facets = statement.Projections
                 .Where(x => x.Expression is ColumnExpression).Select(x => x.Expression).Cast<ColumnExpression>()
-                .Where(x => x.Reference is Facet).Select(x => x.Reference).Cast<Facet>();
+                .Where(x => x.Column is Facet).Select(x => x.Column).Cast<Facet>();
 
-            if (!projections.Any())
+            if (!facets.Any())
                 return;
 
             var slicers = statement.Slicers
                 .Where(x => x is FacetSlicer).Cast<FacetSlicer>()
                 .Select(x => x.Facet);
 
-            foreach (var projection in projections)
+            foreach (var facet in facets)
             {
-                if (!slicers.Contains(projection))
-                    statement.Slicers.Add(new FacetSlicer(projection));
+                if (!slicers.Contains(facet))
+                    statement.Slicers.Add(new FacetSlicer(facet));
             }
         }
     }

@@ -1,1 +1,0 @@
-ColumnExpression(expression)::=$if(expression.Reference.Name)$$expression.Reference.Name; format="identity"$$else$$expression.Name; format="identity"$$endif$

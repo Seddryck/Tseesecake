@@ -1,16 +1,12 @@
 ﻿using DubUrl.Querying.Dialects.Casters;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Projections;
 
 namespace Tseesecake.Arrangers
 {
@@ -19,15 +15,16 @@ namespace Tseesecake.Arrangers
     {
         public void Execute(SelectStatement statement)
         {
-            ExecuteColumnReferenceProjection(statement);
-            ExecuteAggregationProjection(statement);
+            ExecuteProjectionForColumnReference(statement);
+            ExecuteProjectionForAggregation(statement);
         }
 
-        public void ExecuteColumnReferenceProjection(SelectStatement statement)
+        public void ExecuteProjectionForColumnReference(SelectStatement statement)
         {
             var projections = statement.Projections
-                .Where(x => x is ColumnReferenceProjection).Cast<ColumnReferenceProjection>()
-                .Where(x => statement.VirtualMeasurements.Select(y => y.Name).Contains(((ColumnExpression)x.Expression).Reference.Name));
+                .Where(p => p.Expression is ColumnReference)
+                .Where(x => statement.VirtualMeasurements.Select(y => y.Name)
+                                .Contains(((ColumnReference)x.Expression).Name));
 
             if (!projections.Any())
                 return;
@@ -35,18 +32,19 @@ namespace Tseesecake.Arrangers
             foreach (var projection in statement.Projections)
             {
                 if (projections.Contains(projection))
-                    ((ColumnReferenceProjection)projection).Expression
+                    ((Projection)projection).Expression
                         = new VirtualColumnExpression(statement.VirtualMeasurements.Single(x => 
-                            x.Name == ((ColumnExpression)((ColumnReferenceProjection)projection).Expression).Reference.Name
+                            x.Name == ((ColumnReference)((Projection)projection).Expression).Name
                     ).Expression!);
             }
         }
 
-        public void ExecuteAggregationProjection(SelectStatement statement)
+        public void ExecuteProjectionForAggregation(SelectStatement statement)
         {
             var projections = statement.Projections
-                .Where(x => x is AggregationProjection).Cast<AggregationProjection>()
-                .Where(x => statement.VirtualMeasurements.Select(y => y.Name).Contains(((ColumnExpression)x.Aggregation.Expression).Reference.Name));
+                .Where(p => p.Expression is AggregationExpression)
+                .Where(x => statement.VirtualMeasurements.Select(y => y.Name)
+                                .Contains(((ColumnReference)((AggregationExpression)x.Expression).Aggregation.Expression).Name));
 
             if (!projections.Any())
                 return;
@@ -54,9 +52,9 @@ namespace Tseesecake.Arrangers
             foreach (var projection in statement.Projections)
             {
                 if (projections.Contains(projection))
-                    ((AggregationProjection)projection).Aggregation.Expression
+                    ((AggregationExpression)projection.Expression).Aggregation.Expression
                         = new VirtualColumnExpression(statement.VirtualMeasurements.Single(x =>
-                            x.Name == ((ColumnExpression)((AggregationProjection)projection).Aggregation.Expression).Reference.Name
+                            x.Name == ((ColumnReference)((AggregationExpression)projection.Expression).Aggregation.Expression).Name
                     ).Expression!);
             }
         }

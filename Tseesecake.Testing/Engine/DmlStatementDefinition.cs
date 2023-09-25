@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LinqExp = System.Linq.Expressions;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Restrictions;
-using Tseesecake.Querying.Slicers;
-using Tseesecake.Querying.WindowFunctions;
-using Tseesecake.Mounting;
+using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Mounting;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Aggregations;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Projections;
 
 namespace Tseesecake.Testing.Engine
 {
@@ -44,7 +38,7 @@ namespace Tseesecake.Testing.Engine
         public static SelectStatement ProjectionCount
             => new(WindEnergy
                 , new[] {
-                    new AggregationProjection(new CountAggregation(new LiteralExpression("*")), "countOfRows")
+                    new Projection(new AggregationExpression(new CountAggregation(new LiteralExpression("*"))), "countOfRows")
                 });
     }
 }

@@ -5,8 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
+using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Arrangers
 {

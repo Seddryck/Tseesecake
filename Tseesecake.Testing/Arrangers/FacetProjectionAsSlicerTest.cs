@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Aggregations;
-using Tseesecake.Querying.Expressions;
-using Tseesecake.Querying.Projections;
-using Tseesecake.Querying.Slicers;
+using Tseesecake.Modeling.Statements.Arguments;
+using Tseesecake.Modeling.Statements.Aggregations;
+using Tseesecake.Modeling.Statements.Projections;
+using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Testing.Engine;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Testing.Arrangers
 {
@@ -22,10 +22,10 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnReferenceProjection(ts.Timestamp)
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
-                    , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
+                    new Projection(ts.Timestamp)
+                    , new Projection(ts.Facets[0])
+                    , new Projection(ts.Facets[1])
+                    , new Projection(new AggregationExpression(new MaxAggregation(ts.Measurements[0])), "Maximum")
                 }
             );
 
@@ -46,10 +46,10 @@ namespace Tseesecake.Testing.Arrangers
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnReferenceProjection(ts.Timestamp)
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
-                    , new ColumnReferenceProjection(ts.Measurements.ElementAt(0))
+                    new Projection(ts.Timestamp)
+                    , new Projection(ts.Facets[0])
+                    , new Projection(ts.Facets[1])
+                    , new Projection(ts.Measurements[0])
                 }
             );
 
@@ -59,17 +59,17 @@ namespace Tseesecake.Testing.Arrangers
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
             Assert.That(statement.Slicers, Has.Count.EqualTo(0));
         }
-
+        
         [Test]
         public void Execute_PreExistingSlicer_ConservedButMissingAdded()
         {
             var ts = DmlStatementDefinition.WindEnergy;
             var statement = new SelectStatement(ts,
                 new IProjection[] {
-                    new ColumnReferenceProjection(ts.Timestamp)
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(0))
-                    , new ColumnReferenceProjection(ts.Facets.ElementAt(1))
-                    , new AggregationProjection(new MaxAggregation(new ColumnExpression(ts.Measurements.ElementAt(0))), "Maximum")
+                    new Projection(ts.Timestamp)
+                    , new Projection(ts.Facets.ElementAt(0))
+                    , new Projection(ts.Facets.ElementAt(1))
+                    , new Projection(new AggregationExpression(new MaxAggregation(ts.Measurements[0])), "Maximum")
                 }, null,
                 new ISlicer[] {
                     new CyclicTemporalSlicer(ts.Timestamp, CyclicTemporal.MonthOfYear),

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Querying.Ordering;
+using Tseesecake.Modeling.Statements.Ordering;
 
 namespace Tseesecake.Parsing
 {

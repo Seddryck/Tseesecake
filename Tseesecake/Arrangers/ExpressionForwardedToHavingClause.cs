@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Projections;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Aggregations;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Filters;
 
 namespace Tseesecake.Arrangers
 {
@@ -17,7 +17,7 @@ namespace Tseesecake.Arrangers
             if (statement.GroupFilters is null)
                 return;
 
-            var expressions = statement.Projections.Where(x => x is AggregationProjection || x is ExpressionProjection);
+            var expressions = statement.Projections.Where(x => x.Expression is AggregationExpression || x is VirtualColumnExpression);
             if (!expressions.Any())
                 return;
 
@@ -25,12 +25,12 @@ namespace Tseesecake.Arrangers
             {
                 if (statement.GroupFilters[i] is Sifter sifter)
                 {
-                    var expr = expressions.SingleOrDefault(x => x.Alias == sifter.Measurement.Name);
+                    var expr = expressions.SingleOrDefault(x => x.Alias == sifter.Measurement.Name)?.Expression;
                     if (expr != null)
                         sifter.Measurement = expr switch
                         {
-                            AggregationProjection aggrProjection => new AggregationMeasurement(sifter.Measurement.Name, aggrProjection.Aggregation),
-                            ExpressionProjection exprProjection => new ExpressionMeasurement(sifter.Measurement.Name, exprProjection.Expression),
+                            AggregationExpression aggr => new AggregationMeasurement(sifter.Measurement.Name, aggr.Aggregation),
+                            VirtualColumnExpression virtualColumn => new LiteralMeasurement(sifter.Measurement.Name, string.Empty),
                             _ => throw new ArgumentOutOfRangeException()
                         };
                 }
