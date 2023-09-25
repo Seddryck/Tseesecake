@@ -10,7 +10,7 @@ using Tseesecake.Testing.Engine;
 
 namespace Tseesecake.QA
 {
-    public abstract class BaseElementalQueryTest : BaseQATest
+    public abstract class BaseSelectCommandTest : BaseQATest
     {
         [OneTimeSetUp]
         public void SetupFixture()

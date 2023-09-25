@@ -8,7 +8,7 @@ using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Engine.Postgresql
 {
-    public class ElementalQueryPostgresqlTest : BaseElementalQueryTest
+    public class SelelectCommandPostgresqlTest : BaseSelectCommandTest
     {
         protected override string DialectName => "pgsql";
 
@@ -53,7 +53,7 @@ namespace Tseesecake.Testing.Engine.Postgresql
             foreach (var arranger in arrangers)
                 arranger.Execute(statement);
 
-            Assert.That(new ElementalQuery(statement).Read(Dialect, Connectivity)
+            Assert.That(new SelectCommand(statement).Read(Dialect, Connectivity)
                 , Is.EqualTo(SlicerAndGroupFilter));
         }
 

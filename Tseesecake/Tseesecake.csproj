@@ -42,8 +42,8 @@
 	  <EmbeddedResource Include="Engine\Common\Expressions\WindowExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Windows\NamedWindow.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Windows\WindowDefinition.sql.st" />
-	  <EmbeddedResource Include="Engine\ElementalQuery.pg.sql.st" />
-	  <EmbeddedResource Include="Engine\ElementalQuery.duck.sql.st" />
+	  <EmbeddedResource Include="Engine\SelectCommand.pg.sql.st" />
+	  <EmbeddedResource Include="Engine\SelectCommand.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\sorts.dic.st" />
 	  <EmbeddedResource Include="Engine\Common\Dictionaries\aggregations.dic.st" />
 	  <EmbeddedResource Include="Engine\Postgresql\Dictionaries\cyclicTemporals.dic.st" />

@@ -15,7 +15,7 @@ using Tseesecake.Testing.Engine;
 namespace Tseesecake.QA.Postgresql
 {
     [Category("Postgresql")]
-    public class ElementalQueryPostgresqlTest : BaseElementalQueryTest
+    public class SelectCommandPostgresqlTest : BaseSelectCommandTest
     {
         public override string ConnectionString => $"pgsql://postgres:Password12!@localhost/Energy";
 

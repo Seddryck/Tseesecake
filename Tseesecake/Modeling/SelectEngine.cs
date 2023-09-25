@@ -36,7 +36,7 @@ namespace Tseesecake.Modeling
         public IDataReader ExecuteReader(SelectStatement statement)
         {
             statement.Timeseries = statement.Timeseries is IReference<Timeseries> reference ? Timeseries.Single(x => reference.Name == x.Name) : statement.Timeseries;
-            var query = new ElementalQuery(Arrange(statement), QueryLogger);
+            var query = new SelectCommand(Arrange(statement), QueryLogger);
             return DatabaseUrl.ExecuteReader(query);
         }
 

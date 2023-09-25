@@ -37,7 +37,7 @@ namespace Tseesecake.Engine
             try
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = new ElementalQuery(query).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
+                cmd.CommandText = new SelectCommand(query).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
                 return (T)(cmd.ExecuteScalar() ?? throw new NullReferenceException());
             }
             catch { throw; }

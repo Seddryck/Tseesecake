@@ -9,7 +9,7 @@ using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Modeling
 {
-    public class MetaEngineTest
+    public class CatalogEngineTest
     {
         public static Timeseries WindEnergy
             => new(

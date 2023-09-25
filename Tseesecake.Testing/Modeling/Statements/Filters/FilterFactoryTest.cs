@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements.Filters;
 using LinqExp = System.Linq.Expressions;
 
-namespace Tseesecake.Testing.Query.Filters
+namespace Tseesecake.Testing.Modeling.Statements.Filters
 {
     public class FilterFactoryTest
     {

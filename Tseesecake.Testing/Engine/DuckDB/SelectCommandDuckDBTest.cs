@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Tseesecake.Testing.Engine.DuckDB
 {
-    public class ElementalQueryDuckDBTest : BaseElementalQueryTest
+    public class SelectCommandDuckDBTest : BaseSelectCommandTest
     {
         protected override string DialectName => "duckdb";
 

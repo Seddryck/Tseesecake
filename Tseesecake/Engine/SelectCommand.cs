@@ -11,20 +11,20 @@ using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Engine
 {
-    public class ElementalQuery : EmbeddedSqlTemplateCommand
+    public class SelectCommand : EmbeddedSqlTemplateCommand
     {
-        internal ElementalQuery(SelectStatement statement)
+        internal SelectCommand(SelectStatement statement)
             : this(
                   statement
                   , NullQueryLogger.Instance
             )
         { }
 
-        public ElementalQuery(SelectStatement statement, IQueryLogger logger)
+        public SelectCommand(SelectStatement statement, IQueryLogger logger)
             : base(
-                   $"{typeof(ElementalQuery).Namespace}.{nameof(ElementalQuery)}"
-                  , $"{typeof(ElementalQuery).Namespace}"
-                  , $"{typeof(ElementalQuery).Namespace}"
+                   $"{typeof(SelectCommand).Namespace}.{nameof(SelectCommand)}"
+                  , $"{typeof(SelectCommand).Namespace}"
+                  , $"{typeof(SelectCommand).Namespace}"
                   , new Dictionary<string, object?>() { { "statement", statement } }
                   , logger
             )
