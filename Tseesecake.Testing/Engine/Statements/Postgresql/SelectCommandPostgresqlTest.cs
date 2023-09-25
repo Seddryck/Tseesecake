@@ -8,7 +8,7 @@ using Tseesecake.Modeling.Statements;
 
 namespace Tseesecake.Testing.Engine.Statements.Postgresql
 {
-    public class SelelectCommandPostgresqlTest : BaseSelectCommandTest
+    public class SelectCommandPostgresqlTest : BaseSelectCommandTest
     {
         protected override string DialectName => "pgsql";
 
@@ -29,7 +29,7 @@ namespace Tseesecake.Testing.Engine.Statements.Postgresql
         protected override string ProjectionWindowOffsetExpression
             => "SELECT\r\n\tLAG(ABS(\"Produced\" - \"Forecasted\"), 4, 0) OVER(\r\n\t\tPARTITION BY \"WindPark\"\r\n\t\tORDER BY \"Instant\" ASC NULLS LAST\r\n\t) AS \"FourHoursBefore\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
         protected override string ProjectionWindowFrame
-            => "SELECT\r\n\tLAST_VALUE(\"Produced\") OVER(\r\n\t\tPARTITION BY \"WindPark\"\r\n\t\tORDER BY \"Instant\" ASC NULLS LAST\r\n\t\tRANGE BETWEEN UNBOUNDED PRECEDING\r\n\t\t\tAND INTERVAL '6 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t) AS \"Smooth\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
+            => "SELECT\r\n\tLAST_VALUE(\"Produced\") OVER(\r\n\t\tPARTITION BY \"WindPark\"\r\n\t\tORDER BY \"Instant\" ASC NULLS FIRST\r\n\t\tRANGE BETWEEN UNBOUNDED PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS \"Smooth\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
         protected override string FilterSingle
             => "SELECT\r\n\t\"Produced\" AS \"Produced\"\r\nFROM\r\n\t\"WindEnergy\"\r\nWHERE\r\n\t\"WindPark\" = 'Sea park'\r\n";
         protected override string FilterMultiple
@@ -62,7 +62,7 @@ namespace Tseesecake.Testing.Engine.Statements.Postgresql
         protected override string Qualify
             => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY \"Producer\"\r\n\t\t\tORDER BY \"Produced\" DESC NULLS LAST\r\n\t\t) AS \"RowNb\"\r\n\tFROM\r\n\t\t\"WindEnergy\"\r\n) AS T1\r\nWHERE\r\n\t\"RowNb\" <= 5\r\n";
         protected override string LimitOffset
-            => "SELECT\r\n\t\"Produced\" AS \"Produced\"\r\nFROM\r\n\t\"WindEnergy\"\r\nORDER BY\r\n\t\"Produced\" DESC NULLS LAST\r\nLIMIT 20\r\nOFFSET 40\r\n";
+            => "SELECT\r\n\t\"Produced\" AS \"Produced\"\r\nFROM\r\n\t\"WindEnergy\"\r\nORDER BY\r\n\t\"Produced\" DESC NULLS FIRST\r\nLIMIT 20\r\nOFFSET 40\r\n";
         protected override string VirtualMeasurementProjection
             => "SELECT\r\n\t(\"Forecasted\" - \"Produced\") AS \"Accuracy\"\r\nFROM\r\n\t\"WindEnergy\"\r\nORDER BY\r\n\t\"Accuracy\" DESC NULLS LAST\r\n";
         protected override string VirtualMeasurementAggregation

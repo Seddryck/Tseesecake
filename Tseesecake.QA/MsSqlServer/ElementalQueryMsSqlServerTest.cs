@@ -15,7 +15,7 @@ using Tseesecake.Testing.Engine;
 namespace Tseesecake.QA.MsSqlServer
 {
     [Category("MsSqlServer")]
-    public class ElementalQueryMsSqlServerTest : BaseElementalQueryTest
+    public class SelectCommandMsSqlServerTest : BaseSelectCommandTest
     {
         private const string FILENAME = "Instance.txt";
         public override string ConnectionString => $"mssql://sa:Password12!@{(File.Exists(FILENAME) ? File.ReadAllText(FILENAME) : "localhost/2019")}/Energy?TrustServerCertificate=True";

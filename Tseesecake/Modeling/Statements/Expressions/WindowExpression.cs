@@ -13,7 +13,7 @@ namespace Tseesecake.Modeling.Statements.Expressions
     internal class WindowExpression : BaseExpression
     {
         public IWindowFunction WindowFunction { get; }
-        public IWindow Window { get; }
+        public IWindow Window { get; set; }
         public WindowExpression(IWindowFunction windowFunction, IWindow window)
             => (WindowFunction, Window) = (windowFunction, window);
     }

@@ -1,1 +1,1 @@
-ColumnOrder(order)::=$order.Reference.Name; format="identity"$ $sorts.(order.Sort)$ $sorts.(order.NullSort)$
+ColumnOrder(order)::=$order.Expression:(order.Expression.Template)()$ $sorts.(order.Sort)$ $sorts.(order.NullSort)$

@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling;
 
-namespace Tseesecake.Engine.MsSqlServer
+namespace Tseesecake.Engine.Statements.MsSql
 {
     [Dialect<TSqlDialect>()]
     internal class MsSqlServerArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
         protected override ISelectArranger[] InstantiateDialect()
-            => new[] { new ExpressionForwardedToHavingClause() };
+            => new ISelectArranger[] { new ExpressionForwardedToHavingClause()
+                        , new ExpressionForwardedToOrderByClause()
+                        , new NamedWindowForwardedToProjection()
+            };
     }
 }

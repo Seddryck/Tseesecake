@@ -44,7 +44,7 @@ namespace Tseesecake.Arrangers
             var projections = statement.Projections
                 .Where(p => p.Expression is AggregationExpression)
                 .Where(x => statement.VirtualMeasurements.Select(y => y.Name)
-                                .Contains(((ColumnReference)((AggregationExpression)x.Expression).Aggregation.Expression).Name));
+                                .Contains(((IColumn)((AggregationExpression)x.Expression).Aggregation.Expression).Name));
 
             if (!projections.Any())
                 return;

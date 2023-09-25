@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling;
-using Tseesecake.Querying;
-using Tseesecake.Querying.Filters;
-using Tseesecake.Querying.Ordering;
-using Tseesecake.Querying.Projections;
+using Tseesecake.Modeling.Statements;
+using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Filters;
+using Tseesecake.Modeling.Statements.Ordering;
+using Tseesecake.Modeling.Statements.Projections;
 
 namespace Tseesecake.Arrangers
 {
@@ -18,20 +19,20 @@ namespace Tseesecake.Arrangers
             if (statement.Orders is null)
                 return;
 
-            var expressions = statement.Projections.Where(x => x is AggregationProjection || x is ExpressionProjection);
-            if (!expressions.Any())
+            var projections = statement.Projections.Where(x => x.Expression is AggregationExpression || x.Expression is VirtualColumnExpression);
+            if (!projections.Any())
                 return;
 
             for (int i = 0; i < statement.Orders.Count; i++)
             {
                 if (statement.Orders[i] is ColumnOrder order)
                 {
-                    var expr = expressions.SingleOrDefault(x => x.Alias == order.Reference.Name);
-                    if (expr != null)
-                        order.Reference = expr switch
+                    var projection = projections.SingleOrDefault(x => x.Alias == (order.Expression as ColumnReference)?.Name);
+                    if (projection != null)
+                        order.Expression = projection.Expression switch
                         {
-                            AggregationProjection aggrProjection => new AggregationMeasurement(order.Reference.Name, aggrProjection.Aggregation),
-                            ExpressionProjection exprProjection => new ExpressionMeasurement(order.Reference.Name, exprProjection.Expression),
+                            AggregationExpression aggr => aggr,
+                            VirtualColumnExpression virtualColumn => virtualColumn,
                             _ => throw new ArgumentOutOfRangeException()
                         };
                 }
