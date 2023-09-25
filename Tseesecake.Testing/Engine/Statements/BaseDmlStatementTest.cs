@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Tseesecake.Engine;
-using Tseesecake.Mounting;
-using Tseesecake.Mounting.Engine;
+using Tseesecake.Engine.Mounting;
 
-namespace Tseesecake.Testing.Engine
+namespace Tseesecake.Testing.Engine.Statements
 {
     public abstract class BaseDmlStatementTest
     {
@@ -34,13 +32,13 @@ namespace Tseesecake.Testing.Engine
         protected abstract string CreateOrReplace { get; }
         [Test]
         public virtual void Read_CreateOrReplace_ValidStatement()
-            => Assert.That(new DmlStatement(DmlStatementDefinition.CreateOrReplace).Read(Dialect, Connectivity)
+            => Assert.That(new DmlCommand(DmlStatementDefinition.CreateOrReplace).Read(Dialect, Connectivity)
                 , Is.EqualTo(CreateOrReplace));
 
         protected abstract string CopyFrom { get; }
         [Test]
         public void Read_CopyFrom_ValidStatement()
-            => Assert.That(new DmlStatement(DmlStatementDefinition.CopyFrom).Read(Dialect, Connectivity)
+            => Assert.That(new DmlCommand(DmlStatementDefinition.CopyFrom).Read(Dialect, Connectivity)
                 , Is.EqualTo(CopyFrom));
     }
 }

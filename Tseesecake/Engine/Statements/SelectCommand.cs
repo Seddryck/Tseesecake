@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements;
 
-namespace Tseesecake.Engine
+namespace Tseesecake.Engine.Statements
 {
     public class SelectCommand : EmbeddedSqlTemplateCommand
     {

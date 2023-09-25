@@ -16,7 +16,7 @@ using Tseesecake.Modeling.Statements.WindowFunctions;
 using Tseesecake.Modeling.Statements.Windows;
 using LinqExpr = System.Linq.Expressions;
 
-namespace Tseesecake.Testing.Engine
+namespace Tseesecake.Testing.Engine.Statements
 {
     public class SelectStatementDefinition
     {
@@ -29,20 +29,20 @@ namespace Tseesecake.Testing.Engine
                 );
 
         public static SelectStatement ProjectionSingle
-            => new (WindEnergy
-                , new[] { 
+            => new(WindEnergy
+                , new[] {
                     new Projection(new ColumnReference("Produced"))
                 });
 
         public static SelectStatement ProjectionMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Instant"))
                     , new Projection(new ColumnReference("Produced"))
                 });
 
         public static SelectStatement ProjectionExpression
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new LiteralExpression("LOWER(\"WindPark\")"), "LowerWindPark")
                 });
@@ -69,7 +69,7 @@ namespace Tseesecake.Testing.Engine
                 , new[] {
                     new Projection(
                         new WindowExpression(
-                            new RowNumberWindowFunction(), 
+                            new RowNumberWindowFunction(),
                             new Window(
                                 null
                                 , new[] { new ColumnOrder(new ColumnReference("Produced"), Sorting.Descending, NullSorting.Last) }
@@ -127,7 +127,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterSingle
-            =>  new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Produced"))
                 }
@@ -136,7 +136,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Produced"))
                 }
@@ -146,7 +146,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterCuller
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Produced"), "Produced")
                 }
@@ -155,7 +155,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement FilterTemporizer
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Produced"))
                 }
@@ -164,7 +164,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerSingle
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new AggregationExpression(new MaxAggregation(new ColumnReference("Produced"))), "Maximum")
                 }
@@ -174,7 +174,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerMultiple
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new AggregationExpression(new MaxAggregation(new ColumnReference("Produced"))), "Maximum")
                 }
@@ -185,7 +185,7 @@ namespace Tseesecake.Testing.Engine
                 });
 
         public static SelectStatement SlicerAndGroupFilter
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new AggregationExpression(new AverageAggregation(new ColumnReference("Produced"))), "AvgProduced")
                 }
@@ -221,7 +221,7 @@ namespace Tseesecake.Testing.Engine
                         , new[] { new FacetSlicer(new Facet("WindPark")) }
                         , new[] { new ColumnOrder(new ColumnReference("Instant"), Sorting.Ascending, NullSorting.Last) }
                         , new RangeBetween(new Preceding(new ConstantExpression(new TimeSpan(3,0,0,0))), new Following(new ConstantExpression(new TimeSpan(3,0,0,0))))
-                    )} 
+                    )}
                 );
         public static SelectStatement Qualify
             => new(WindEnergy
@@ -248,7 +248,7 @@ namespace Tseesecake.Testing.Engine
                 , null);
 
         public static SelectStatement LimitOffset
-            => new (WindEnergy
+            => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Produced"))
                 }
@@ -259,19 +259,19 @@ namespace Tseesecake.Testing.Engine
                 , null
                 , new IOrderBy[] {
                     new ColumnOrder(new ColumnReference("Produced"), Sorting.Descending, NullSorting.Last) }
-                , new LimitOffsetRestriction(20,40));
+                , new LimitOffsetRestriction(20, 40));
 
         public static SelectStatement VirtualMeasurementProjection
             => new(WindEnergy
                 , new[] {
                     new Projection(new ColumnReference("Accuracy"), "Accuracy")
-                    { 
+                    {
                         Expression = new VirtualColumnExpression(
                             LinqExpr.Expression.Subtract(
                                 LinqExpr.Expression.Parameter(typeof(double), "Forecasted"),
                                 LinqExpr.Expression.Parameter(typeof(double), "Produced")
                              )
-                        ) 
+                        )
                     }
                 }
                 , null

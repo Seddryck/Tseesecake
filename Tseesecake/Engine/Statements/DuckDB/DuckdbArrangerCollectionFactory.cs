@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Tseesecake.Arrangers;
 using Tseesecake.Modeling;
 
-namespace Tseesecake.Engine.DuckDB
+namespace Tseesecake.Engine.Statements.DuckDB
 {
-    [Dialect<PgsqlDialect>()]
-    internal class PostgresqlArrangerCollectionFactory : BaseArrangerCollectionFactory
+    [Dialect<DuckdbDialect>()]
+    internal class DuckdbArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
         protected override ISelectArranger[] InstantiateDialect()
-            => new[] { new ExpressionForwardedToHavingClause() };
+            => Array.Empty<ISelectArranger>();
     }
 }

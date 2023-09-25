@@ -9,22 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
 
-namespace Tseesecake.Mounting.Engine
+namespace Tseesecake.Engine.Mounting
 {
-    public class DmlStatement : EmbeddedSqlTemplateCommand
+    public class DmlCommand : EmbeddedSqlTemplateCommand
     {
-        internal DmlStatement(Timeseries ts)
+        internal DmlCommand(Timeseries ts)
             : this(
                    ts
                   , NullQueryLogger.Instance
             )
         { }
 
-        public DmlStatement(Timeseries ts, IQueryLogger logger)
+        public DmlCommand(Timeseries ts, IQueryLogger logger)
             : base(
-                   $"{typeof(DmlStatement).Namespace}.{nameof(DmlStatement)}"
-                  , $"{typeof(DmlStatement).Namespace}"
-                  , $"{typeof(DmlStatement).Namespace}"
+                   $"{typeof(DmlCommand).Namespace}.{nameof(DmlCommand)}"
+                  , $"{typeof(DmlCommand).Namespace}"
+                  , $"{typeof(DmlCommand).Namespace}"
                   , new Dictionary<string, object?>() { { "ts", ts } }
                   , logger
             )

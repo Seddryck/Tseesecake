@@ -4,10 +4,9 @@ using DubUrl.Registering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using Tseesecake.Engine;
+using Tseesecake.Engine.Statements;
 
-namespace Tseesecake.Testing.Engine
+namespace Tseesecake.Testing.Engine.Statements
 {
     public abstract class BaseSelectCommandTest
     {

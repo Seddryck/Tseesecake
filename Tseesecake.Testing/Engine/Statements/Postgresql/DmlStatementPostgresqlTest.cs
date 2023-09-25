@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Tseesecake.Testing.Engine.Statements;
 
-namespace Tseesecake.Testing.Engine.Postgresql
+namespace Tseesecake.Testing.Engine.Statements.Postgresql
 {
     public class DmlStatementPostgresqlTest : BaseDmlStatementTest
     {

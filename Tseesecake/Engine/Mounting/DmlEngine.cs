@@ -5,11 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Engine.Statements;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
-using Tseesecake.Mounting.Engine;
 
-namespace Tseesecake.Engine
+namespace Tseesecake.Engine.Mounting
 {
     public class DmlEngine
     {
@@ -24,7 +24,7 @@ namespace Tseesecake.Engine
             try
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = new DmlStatement(ts).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
+                cmd.CommandText = new DmlCommand(ts).Read(ConnectionUrl.Dialect, ConnectionUrl.Connectivity);
                 cmd.ExecuteNonQuery();
             }
             catch { throw; }

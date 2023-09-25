@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Engine.DuckDB;
 using DubUrl.Querying.Dialects;
+using Tseesecake.Engine.Statements.DuckDB;
 
 namespace Tseesecake.Testing.Arrangers
 {

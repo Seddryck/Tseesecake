@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
 
-namespace Tseesecake.Mounting
+namespace Tseesecake.Modeling.Mounting
 {
     public class FileTimeseries : Timeseries
     {
