@@ -19,7 +19,7 @@ If (-not (Test-Path -Path $pgPath)) {
 Write-Output "Using '$pgPath' as PostgreSQL installation folder"
 
 $filesChanged = & git diff --name-only HEAD HEAD~1
-if (-not $force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*postgresql*")) {
+if ($force -or ($filesChanged -like "*pgsql*") -or ($filesChanged -like "*postgresql*")) {
 	Write-Output "Deploying PostgreSQL testing environment"
 
 	# Starting database service or docker container
