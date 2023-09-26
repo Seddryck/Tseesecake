@@ -46,18 +46,22 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 		Write-host "`t`tData bulk copied"
 		Write-host "`t`tPost deploying data ..."
 		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database-post.sql"
-		Write-host "`t`tData post deployed..."
+		Write-host "`t`tData post deployed"
 	} else {
 		Write-host "`t`tCopying deployment scripts on container ..."
 		& docker cp "./deploy-mssqlserver-database.sql" mssql:"./deploy-mssqlserver-database.sql"
 		& docker cp "./deploy-mssqlserver-database-post.sql" mssql:"./deploy-mssqlserver-database-post.sql"
-		
-		Write-host "`t`tUsing $fullPath as raw source ..."
 		Write-host "`t`tScript copied"
-		Write-host "`t`tUsing remote client on the docker container and local BCP ..."
+		Write-host "`t`tUsing remote client on the docker container and local BCP"
+		Write-host "`t`tCreating tables ..."
 		& docker exec -it mssql /opt/mssql-tools/bin/sqlcmd "-Usa" "-PPassword12!" "-i./deploy-mssqlserver-database.sql"
+		Write-host "`t`tTables created"
+		Write-host "`t`tBulk copying data ..."
 		& bcp WindEnergyStg in $fullPath -U sa -P Password12! -S localhost -d Energy -t "," -C 65001 -c -F2
+		Write-host "`t`tData bulk copied"
+		Write-host "`t`tPost deploying data ..."
 		& docker exec -it mssql /opt/mssql-tools/bin/sqlcmd "-Usa" "-PPassword12!" "-i./deploy-mssqlserver-database-post.sql"
+		Write-host "`t`tData post deployed"
 	}
 	Write-host "`tDatabase deployed"
 	
