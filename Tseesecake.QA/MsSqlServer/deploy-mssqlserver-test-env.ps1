@@ -59,7 +59,7 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 	Write-host "`tDatabase deployed"
 	
 	# Copying correct config
-	Write-Host "`t`tConfiguring URI for instance ..."
+	Write-Host "`tConfiguring URI for instance ..."
 	foreach ($framework in $frameworks)
 	{
 		$filePath = "$PSScriptRoot\..\bin\$config\$framework\Instance.txt"
@@ -67,7 +67,7 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 		$serverUrl | Set-Content -NoNewline -Force $filePath
 		Write-Host "`t`tConfigure value '$serverUrl' into $filePath"
 	}
-	Write-Host "`t`tInstance URI configured."
+	Write-Host "`tURI for instance configured."
 	
 
 	# Running QA tests

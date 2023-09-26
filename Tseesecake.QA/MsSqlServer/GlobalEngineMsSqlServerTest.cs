@@ -1,4 +1,5 @@
 ﻿using DubUrl.Extensions.DependencyInjection;
+using DubUrl;
 using DubUrl.Mapping;
 using DubUrl.Querying.Dialects;
 using DubUrl.Registering;
@@ -19,5 +20,19 @@ namespace Tseesecake.QA.MsSqlServer
     {
         private const string FILENAME = "Instance.txt";
         public override string ConnectionString => $"mssql://sa:Password12!@{(File.Exists(FILENAME) ? File.ReadAllText(FILENAME) : "localhost/2019")}/Energy?TrustServerCertificate=True";
+
+        [Test]
+        public void Check()
+        {
+            Console.WriteLine(ConnectionString);
+
+            var builder = new SchemeMapperBuilder();
+            var factory = new ConnectionUrlFactory(builder);
+            var conn = factory.Instantiate(ConnectionString).Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "select count(*) from WindEnergy";
+            Console.WriteLine($"Rows count: {cmd.ExecuteScalar()}");
+            conn.Close();
+        }
     }
 }
