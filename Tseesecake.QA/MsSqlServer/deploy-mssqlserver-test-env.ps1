@@ -37,7 +37,7 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 		Write-host "`t`tCreating tables ..."
 		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database.sql"
 		Write-host "`t`tTables created"
-		Write-host "`t`tBulk copying data ..."
+		Write-host "`t`tBulk copying data from $fullPath ..."
 		& bcp WindEnergyStg in $fullPath -U sa -P Password12! -S localhost -d Energy -t "," -C 65001 -c -F2
 		Write-host "`t`tData bulk copied"
 		Write-host "`t`tPost deploying data ..."
