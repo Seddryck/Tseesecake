@@ -1,0 +1,1 @@
+PartTemporalSlicer(slicer)::=$temporalFunctions.date_part$($cyclicTemporals.(slicer.Cyclic)$, $slicer.Timestamp.Name; format="identity"$)

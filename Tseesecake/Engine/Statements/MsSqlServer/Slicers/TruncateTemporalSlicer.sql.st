@@ -1,0 +1,1 @@
+TruncateTemporalSlicer(slicer)::=$temporalFunctions.date_trunc$($truncationTemporals.(slicer.Truncation)$, $slicer.Timestamp.Column.Name; format="identity"$)

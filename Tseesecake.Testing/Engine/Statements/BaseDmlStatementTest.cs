@@ -37,7 +37,7 @@ namespace Tseesecake.Testing.Engine.Statements
 
         protected abstract string CopyFrom { get; }
         [Test]
-        public void Read_CopyFrom_ValidStatement()
+        public virtual void Read_CopyFrom_ValidStatement()
             => Assert.That(new DmlCommand(DmlStatementDefinition.CopyFrom).Read(Dialect, Connectivity)
                 , Is.EqualTo(CopyFrom));
     }

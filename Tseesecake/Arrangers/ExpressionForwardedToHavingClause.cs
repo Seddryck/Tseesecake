@@ -17,7 +17,7 @@ namespace Tseesecake.Arrangers
             if (statement.GroupFilters is null)
                 return;
 
-            var expressions = statement.Projections.Where(x => x.Expression is AggregationExpression || x is VirtualColumnExpression);
+            var expressions = statement.Projections.Where(x => x.Expression is AggregationExpression || x.Expression is VirtualColumnExpression);
             if (!expressions.Any())
                 return;
 

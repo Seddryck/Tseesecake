@@ -42,7 +42,7 @@ namespace Tseesecake.Testing.Engine.Statements
 
         protected abstract string ProjectionExpression { get; }
         [Test]
-        public void Read_ProjectionExpression_ValidStatement()
+        public virtual void Read_ProjectionExpression_ValidStatement()
             => Assert.That(new SelectCommand(SelectStatementDefinition.ProjectionExpression).Read(Dialect, Connectivity)
                 , Is.EqualTo(ProjectionExpression));
 
@@ -72,7 +72,7 @@ namespace Tseesecake.Testing.Engine.Statements
 
         protected abstract string ProjectionWindowOffsetExpression { get; }
         [Test]
-        public void Read_ProjectionWindowOffsetExpression_ValidStatement()
+        public virtual void Read_ProjectionWindowOffsetExpression_ValidStatement()
             => Assert.That(new SelectCommand(SelectStatementDefinition.ProjectionWindowOffsetExpression).Read(Dialect, Connectivity)
                 , Is.EqualTo(ProjectionWindowOffsetExpression));
 
@@ -126,7 +126,7 @@ namespace Tseesecake.Testing.Engine.Statements
 
         protected abstract string NamedWindow { get; }
         [Test]
-        public void Read_NamedWindow_ValidStatement()
+        public virtual void Read_NamedWindow_ValidStatement()
             => Assert.That(new SelectCommand(SelectStatementDefinition.NamedWindow).Read(Dialect, Connectivity)
                 , Is.EqualTo(NamedWindow));
 

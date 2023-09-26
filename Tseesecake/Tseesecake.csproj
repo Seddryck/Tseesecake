@@ -3,7 +3,22 @@
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Engine\Statements\Common\Dictionaries\temporalFunctions.dic.st" />
 	  <None Remove="Engine\Statements\Common\Expressions\FilteredAggregationExpression.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\BaseQuery.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Dictionaries\cyclicTemporals.dic.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Dictionaries\sorts.dic.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Dictionaries\temporalFunctions.dic.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Dictionaries\windowFunctions.dic.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Expressions\FilteredAggregationExpression.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Filters\SinceTemporizer.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Ordering\ColumnOrder.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Projections\AggregationProjection.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Restrictions\LimitOffsetRestriction.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Restrictions\LimitRestriction.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Slicers\CyclicTemporalSlicer.sql.st" />
+	  <None Remove="Engine\Statements\MsSqlServer\Slicers\TruncateTemporalSlicer.sql.st" />
+	  <None Remove="Engine\Statements\SelectCommand.ms.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="Engine\Statements\Common\Calculator\BinaryCall.sql.st" />
@@ -24,6 +39,7 @@
 	  <EmbeddedResource Include="Engine\Statements\Common\Calculator\BinaryExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\arithmetics.dic.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\operations.dic.st" />
+	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\temporalFunctions.dic.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\truncationTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\cyclicTemporals.dic.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\framePosition.dic.st" />
@@ -42,6 +58,20 @@
 	  <EmbeddedResource Include="Engine\Statements\Common\Expressions\WindowExpression.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Windows\NamedWindow.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Windows\WindowDefinition.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\BaseQuery.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Dictionaries\cyclicTemporals.dic.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Dictionaries\sorts.dic.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Dictionaries\temporalFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Dictionaries\windowFunctions.dic.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Expressions\FilteredAggregationExpression.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Filters\SinceTemporizer.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Ordering\ColumnOrder.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Projections\AggregationProjection.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Restrictions\LimitOffsetRestriction.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Restrictions\LimitRestriction.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Slicers\CyclicTemporalSlicer.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\MsSqlServer\Slicers\TruncateTemporalSlicer.sql.st" />
+	  <EmbeddedResource Include="Engine\Statements\SelectCommand.ms.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\SelectCommand.pg.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\SelectCommand.duck.sql.st" />
 	  <EmbeddedResource Include="Engine\Statements\Common\Dictionaries\sorts.dic.st" />
@@ -77,7 +107,7 @@
 	  <EmbeddedResource Include="Engine\Mounting\Postgresql\CreateOrReplace.sql.st" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="DubUrl" Version="0.1.231" />
+	  <PackageReference Include="DubUrl" Version="0.1.233" />
 	  <PackageReference Include="Sprache" Version="2.3.1" />
 	</ItemGroup>
 	<ItemGroup>
