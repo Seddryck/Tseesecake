@@ -13,6 +13,6 @@ SELECT
 FROM
 	WindEnergyStg;
 
-DROP TABLE
-	WindEnergyStg;
-GO
+--DROP TABLE
+--	WindEnergyStg;
+--GO

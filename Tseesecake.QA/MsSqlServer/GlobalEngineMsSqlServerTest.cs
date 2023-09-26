@@ -32,6 +32,8 @@ namespace Tseesecake.QA.MsSqlServer
             var cmd = conn.CreateCommand();
             cmd.CommandText = "select count(*) from WindEnergy";
             Console.WriteLine($"Rows count: {cmd.ExecuteScalar()}");
+            cmd.CommandText = "select count(*) from WindEnergyStg";
+            Console.WriteLine($"Rows count STG: {cmd.ExecuteScalar()}");
             conn.Close();
         }
     }
