@@ -32,12 +32,16 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 
 	# Deploying database based on script
 	Write-host "`tDeploying database ..."
+	Write-host "`t`tCreating file to import ..."
+	Get-Content "../WindEnergy.csv" -Raw | Out-File -Encoding UTF8NoBOM "../bin/WindEnergyBOM.csv"
+	$fullPath = Get-Item "../bin/WindEnergyBOM.csv" | Resolve-Path | Convert-Path	
+	Write-host "`t`tFile to import created at $fullPath"
 	if ($env:APPVEYOR -eq "True") {
 		Write-host "`t`tUsing local client"
 		Write-host "`t`tCreating tables ..."
 		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database.sql"
 		Write-host "`t`tTables created"
-		Write-host "`t`tBulk copying data from $fullPath ..."
+		Write-host "`t`tBulk copying data ..."
 		& bcp WindEnergyStg in $fullPath -U sa -P Password12! -S localhost -d Energy -t "," -C 65001 -c -F2
 		Write-host "`t`tData bulk copied"
 		Write-host "`t`tPost deploying data ..."
@@ -47,8 +51,7 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 		Write-host "`t`tCopying deployment scripts on container ..."
 		& docker cp "./deploy-mssqlserver-database.sql" mssql:"./deploy-mssqlserver-database.sql"
 		& docker cp "./deploy-mssqlserver-database-post.sql" mssql:"./deploy-mssqlserver-database-post.sql"
-		Get-Content "../WindEnergy.csv" -Raw | Out-File -Encoding UTF8NoBOM "../bin/WindEnergyBOM.csv"
-		$fullPath = Get-Item "../bin/WindEnergyBOM.csv" | Resolve-Path | Convert-Path	
+		
 		Write-host "`t`tUsing $fullPath as raw source ..."
 		Write-host "`t`tScript copied"
 		Write-host "`t`tUsing remote client on the docker container and local BCP ..."
