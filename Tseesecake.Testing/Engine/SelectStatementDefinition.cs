@@ -214,7 +214,7 @@ namespace Tseesecake.Testing.Engine
                     new NamedWindow("seven"
                         , new[] { new FacetSlicer(new Facet("WindPark")) }
                         , new[] { new ColumnOrder(new ColumnReference("Instant"), Sorting.Ascending, NullSorting.Last) }
-                        , new RangeBetween(new Preceding(new ConstantExpression(new TimeSpan(3,0,0,0))), new Following(new ConstantExpression(new TimeSpan(3,0,0,0))))
+                        , new RowsBetween(new Preceding(new ConstantExpression(7)), new CurrentRow())
                     )} 
                 );
         public static SelectStatement Qualify

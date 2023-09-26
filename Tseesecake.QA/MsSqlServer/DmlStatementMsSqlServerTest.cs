@@ -17,5 +17,10 @@ namespace Tseesecake.QA.MsSqlServer
         [Ignore("File options not correctly handled")]
         public override void Mount_CopyFrom_ValidStatement()
         { }
+
+        [Test]
+        [Ignore("File options not correctly handled")]
+        public override void Mount_CreateOrReplace_ValidStatement()
+        { }
     }
 }

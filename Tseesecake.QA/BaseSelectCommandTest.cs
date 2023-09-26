@@ -288,12 +288,13 @@ namespace Tseesecake.QA
             Assert.That(reader, Is.Not.Null);
             Assert.That(reader.FieldCount, Is.EqualTo(2));
             var rowCount = 0;
-            var previousValue = double.MaxValue;
+            object? previousValue = null;
             while (reader.Read())
             {
-                Assert.That(reader.GetDouble(1), Is.LessThanOrEqualTo(previousValue));
+                if (previousValue is not null)
+                    Assert.That(reader.GetValue(1), Is.LessThanOrEqualTo(previousValue));
                 rowCount += 1;
-                previousValue = reader.GetDouble(1);
+                previousValue = reader.GetValue(1);
             }
             Assert.That(rowCount, Is.EqualTo(5)); 
         }

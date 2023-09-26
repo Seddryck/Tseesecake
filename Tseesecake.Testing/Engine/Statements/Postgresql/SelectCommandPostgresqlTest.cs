@@ -58,7 +58,7 @@ namespace Tseesecake.Testing.Engine.Statements.Postgresql
         }
 
         protected override string NamedWindow
-            => "SELECT\r\n\tMIN(\"Produced\") OVER seven AS \"MinSevenDays\"\r\n\t, MAX(\"Produced\") OVER seven AS \"MaxSevenDays\"\r\nFROM\r\n\t\"WindEnergy\"\r\nWINDOW\r\n\tseven AS (\r\n\t\tPARTITION BY \"WindPark\"\r\n\t\tORDER BY \"Instant\" ASC NULLS LAST\r\n\t\tRANGE BETWEEN INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' PRECEDING\r\n\t\t\tAND INTERVAL '3 DAYS 0 HOURS 0 MINUTES 0 SECONDS' FOLLOWING\r\n\t)\r\n";
+            => "SELECT\r\n\tMIN(\"Produced\") OVER seven AS \"MinSevenDays\"\r\n\t, MAX(\"Produced\") OVER seven AS \"MaxSevenDays\"\r\nFROM\r\n\t\"WindEnergy\"\r\nWINDOW\r\n\tseven AS (\r\n\t\tPARTITION BY \"WindPark\"\r\n\t\tORDER BY \"Instant\" ASC NULLS LAST\r\n\t\tROWS BETWEEN 7 PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t)\r\n";
         protected override string Qualify
             => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY \"Producer\"\r\n\t\t\tORDER BY \"Produced\" DESC NULLS LAST\r\n\t\t) AS \"RowNb\"\r\n\tFROM\r\n\t\t\"WindEnergy\"\r\n) AS T1\r\nWHERE\r\n\t\"RowNb\" <= 5\r\n";
         protected override string LimitOffset

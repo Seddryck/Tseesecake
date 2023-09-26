@@ -42,9 +42,9 @@ namespace Tseesecake.Testing.Engine.Statements.MsSqlServer
         protected override string ProjectionAggregationFilter
             => "SELECT\r\n\tAVG(\r\n\t\tCASE \r\n\t\t\tWHEN [Producer] = 'Future Energy'\r\n\t\t\tTHEN [Produced]\r\n\t\t\tELSE NULL\r\n\t\tEND\r\n\t) AS [Average]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string ProjectionWindow
-            => "SELECT\r\n\tROW_NUMBER() OVER(\r\n\t\tORDER BY \r\n\t[Produced] DESC\r\n\t) AS [RowId]\r\nFROM\r\n\t[WindEnergy]\r\n";
+            => "SELECT\r\n\tROW_NUMBER() OVER(\r\n\t\tORDER BY [Produced] DESC\r\n\t) AS [RowId]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string ProjectionWindowOffset
-            => "SELECT\r\n\tLAG([Produced], 4, 0) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY \r\n\tCASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC \r\n\t) AS [FourHoursBefore]\r\nFROM\r\n\t[WindEnergy]\r\n";
+            => "SELECT\r\n\tLAG([Produced], 4, 0) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY CASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC, [Instant] ASC\r\n\t) AS [FourHoursBefore]\r\nFROM\r\n\t[WindEnergy]\r\n";
         
         [Test]
         public override void Read_ProjectionWindowOffsetExpression_ValidStatement()
@@ -56,9 +56,9 @@ namespace Tseesecake.Testing.Engine.Statements.MsSqlServer
                 , Is.EqualTo(ProjectionWindowOffsetExpression));
         }
         protected override string ProjectionWindowOffsetExpression
-            => "SELECT\r\n\tLAG(ABS([Produced] - [Forecasted]), 4, 0) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY \r\n\tCASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC \r\n\t) AS [FourHoursBefore]\r\nFROM\r\n\t[WindEnergy]\r\n";
+            => "SELECT\r\n\tLAG(ABS([Produced] - [Forecasted]), 4, 0) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY CASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC, [Instant] ASC\r\n\t) AS [FourHoursBefore]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string ProjectionWindowFrame
-            => "SELECT\r\n\tLAST_VALUE([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY \r\n\t[Instant] ASC\r\n\t\tRANGE BETWEEN UNBOUNDED PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [Smooth]\r\nFROM\r\n\t[WindEnergy]\r\n";
+            => "SELECT\r\n\tLAST_VALUE([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY [Instant] ASC\r\n\t\tRANGE BETWEEN UNBOUNDED PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [Smooth]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string FilterSingle
             => "SELECT\r\n\t[Produced] AS [Produced]\r\nFROM\r\n\t[WindEnergy]\r\nWHERE\r\n\t[WindPark] = 'Sea park'\r\n";
         protected override string FilterMultiple
@@ -86,18 +86,13 @@ namespace Tseesecake.Testing.Engine.Statements.MsSqlServer
                 , Is.EqualTo(SlicerAndGroupFilter));
         }
 
+        protected override string NamedWindow
+            => "SELECT\r\n\tMIN([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY CASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC, [Instant] ASC\r\n\t\tROWS BETWEEN 7 PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [MinSevenDays]\r\n\t, MAX([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY CASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC, [Instant] ASC\r\n\t\tROWS BETWEEN 7 PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [MaxSevenDays]\r\nFROM\r\n\t[WindEnergy]\r\n";
         [Test]
         public override void Read_NamedWindow_ValidStatement()
         {
             var arrangers = new MsSqlServerArrangerCollectionFactory().Instantiate<IStatement>();
             var statement = SelectStatementDefinition.NamedWindow;
-            statement.Windows[0] = new NamedWindow(
-                    statement.Windows[0].Name
-                    , statement.Windows[0].PartitionBys
-                    , statement.Windows[0].OrderBys
-                    , new RowsBetween(new Preceding(new ConstantExpression(7)), new CurrentRow())
-                );
-
             foreach (var arranger in arrangers)
                 arranger.Execute(statement);
 
@@ -105,12 +100,10 @@ namespace Tseesecake.Testing.Engine.Statements.MsSqlServer
                 , Is.EqualTo(NamedWindow));
         }
 
-        protected override string NamedWindow
-            => "SELECT\r\n\tMIN([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY \r\n\tCASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC \r\n\t\tROWS BETWEEN 7 PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [MinSevenDays]\r\n\t, MAX([Produced]) OVER(\r\n\t\tPARTITION BY [WindPark]\r\n\t\tORDER BY \r\n\tCASE WHEN [Instant] IS NULL THEN 1 ELSE 0 END ASC \r\n\t\tROWS BETWEEN 7 PRECEDING\r\n\t\t\tAND CURRENT ROW\r\n\t) AS [MaxSevenDays]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string Qualify
-            => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY [Producer]\r\n\t\t\tORDER BY \r\n\t\t[Produced] DESC\r\n\t\t) AS [RowNb]\r\n\tFROM\r\n\t\t[WindEnergy]\r\n) AS T1\r\nWHERE\r\n\t[RowNb] <= 5\r\n";
+            => "SELECT * FROM (\r\n\tSELECT\r\n\t\tROW_NUMBER() OVER(\r\n\t\t\tPARTITION BY [Producer]\r\n\t\t\tORDER BY [Produced] DESC\r\n\t\t) AS [RowNb]\r\n\tFROM\r\n\t\t[WindEnergy]\r\n) AS T1\r\nWHERE\r\n\t[RowNb] <= 5\r\n";
         protected override string LimitOffset
-            => "SELECT\r\n\t[Produced] AS [Produced]\r\nFROM\r\n\t[WindEnergy]\r\nORDER BY\r\n\tCASE WHEN [Produced] IS NULL THEN 1 ELSE 0 END DESC \r\nOFFSET 40 ROWS\r\nFETCH NEXT 20 ROWS ONLY\r\n";
+            => "SELECT\r\n\t[Produced] AS [Produced]\r\nFROM\r\n\t[WindEnergy]\r\nORDER BY\r\n\tCASE WHEN [Produced] IS NULL THEN 1 ELSE 0 END DESC, [Produced] DESC\r\nOFFSET 40 ROWS\r\nFETCH NEXT 20 ROWS ONLY\r\n";
         protected override string VirtualMeasurementProjection
             => "SELECT\r\n\t([Forecasted] - [Produced]) AS [Accuracy]\r\nFROM\r\n\t[WindEnergy]\r\nORDER BY\r\n\t[Accuracy] DESC\r\n";
         protected override string VirtualMeasurementAggregation

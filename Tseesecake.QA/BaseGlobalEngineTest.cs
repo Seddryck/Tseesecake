@@ -59,7 +59,7 @@ namespace Tseesecake.QA
             Assert.That(reader.FieldCount, Is.EqualTo(1));
             Assert.That(reader.GetName(0), Is.EqualTo("CountRows"));
             Assert.That(reader.Read(), Is.True);
-            Assert.That(reader.GetDecimal(0), Is.EqualTo(2280));
+            Assert.That(reader.GetInt32(0), Is.EqualTo(2280));
             Assert.That(reader.Read(), Is.False);
         }
 

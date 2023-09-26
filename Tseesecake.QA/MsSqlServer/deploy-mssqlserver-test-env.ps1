@@ -33,10 +33,16 @@ if ($force -or ($filesChanged -like "*mssql*")) {
 	# Deploying database based on script
 	Write-host "`tDeploying database ..."
 	if ($env:APPVEYOR -eq "True") {
-		Write-host "`t`tUsing local client ..."
-		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database.sql" | Out-Null
+		Write-host "`t`tUsing local client"
+		Write-host "`t`tCreating tables ..."
+		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database.sql"
+		Write-host "`t`tTables created"
+		Write-host "`t`tBulk copying data ..."
 		& bcp WindEnergyStg in $fullPath -U sa -P Password12! -S localhost -d Energy -t "," -C 65001 -c -F2
-		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database-post.sql" | Out-Null
+		Write-host "`t`tData bulk copied"
+		Write-host "`t`tPost deploying data ..."
+		& sqlcmd -U "sa" -P "Password12!" -S ".\SQL2019" -i ".\deploy-mssqlserver-database-post.sql"
+		Write-host "`t`tData post deployed..."
 	} else {
 		Write-host "`t`tCopying deployment scripts on container ..."
 		& docker cp "./deploy-mssqlserver-database.sql" mssql:"./deploy-mssqlserver-database.sql"
