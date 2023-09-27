@@ -33,10 +33,12 @@ namespace Tseesecake.Parsing.Select
             from lp in Parse.Char('(').Token()
             from partitions in PartitionBys.Optional()
             from orders in OrderBys.Optional()
+            from frame in FrameParser.Frame.Optional()
             from rp in Parse.Char(')').Token()
             select new Window(
                 partitions.IsDefined ? partitions.Get() : null
                 , orders.IsDefined ? orders.Get() : null
+                , frame.IsDefined ? frame.Get() : null
             );
 
         protected internal static Parser<IWindow> ReferenceWindow =
@@ -57,11 +59,13 @@ namespace Tseesecake.Parsing.Select
             from _ in Keyword.As
             from partitions in PartitionBys.Optional()
             from orders in OrderBys.Optional()
+            from frame in FrameParser.Frame.Optional()
             select new NamedWindow(
                 name
                 , new Window(
                     partitions.IsDefined ? partitions.Get() : null
                     , orders.IsDefined ? orders.Get() : null
+                    , frame.IsDefined ? frame.Get() : null
                 )
             );
     }

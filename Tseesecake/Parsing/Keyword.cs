@@ -12,6 +12,7 @@ namespace Tseesecake.Parsing
     {
         public static readonly Parser<string> Create = Parse.IgnoreCase("Create").Text().Token();
         public static readonly Parser<string> Or = Parse.IgnoreCase("Or").Text().Token();
+        public static readonly Parser<string> And = Parse.IgnoreCase("And").Text().Token();
         public static readonly Parser<string> Replace = Parse.IgnoreCase("Replace").Text().Token();
         public static readonly Parser<string> Timeseries = Parse.IgnoreCase("Timeseries").Text().Token();
         public static readonly Parser<string> Import = Parse.IgnoreCase("Import").Text().Token();

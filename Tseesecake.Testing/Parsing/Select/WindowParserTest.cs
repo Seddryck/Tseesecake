@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Modeling.Statements.Frames;
 using Tseesecake.Modeling.Statements.Ordering;
 using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Modeling.Statements.WindowFunctions;
@@ -77,6 +78,18 @@ namespace Tseesecake.Testing.Parsing.Select
         }
 
         [Test]
+        public void Parse_Frame_Window()
+        {
+            var window = WindowParser.InlineWindow.Parse($"OVER(ORDER BY Instant ROWS UNBOUNDED PRECEDING)");
+            Assert.That(window, Is.TypeOf<Window>());
+            Assert.That(((Window)window).PartitionBys, Is.Null);
+            Assert.That(((Window)window).OrderBys, Is.Not.Null);
+            Assert.That(((Window)window).OrderBys, Has.Length.EqualTo(1));
+            Assert.That(((Window)window).Frame, Is.Not.Null);
+            Assert.That(((Window)window).Frame, Is.TypeOf<RowsSingle>());
+        }
+
+        [Test]
         [TestCase("OVER Seven", "Seven")]
         public void Parse_Reference_Window(string text, string identifier)
         {
@@ -103,6 +116,23 @@ namespace Tseesecake.Testing.Parsing.Select
             Assert.That(window.PartitionBys, Has.Length.EqualTo(2));
             Assert.That(window.OrderBys, Is.Not.Null);
             Assert.That(window.OrderBys, Has.Length.EqualTo(1));
+            Assert.That(window.Frame, Is.Null);
+        }
+
+        [Test]
+        public void Parse_NamedWindowWithFrame_NamedWindow()
+        {
+            var window = WindowParser.NamedWindow.Parse(
+                "Seven AS PARTITION BY WindPark, WindFarm ORDER BY Instant ROWS BETWEEN 5 PRECEDING AND CURRENT ROW"
+                );
+            Assert.That(window, Is.TypeOf<NamedWindow>());
+            Assert.That(window.Name, Is.EqualTo("Seven"));
+            Assert.That(window.PartitionBys, Is.Not.Null);
+            Assert.That(window.PartitionBys, Has.Length.EqualTo(2));
+            Assert.That(window.OrderBys, Is.Not.Null);
+            Assert.That(window.OrderBys, Has.Length.EqualTo(1));
+            Assert.That(window.Frame, Is.Not.Null);
+            Assert.That(window.Frame, Is.TypeOf<RowsBetween>());
         }
     }
 }
