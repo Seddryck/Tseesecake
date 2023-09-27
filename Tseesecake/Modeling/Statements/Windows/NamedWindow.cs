@@ -13,6 +13,9 @@ namespace Tseesecake.Modeling.Statements.Windows
     {
         public string Name { get; }
 
+        public NamedWindow(string name, Window window)
+            : this(name, window.PartitionBys, window.OrderBys, window.Frame) { }
+
         public NamedWindow(string name, ISlicer[]? partitionBys, IOrderBy[]? orderBys, IFrame? frame)
             : base(partitionBys, orderBys, frame) { Name = name; }
     }

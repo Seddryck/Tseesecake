@@ -12,6 +12,7 @@ namespace Tseesecake.Parsing
     {
         public static readonly Parser<string> Create = Parse.IgnoreCase("Create").Text().Token();
         public static readonly Parser<string> Or = Parse.IgnoreCase("Or").Text().Token();
+        public static readonly Parser<string> And = Parse.IgnoreCase("And").Text().Token();
         public static readonly Parser<string> Replace = Parse.IgnoreCase("Replace").Text().Token();
         public static readonly Parser<string> Timeseries = Parse.IgnoreCase("Timeseries").Text().Token();
         public static readonly Parser<string> Import = Parse.IgnoreCase("Import").Text().Token();
@@ -20,8 +21,13 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> As = Parse.IgnoreCase("As").Text().Token();
         public static readonly Parser<string> Select = Parse.IgnoreCase("Select").Text().Token();
         public static readonly Parser<string> Where = Parse.IgnoreCase("Where").Text().Token();
+        public static readonly Parser<string> Having = Parse.IgnoreCase("Having").Text().Token();
+        public static readonly Parser<string> Qualify = Parse.IgnoreCase("Qualify").Text().Token();
         public static readonly Parser<string> Not = Parse.IgnoreCase("Not").Text().Token();
+        public static readonly Parser<string> Over = Parse.IgnoreCase("Over").Text().Token();
+        public static readonly Parser<string> PartitionBy = Parse.IgnoreCase("Partition").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Partition By");
         public static readonly Parser<string> OrderBy = Parse.IgnoreCase("Order").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Order By");
+        public static readonly Parser<string> Window = Parse.IgnoreCase("Window").Text().Token();
         public static readonly Parser<Sorting> Asc = Parse.IgnoreCase("Asc").Text().Token().Return(Sorting.Ascending);
         public static readonly Parser<Sorting> Desc = Parse.IgnoreCase("Desc").Text().Token().Return(Sorting.Descending);
         public static readonly Parser<string> Nulls = Parse.IgnoreCase("Nulls").Text().Token();
