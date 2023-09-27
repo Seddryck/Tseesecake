@@ -43,5 +43,19 @@ namespace Tseesecake.Testing.Parsing.Select
             Assert.That(((BaseOffsetWindowFunction)windowFunction).Offset, Is.TypeOf<ConstantExpression>());
             Assert.That(((BaseOffsetWindowFunction)windowFunction).Default, Is.TypeOf<ConstantExpression>());
         }
+
+        [Test]
+        [TestCase("avg", typeof(AverageAggregation))]
+        [TestCase("sum", typeof(SumAggregation))]
+        [TestCase("median", typeof(MedianAggregation))]
+        [TestCase("count", typeof(CountAggregation))]
+        [TestCase("max", typeof(MaxAggregation))]
+        [TestCase("min", typeof(MinAggregation))]
+        public void Parse_Aggregation_WindowFunction(string text, Type type)
+        {
+            var windowFunction = WindowFunctionParser.WindowFunction.Parse($"{text}(MyColumn)");
+            Assert.That(windowFunction, Is.TypeOf(type));
+            Assert.That(((BaseAggregation)windowFunction).Expression, Is.TypeOf<ColumnReference>());
+        }
     }
 }

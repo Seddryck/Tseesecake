@@ -71,6 +71,6 @@ namespace Tseesecake.Parsing.Select
             select new LeadWindowFunction(args[0], args[1], args[2]);
 
         public static Parser<IWindowFunction> WindowFunction =
-            RowNumber.Or(Rank).Or(DenseRank).Or(First).Or(Last).Or(Lag).Or(Lead);
+            AggregationParser.Aggregation.Or(RowNumber).Or(Rank).Or(DenseRank).Or(First).Or(Last).Or(Lag).Or(Lead);
     }
 }
