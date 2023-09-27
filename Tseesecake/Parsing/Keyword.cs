@@ -21,6 +21,8 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> As = Parse.IgnoreCase("As").Text().Token();
         public static readonly Parser<string> Select = Parse.IgnoreCase("Select").Text().Token();
         public static readonly Parser<string> Where = Parse.IgnoreCase("Where").Text().Token();
+        public static readonly Parser<string> Having = Parse.IgnoreCase("Having").Text().Token();
+        public static readonly Parser<string> Qualify = Parse.IgnoreCase("Qualify").Text().Token();
         public static readonly Parser<string> Not = Parse.IgnoreCase("Not").Text().Token();
         public static readonly Parser<string> Over = Parse.IgnoreCase("Over").Text().Token();
         public static readonly Parser<string> PartitionBy = Parse.IgnoreCase("Partition").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Partition By");

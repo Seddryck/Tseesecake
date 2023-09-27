@@ -239,5 +239,18 @@ namespace Tseesecake.Testing.Parsing.Select
             Assert.That(query.Windows[0].OrderBys, Is.Null);
             Assert.That(query.Windows[0].Frame, Is.Null);
         }
+
+        [Test]
+        public virtual void Parse_Having_Valid()
+        {
+            var text = "SELECT MAX(Produced) as BigProduced FROM WindEnergy GROUP BY WindPark HAVING Produced>20";
+            var query = SelectStatementParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Projections, Has.Count.EqualTo(1));
+            Assert.That(query.Projections[0].Alias, Is.EqualTo("BigProduced"));
+
+            Assert.That(query.GroupFilters, Has.Count.EqualTo(1));
+        }
     }
 }
