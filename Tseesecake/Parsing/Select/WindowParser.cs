@@ -51,5 +51,18 @@ namespace Tseesecake.Parsing.Select
             from function in WindowFunctionParser.WindowFunction
             from window in Window
             select new WindowExpression(function, window);
+
+        public static Parser<NamedWindow> NamedWindow =
+            from name in Grammar.Identifier
+            from _ in Keyword.As
+            from partitions in PartitionBys.Optional()
+            from orders in OrderBys.Optional()
+            select new NamedWindow(
+                name
+                , new Window(
+                    partitions.IsDefined ? partitions.Get() : null
+                    , orders.IsDefined ? orders.Get() : null
+                )
+            );
     }
 }

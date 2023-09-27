@@ -90,5 +90,19 @@ namespace Tseesecake.Testing.Parsing.Select
         [TestCase("OVER Seven", typeof(ReferenceWindow))]
         public void Parse_Over_Window(string text, Type type)
             => Assert.That(WindowParser.Window.Parse(text), Is.TypeOf(type));
+
+        [Test]
+        public void Parse_NamedWindow_NamedWindow()
+        {
+            var window = WindowParser.NamedWindow.Parse(
+                "Seven AS PARTITION BY WindPark, WindFarm ORDER BY Instant"
+                );
+            Assert.That(window, Is.TypeOf<NamedWindow>());
+            Assert.That(window.Name, Is.EqualTo("Seven"));
+            Assert.That(window.PartitionBys, Is.Not.Null);
+            Assert.That(window.PartitionBys, Has.Length.EqualTo(2));
+            Assert.That(window.OrderBys, Is.Not.Null);
+            Assert.That(window.OrderBys, Has.Length.EqualTo(1));
+        }
     }
 }
