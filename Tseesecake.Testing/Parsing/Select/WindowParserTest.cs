@@ -25,7 +25,7 @@ namespace Tseesecake.Testing.Parsing.Select
         [TestCase("", new string[] { })]
         public void Parse_PartitionBy_Window(string text, string[] args)
         {
-            var window = WindowParser.Window.Parse($"OVER({text})");
+            var window = WindowParser.InlineWindow.Parse($"OVER({text})");
             Assert.That(window, Is.TypeOf<Window>());
             if (args.Length == 0)
                 Assert.That(((Window)window).PartitionBys, Is.Null);
@@ -39,6 +39,7 @@ namespace Tseesecake.Testing.Parsing.Select
                 var names = ((Window)window).PartitionBys.Cast<FacetSlicer>().Select(x => x.Facet.Name);
                 Assert.That(names, Is.EquivalentTo(args));
             }
+            Assert.That(((Window)window).OrderBys, Is.Null);
         }
 
         [Test]
@@ -47,7 +48,7 @@ namespace Tseesecake.Testing.Parsing.Select
         [TestCase("", new string[] { })]
         public void Parse_OrderBy_Window(string text, string[] args)
         {
-            var window = WindowParser.Window.Parse($"OVER({text})");
+            var window = WindowParser.InlineWindow.Parse($"OVER({text})"); 
             Assert.That(window, Is.TypeOf<Window>());
             if (args.Length == 0)
                 Assert.That(((Window)window).OrderBys, Is.Null);
@@ -61,6 +62,33 @@ namespace Tseesecake.Testing.Parsing.Select
                 var names = ((Window)window).OrderBys.Cast<ColumnOrder>().Select(x => ((ColumnReference)x.Expression).Name);
                 Assert.That(names, Is.EquivalentTo(args));
             }
+            Assert.That(((Window)window).PartitionBys, Is.Null);
         }
+
+        [Test]
+        public void Parse_PartitionByAndOrderBy_Window()
+        {
+            var window = WindowParser.InlineWindow.Parse($"OVER(PARTITION BY WindPark, WindFarm ORDER BY Instant)");
+            Assert.That(window, Is.TypeOf<Window>());
+            Assert.That(((Window)window).PartitionBys, Is.Not.Null);
+            Assert.That(((Window)window).PartitionBys, Has.Length.EqualTo(2));
+            Assert.That(((Window)window).OrderBys, Is.Not.Null);
+            Assert.That(((Window)window).OrderBys, Has.Length.EqualTo(1));
+        }
+
+        [Test]
+        [TestCase("OVER Seven", "Seven")]
+        public void Parse_Reference_Window(string text, string identifier)
+        {
+            var window = WindowParser.ReferenceWindow.Parse(text);
+            Assert.That(window, Is.TypeOf<ReferenceWindow>());
+            Assert.That(((ReferenceWindow)window).Name, Is.EqualTo(identifier));
+        }
+
+        [Test]
+        [TestCase("OVER (PARTITION BY WindPark)", typeof(Window))]
+        [TestCase("OVER Seven", typeof(ReferenceWindow))]
+        public void Parse_Over_Window(string text, Type type)
+            => Assert.That(WindowParser.Window.Parse(text), Is.TypeOf(type));
     }
 }

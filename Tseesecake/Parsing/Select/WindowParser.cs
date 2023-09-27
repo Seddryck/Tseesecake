@@ -28,7 +28,7 @@ namespace Tseesecake.Parsing.Select
             from orders in OrderByParser.OrderBy
             select orders.ToArray();
 
-        public static Parser<IWindow> Window =
+        protected internal static Parser<IWindow> InlineWindow =
             from over in Keyword.Over
             from lp in Parse.Char('(').Token()
             from partitions in PartitionBys.Optional()
@@ -38,5 +38,18 @@ namespace Tseesecake.Parsing.Select
                 partitions.IsDefined ? partitions.Get() : null
                 , orders.IsDefined ? orders.Get() : null
             );
+
+        protected internal static Parser<IWindow> ReferenceWindow =
+            from over in Keyword.Over
+            from reference in Grammar.Identifier
+            select new ReferenceWindow(reference);
+
+        protected internal static Parser<IWindow> Window =
+            InlineWindow.Or(ReferenceWindow);
+
+        public static Parser<WindowExpression> WindowExpression =
+            from function in WindowFunctionParser.WindowFunction
+            from window in Window
+            select new WindowExpression(function, window);
     }
 }
