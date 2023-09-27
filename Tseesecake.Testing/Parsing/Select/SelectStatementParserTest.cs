@@ -13,6 +13,8 @@ using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Filters;
 using Tseesecake.Modeling.Statements.Projections;
 using Tseesecake.Modeling.Statements.Slicers;
+using Tseesecake.Modeling.Statements.WindowFunctions;
+using Tseesecake.Modeling.Statements.Windows;
 using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Testing.Parsing.Select
@@ -201,6 +203,41 @@ namespace Tseesecake.Testing.Parsing.Select
             var expression = query.VirtualMeasurements.First();
             Assert.That(expression.Name, Is.EqualTo("Accuracy"));
             Assert.That(expression.Expression, Is.Not.Null);
+        }
+
+        [Test]
+        public virtual void Parse_WindowExpression_Valid()
+        {
+            var text = "SELECT ROW_NUMBER() OVER (PARTITION BY WindPark) as RowNb FROM WindEnergy";
+            var query = SelectStatementParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Projections, Has.Count.EqualTo(1));
+            Assert.That(query.Projections[0].Alias, Is.EqualTo("RowNb"));
+            Assert.That(query.Projections[0].Expression, Is.TypeOf<WindowExpression>());
+        }
+
+        [Test]
+        public virtual void Parse_NamedWindow_Valid()
+        {
+            var text = "SELECT ROW_NUMBER() OVER Park as RowNb FROM WindEnergy WINDOW Park AS PARTITION BY WindPark";
+            var query = SelectStatementParser.Query.Parse(text);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Timeseries.Name, Is.EqualTo("WindEnergy"));
+            Assert.That(query.Projections, Has.Count.EqualTo(1));
+            var columnName = query.Projections.Select(x => x.Alias).First();
+            Assert.That(columnName, Is.EqualTo("RowNb"));
+
+            Assert.That(query.Projections[0].Expression, Is.TypeOf<WindowExpression>());
+            Assert.That(((WindowExpression)query.Projections[0].Expression).WindowFunction, Is.TypeOf<RowNumberWindowFunction>());
+            Assert.That(((WindowExpression)query.Projections[0].Expression).Window, Is.TypeOf<ReferenceWindow>());
+            Assert.That(((ReferenceWindow)((WindowExpression)query.Projections[0].Expression).Window).Name, Is.EqualTo("Park"));
+
+            Assert.That(query.Windows, Has.Count.EqualTo(1));
+            Assert.That(query.Windows[0].Name, Is.EqualTo("Park"));
+            Assert.That(query.Windows[0].PartitionBys, Is.Not.Null);
+            Assert.That(query.Windows[0].OrderBys, Is.Null);
+            Assert.That(query.Windows[0].Frame, Is.Null);
         }
     }
 }

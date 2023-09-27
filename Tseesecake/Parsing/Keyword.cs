@@ -24,6 +24,7 @@ namespace Tseesecake.Parsing
         public static readonly Parser<string> Over = Parse.IgnoreCase("Over").Text().Token();
         public static readonly Parser<string> PartitionBy = Parse.IgnoreCase("Partition").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Partition By");
         public static readonly Parser<string> OrderBy = Parse.IgnoreCase("Order").Text().Token().Then(_ => Parse.IgnoreCase("By").Text().Token()).Return("Order By");
+        public static readonly Parser<string> Window = Parse.IgnoreCase("Window").Text().Token();
         public static readonly Parser<Sorting> Asc = Parse.IgnoreCase("Asc").Text().Token().Return(Sorting.Ascending);
         public static readonly Parser<Sorting> Desc = Parse.IgnoreCase("Desc").Text().Token().Return(Sorting.Descending);
         public static readonly Parser<string> Nulls = Parse.IgnoreCase("Nulls").Text().Token();

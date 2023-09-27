@@ -9,6 +9,7 @@ using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Filters;
 using Tseesecake.Modeling.Statements.Ordering;
 using Tseesecake.Modeling.Statements.Slicers;
+using Tseesecake.Modeling.Statements.Windows;
 
 namespace Tseesecake.Parsing.Select
 {
@@ -37,6 +38,11 @@ namespace Tseesecake.Parsing.Select
             from facets in FacetSlicers.Optional()
             select facets.GetOrElse(Array.Empty<ISlicer>()).Concat(temporals.GetOrElse(Array.Empty<ISlicer>())).ToArray();
 
+        public readonly static Parser<NamedWindow[]> Windows =
+            from keyword in Keyword.Window
+            from windows in WindowParser.NamedWindow.DelimitedBy(Parse.Char(','))
+            select windows.ToArray();
+
         public readonly static Parser<IOrderBy[]> OrderBys =
             from keyword in Keyword.OrderBy
             from orderBys in OrderByParser.OrderBy
@@ -54,8 +60,9 @@ namespace Tseesecake.Parsing.Select
             from ts in TimeseriesReference
             from filters in Filters.Optional()
             from slicers in Slicers.Optional()
+            from namedWindows in Windows.Optional()
             from orderBys in OrderBys.Optional()
             from restriction in RestrictionParser.Restriction.Optional()
-            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), slicers.GetOrElse(null), null, null, null, orderBys.GetOrElse(null), restriction.GetOrElse(null), measurementExpressions.GetOrElse(null));
+            select new SelectStatement(ts, projections.ToArray(), filters.GetOrElse(null), slicers.GetOrElse(null), null, namedWindows.GetOrElse(null), null, orderBys.GetOrElse(null), restriction.GetOrElse(null), measurementExpressions.GetOrElse(null));
     }
 }

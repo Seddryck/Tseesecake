@@ -7,7 +7,7 @@ using Tseesecake.Modeling.Statements.Windows;
 
 namespace Tseesecake.Modeling.Statements.Frames
 {
-    public interface IFrame : IWindow
+    public interface IFrame
     {
         string Template { get; }
     }

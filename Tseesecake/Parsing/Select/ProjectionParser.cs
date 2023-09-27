@@ -29,6 +29,12 @@ namespace Tseesecake.Parsing.Select
             from alias in Grammar.Identifier
             select new Projection(new AggregationExpression(aggregation), alias);
 
-        public static Parser<IProjection> Projection = Aggregation.Or(Column).Or(Expression);
+        public static Parser<IProjection> Window =
+            from windowExpression in WindowParser.WindowExpression
+            from _ in Keyword.As
+            from alias in Grammar.Identifier
+            select new Projection(windowExpression, alias);
+
+        public static Parser<IProjection> Projection = Window.Or(Aggregation).Or(Column).Or(Expression);
     }
 }
