@@ -20,6 +20,8 @@ namespace Tseesecake.Testing.Engine.Statements.Postgresql
             => "SELECT\r\n\tLOWER(\"WindPark\") AS \"LowerWindPark\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
         protected override string ProjectionAggregation
             => "SELECT\r\n\tMAX(\"Produced\") AS \"Maximum\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
+        protected override string ProjectionAggregationProduct
+            => "SELECT\r\n\tCASE\r\n\t    WHEN MIN(ABS(\"Produced\"))=0 THEN 0\r\n\t    ELSE EXP(SUM(LN(ABS(NULLIF(\"Produced\", 0))))) \r\n\t            * CASE WHEN (COUNT(CASE WHEN \"Produced\" < 0 THEN 1 ELSE NULL END) % 2)=0 \r\n\t                    THEN 1 \r\n\t                    ELSE -1 \r\n\t              END  \r\n\tEND AS \"Value\"\r\nFROM\r\n\t\"WindEnergy\"\r\nWHERE\r\n\t\"Instant\" < TIMESTAMP '2022-12-28 03:00:00'\r\n\tAND \"WindPark\" = 'Wind parks in the Sky'\r\n";
         protected override string ProjectionAggregationFilter
             => "SELECT\r\n\tAVG(\"Produced\") FILTER (WHERE \"Producer\" = 'Future Energy') AS \"Average\"\r\nFROM\r\n\t\"WindEnergy\"\r\n";
         protected override string ProjectionWindow

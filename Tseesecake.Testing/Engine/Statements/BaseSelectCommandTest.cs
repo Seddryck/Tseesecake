@@ -52,6 +52,12 @@ namespace Tseesecake.Testing.Engine.Statements
             => Assert.That(new SelectCommand(SelectStatementDefinition.ProjectionAggregation).Read(Dialect, Connectivity)
                 , Is.EqualTo(ProjectionAggregation));
 
+        protected abstract string ProjectionAggregationProduct { get; }
+        [Test]
+        public void Read_ProjectionAggregationProduct_ValidStatement()
+            => Assert.That(new SelectCommand(SelectStatementDefinition.ProjectionAggregationProduct).Read(Dialect, Connectivity)
+                , Is.EqualTo(ProjectionAggregationProduct));
+
         protected abstract string ProjectionAggregationFilter { get; }
         [Test]
         public void Read_ProjectionAggregationFilter_ValidStatement()

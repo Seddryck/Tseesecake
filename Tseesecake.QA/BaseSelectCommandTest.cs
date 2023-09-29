@@ -69,6 +69,20 @@ namespace Tseesecake.QA
         }
 
         [Test]
+        public virtual void Execute_ProjectionAggregationProduct_ValidStatement()
+        {
+            var engine = Provider.GetRequiredService<SelectEngine>();
+            var reader = engine.ExecuteReader(SelectStatementDefinition.ProjectionAggregationProduct);
+            Assert.That(reader, Is.Not.Null);
+            Assert.That(reader.Read(), Is.True);
+            Assert.That(reader.FieldCount, Is.EqualTo(1));
+            Assert.That(reader.GetName(0), Is.EqualTo("Value"));
+            Assert.That(reader.GetDouble(0), Is.GreaterThan(18 * 16 * 18));
+            Assert.That(reader.GetDouble(0), Is.LessThan(19 * 17 * 19));
+            Assert.That(reader.Read(), Is.False);
+        }
+
+        [Test]
         public virtual void Execute_ProjectionAggregationFilter_ValidStatement()
         {
             var engine = Provider.GetRequiredService<SelectEngine>();
@@ -296,7 +310,7 @@ namespace Tseesecake.QA
                 rowCount += 1;
                 previousValue = reader.GetValue(1);
             }
-            Assert.That(rowCount, Is.EqualTo(5)); 
+            Assert.That(rowCount, Is.EqualTo(5));
         }
     }
 }

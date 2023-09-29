@@ -17,7 +17,9 @@ namespace Tseesecake.Testing.Engine.Statements.DuckDB
         protected override string ProjectionExpression
             => "SELECT\r\n\tLOWER(\"WindPark\") AS LowerWindPark\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionAggregation
-            => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\n";
+            => "SELECT\r\n\tMAX(Produced) AS Maximum\r\nFROM\r\n\tWindEnergy\r\n"; 
+        protected override string ProjectionAggregationProduct
+            => "SELECT\r\n\tPRODUCT(Produced) AS Value\r\nFROM\r\n\tWindEnergy\r\nWHERE\r\n\tInstant < TIMESTAMP '2022-12-28 03:00:00'\r\n\tAND WindPark = 'Wind parks in the Sky'\r\n";
         protected override string ProjectionAggregationFilter
             => "SELECT\r\n\tAVG(Produced) FILTER (WHERE Producer = 'Future Energy') AS Average\r\nFROM\r\n\tWindEnergy\r\n";
         protected override string ProjectionWindow
