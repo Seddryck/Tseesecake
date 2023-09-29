@@ -39,6 +39,8 @@ namespace Tseesecake.Testing.Engine.Statements.MsSqlServer
 
         protected override string ProjectionAggregation
             => "SELECT\r\n\tMAX([Produced]) AS [Maximum]\r\nFROM\r\n\t[WindEnergy]\r\n";
+        protected override string ProjectionAggregationProduct
+            => "SELECT\r\n\tCASE\r\n\t    WHEN MIN(ABS([Produced]))=0 THEN 0\r\n\t    ELSE EXP(SUM(LOG(ABS(NULLIF([Produced], 0))))) \r\n\t            * CASE WHEN (COUNT(CASE WHEN [Produced] < 0 THEN 1 ELSE NULL END) % 2)=0 \r\n\t                    THEN 1 \r\n\t                    ELSE -1 \r\n\t              END  \r\n\tEND AS [Value]\r\nFROM\r\n\t[WindEnergy]\r\nWHERE\r\n\t[Instant] < CAST ('2022-12-28 03:00:00' AS DATETIME)\r\n\tAND [WindPark] = 'Wind parks in the Sky'\r\n";
         protected override string ProjectionAggregationFilter
             => "SELECT\r\n\tAVG(\r\n\t\tCASE \r\n\t\t\tWHEN [Producer] = 'Future Energy'\r\n\t\t\tTHEN [Produced]\r\n\t\t\tELSE NULL\r\n\t\tEND\r\n\t) AS [Average]\r\nFROM\r\n\t[WindEnergy]\r\n";
         protected override string ProjectionWindow

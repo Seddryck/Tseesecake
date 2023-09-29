@@ -4,5 +4,3 @@
 "count" : "COUNT"
 "median" : "MEDIAN"
 "sum" : "SUM"
-"product" : "PRODUCT"
-

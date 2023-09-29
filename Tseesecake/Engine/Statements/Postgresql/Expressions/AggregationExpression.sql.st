@@ -1,0 +1,9 @@
+AggregationExpression(expression)::=$\\$
+$if(aggregations.(expression.Aggregation.Name))$$\\$
+$aggregations.(expression.Aggregation.Name)$$\\$
+($\\$
+$expression.Aggregation.Expression:(expression.Aggregation.Expression.Template)()$$\\$
+)$\\$
+$else$$\\$
+$(expression.Aggregation.Name)(expression.Aggregation.Expression)$$\\$
+$endif$

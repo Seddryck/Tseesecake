@@ -55,6 +55,15 @@ namespace Tseesecake.Testing.Engine
                     new Projection(new AggregationExpression(new MaxAggregation(new Measurement("Produced"))), "Maximum")
                 });
 
+        public static SelectStatement ProjectionAggregationProduct
+            => new(WindEnergy
+                , new[] {
+                    new Projection(new AggregationExpression(new ProductAggregation(new Measurement("Produced"))), "Value")
+                }, new IFilter[] {
+                    new BeforeTemporizer(new Timestamp("Instant"), new DateTime(2022, 12, 28, 03, 00, 00))
+                    , new EqualDicer(new Facet("WindPark"), "Wind parks in the Sky")
+                });
+
         public static SelectStatement ProjectionAggregationFilter
             => new(WindEnergy
                 , new[] {
