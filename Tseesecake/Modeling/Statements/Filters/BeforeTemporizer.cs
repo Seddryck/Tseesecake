@@ -9,11 +9,13 @@ namespace Tseesecake.Modeling.Statements.Filters
 {
     internal class BeforeTemporizer : Temporizer
     {
-        protected DateTime Instant { get; }
+        public DateTime Instant { get; }
 
         public override string Template { get => nameof(BeforeTemporizer); }
 
         public BeforeTemporizer(Timestamp timestamp, DateTime instant)
             : base(timestamp) { Instant = instant; }
+
+        public override string ToString() => $"Tempo:'{Instant}'";
     }
 }
