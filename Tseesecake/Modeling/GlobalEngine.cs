@@ -16,29 +16,36 @@ namespace Tseesecake.Modeling
 {
     public class GlobalEngine
     {
-        private SelectEngine QueryEngine { get; }
-        private CatalogEngine MetaEngine { get; }
+        private EngineDictionary<IDataReaderEngine> Engines { get; }
         public Timeseries[] Timeseries { get; }
+        public GlobalParser Parser { get; }
 
-        public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ArrangerCollectionProvider provider)
+        public GlobalEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, IArrangerCollectionProvider provider)
         {
             var databaseUrl = factory.Instantiate(url);
             var arrangers = provider.Get(databaseUrl.Dialect.GetType()).Instantiate<IStatement>();
-            QueryEngine = new SelectEngine(databaseUrl, timeseries, arrangers, factory.QueryLogger);
-            MetaEngine = new CatalogEngine(timeseries);
+            Parser = new GlobalParser();
+            Engines = new()
+            {
+                { typeof(ISelectStatement), new SelectEngine(databaseUrl, timeseries, arrangers, factory.QueryLogger) },
+                { typeof(IShowStatement), new CatalogEngine(timeseries) }
+            };
             Timeseries = timeseries;
+        }
+
+        public void Add<S>(IDataReaderEngine engine, Parser<IStatement> parser) where S : IStatement
+        {
+            Engines.Add<S>(engine);
+            Parser.Add(parser);
         }
 
         public IDataReader ExecuteReader(string query)
         {
-            var parser = GlobalParser.Global;
-            var statement = parser.Parse(query);
-            return statement switch
-            {
-                SelectStatement select => QueryEngine.ExecuteReader(select),
-                IShowStatement show => MetaEngine.ExecuteReader(show),
-                _ => throw new NotImplementedException()
-            };
+            var statement = Parser.Global.Parse(query);
+            if (Engines.TryGetValue(statement.GetType(), out var engine))
+                return engine.ExecuteReader(statement);
+            else
+                throw new InvalidOperationException();
         }
     }
 }

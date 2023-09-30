@@ -50,7 +50,7 @@ namespace Tseesecake.QA
 #if DEBUG
                .WithQueryLogger(new ConsoleLogger())
 #endif
-               .AddSingleton(new ArrangerCollectionProvider());
+               .AddSingleton<IArrangerCollectionProvider>(new ArrangerCollectionProvider());
 
             foreach (var engine in engines)
             {

@@ -8,7 +8,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="DubUrl" Version="0.1.233" />
+		<PackageReference Include="DubUrl" Version="0.2.0" />
 		<PackageReference Include="DuckDB.NET.Data.Full" Version="0.8.1" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
