@@ -16,7 +16,6 @@ namespace Tseesecake.Modeling
         public bool TryGetValue<S>([NotNullWhen(true)] out T? value) where S : IStatement
             => TryGetValue(typeof(S), out value);
 
-        
         public bool TryGetValue(Type type, [NotNullWhen(true)] out T? value)
         {
             if (!typeof(IStatement).IsAssignableFrom(type))
@@ -60,11 +59,5 @@ namespace Tseesecake.Modeling
 
         public IEnumerator<T> GetEnumerator() => InternalDictionary.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => InternalDictionary.Values.GetEnumerator();
-    }
-
-    public class UnexpectedTypeException<E> : TseesecakeException
-    {
-        public UnexpectedTypeException(Type type)
-            : base($"The type '{type.Name}' is not supported. You must use a type implementing '{typeof(E).Name}'") { }
     }
 }
