@@ -14,7 +14,7 @@ using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Modeling
 {
-    internal class CatalogEngine
+    internal class CatalogEngine : IDataReaderEngine
     {
         public Timeseries[] Timeseries { get; set; }
 
@@ -79,5 +79,8 @@ namespace Tseesecake.Modeling
             table.AcceptChanges();
             return table.CreateDataReader();
         }
+
+        public IDataReader ExecuteReader(IStatement statement)
+            => statement is IShowStatement stmt ? ExecuteReader(stmt) : throw new ArgumentException();
     }
 }

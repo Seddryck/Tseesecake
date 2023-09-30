@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Arrangers
 {
-    public sealed class ArrangerCollectionProvider
+    public sealed class ArrangerCollectionProvider : IArrangerCollectionProvider
     {
         public Assembly[] Assemblies { get; }
         private Dictionary<Type, IArrangerCollectionFactory>? factories;
