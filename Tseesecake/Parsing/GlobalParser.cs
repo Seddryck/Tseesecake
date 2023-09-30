@@ -10,10 +10,32 @@ using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Parsing
 {
-    internal class GlobalParser
+    public class GlobalParser
     {
-        public readonly static Parser<IStatement> Global = 
-            TimeseriesMetaParser.Show
-            .Or((Parser<IStatement>)SelectStatementParser.Query);
+        private IList<Parser<IStatement>> Parsers { get; } = new List<Parser<IStatement>>();
+
+        public GlobalParser()
+        {
+            Parsers = new List<Parser<IStatement>>()
+            {
+                TimeseriesMetaParser.Show,
+                SelectStatementParser.Query
+            };
+        }
+
+        public void Add(Parser<IStatement> parser)
+            => Parsers.Add(parser);
+
+        public Parser<IStatement> Global
+        {
+            get
+            {
+                Parser<IStatement>? global = null;
+                foreach (var parser in Parsers) 
+                    global = global is null ? parser : parser.Or(global);
+                
+                return global is not null ? global: throw new InvalidOperationException() ;
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ using Tseesecake.Modeling.Statements.Windows;
 
 namespace Tseesecake.Modeling.Statements
 {
-    public class SelectStatement : IStatement
+    public class SelectStatement : ISelectStatement
     {
         public ITimeseries Timeseries { get; set; }
         public List<IProjection> Projections { get; }

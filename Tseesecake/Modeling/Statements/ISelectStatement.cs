@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Tseesecake.Modeling.Statements
 {
-    public interface IShowStatement : IStatement
+    public interface ISelectStatement : IStatement
     { }
 }
