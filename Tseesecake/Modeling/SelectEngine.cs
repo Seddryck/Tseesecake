@@ -16,17 +16,17 @@ using Tseesecake.Parsing.Select;
 
 namespace Tseesecake.Modeling
 {
-    public class SelectEngine
+    public class SelectEngine : IDataReaderEngine
     {
-        private DatabaseUrl DatabaseUrl { get; }
+        private IDatabaseUrl DatabaseUrl { get; }
         public Timeseries[] Timeseries { get; }
         public IQueryLogger QueryLogger { get; } = NullQueryLogger.Instance;
         private ISelectArranger[] Arrangers { get; }
 
-        protected internal SelectEngine(DatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers, IQueryLogger logger)
+        protected internal SelectEngine(IDatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers, IQueryLogger logger)
             => (DatabaseUrl, Timeseries, Arrangers, QueryLogger) = (databaseUrl, timeseries, arrangers, logger);
 
-        public SelectEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, ArrangerCollectionProvider provider)
+        public SelectEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, IArrangerCollectionProvider provider)
         {
             var databaseUrl = factory.Instantiate(url);
             var arrangers = provider.Get(databaseUrl.Dialect.GetType()).Instantiate<IStatement>();
@@ -54,5 +54,8 @@ namespace Tseesecake.Modeling
             var statement = parser.Parse(query);
             return ExecuteReader(statement);
         }
+
+        public IDataReader ExecuteReader(IStatement statement)
+            => statement is SelectStatement stmt ? ExecuteReader(stmt) : throw new ArgumentException();
     }
 }
