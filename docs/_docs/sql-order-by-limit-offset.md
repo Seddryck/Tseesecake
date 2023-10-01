@@ -8,7 +8,7 @@ tags: [sql-select]
 
 ## ORDER BY clause
 
-The `ORDER BY` clause accepts reference to the timestamp, the facets and the measurements as defined in the timeseries or as defined in the [`SELECT` clause](./sql-select-from).
+The `ORDER BY` clause accepts reference to the timestamp, the facets and the measurements as defined in the timeseries or as defined in the [`SELECT` clause](../sql-select-from).
 
 ```sql
 SELECT
