@@ -1,0 +1,16 @@
+# Boxes include navigation
+
+- title: Why Tseesecake
+  desc: A proxy for query and storage engines dedicated to time series
+  icon: check
+  doc: why-tseesecake
+
+- title: Getting Started
+  desc: Get started fast with installation and basic usages
+  icon: play
+  doc: installation-tseesecake
+
+- title: Tseesecake SQL
+  desc: query your time series
+  icon: file-edit
+  doc: sql-basics
