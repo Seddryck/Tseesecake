@@ -1,0 +1,40 @@
+# Changelog page source
+- title: Documentation work started
+  label:
+  date: Sep 30, 2023
+  list:
+  - Initial Jekyll setup (always a lot of fun)
+  - Create visual identity and review stylesheets
+  - Write first pages of documentation
+
+- title: Microsoft SQL Server support
+  label:
+  date: Sep 27, 2023
+  list:
+  - Templates to support T-SQL dialect (Microsoft SQL Server)
+  - Parsers for window, frame and having clauses
+  - Each translation of a query can be redirected to a logger
+
+- title: Ready for first public demo
+  label:
+  date: Sep 2, 2023
+  list:
+  - Templates for DuckDB and PostgreSQL dialects
+  - Creation of first arrangers
+  - Parsers for where, limit, offset and order by clauses
+
+- title: Setup QA test harness
+  label:
+  date: Jul 12, 2023
+  list:
+  - Internal model for queries and timeseries available
+  - Parsers for where, limit, offset and order by clauses and DML statements
+  - QA tests available
+
+- title: First commit
+  label:
+  date: Apr 28, 2023
+  list:
+  - Create repository on GitHub
+  - Initial README with first ideas and references
+  - selection of license Apache 2.0

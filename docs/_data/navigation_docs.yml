@@ -1,0 +1,22 @@
+- title: Getting Started
+  docs:
+  - why-tseesecake
+  - installation-tseesecake
+  - tseesecake-ecosystem
+  - timeseries-structure
+
+- title: Tseesecake SQL dialect
+  docs:
+  - sql-select-statement
+  - sql-select-from
+  - sql-virtual-measurement
+  - sql-where
+  - sql-bucket-by-group-by-having
+  - sql-order-by-limit-offset
+  - sql-aggregations
+  - sql-windows
+
+- title: Mounting time-series
+  docs:
+  - sql-create-or-replace
+  - sql-file-source
