@@ -34,7 +34,17 @@ namespace Tseesecake.Parsing
             from dec in Parse.DecimalInvariant.Token()
             select decimal.Parse(dec, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat) * (op.IsDefined ? -1 : 1);
 
-        public static readonly Parser<string> Identifier = Textual.Or(DoubleQuotedTextual);
+        protected internal static readonly Parser<char> IdentifierFirstChar =
+            Parse.Letter.Or(Parse.Char('_'));
+
+        protected internal static readonly Parser<char> IdentifierTailChar =
+            Parse.Letter.Or(Parse.Char('_')).Or(Parse.Digit);
+
+        public static readonly Parser<string> UnquotedIdentifier =
+            Parse.Identifier(IdentifierFirstChar, IdentifierTailChar);
+
+        public static readonly Parser<string> Identifier =
+           UnquotedIdentifier.Or(UnquotedIdentifier.Contained(Parse.Char('"'), Parse.Char('"')));
 
         public static readonly Parser<char> Terminator = Parse.Char(';').Token();
     }
