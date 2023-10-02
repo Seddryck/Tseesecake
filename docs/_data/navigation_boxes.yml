@@ -13,4 +13,4 @@
 - title: Tseesecake SQL
   desc: query your time series
   icon: file-edit
-  doc: sql-basics
+  doc: sql-select-statement
