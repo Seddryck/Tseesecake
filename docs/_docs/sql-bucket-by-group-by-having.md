@@ -6,7 +6,7 @@ tags: [sql-select]
 
 ## BUCKET BY clause
 
-The `BUCKET BY` clause specifies how to group the rows based on the time horizon. Two sets of options are available or the truncations removing a part of the timestamp but also cyclics taking a specific part of the timestamp. 
+The `BUCKET BY` clause specifies how to group the rows based on the time horizon. Two sets of options are available or the truncations removing a part of the timestamp but also cyclics taking a specific part of the timestamp.
 
 ### Truncation
 
@@ -53,7 +53,7 @@ BUCKET BY
 
 ## GROUP BY clause
 
-The `GROUP BY` clause specifies which grouping facets should be used to perform any aggregations in the SELECT clause. 
+The `GROUP BY` clause specifies which grouping facets should be used to perform any aggregations in the SELECT clause.
 
 In this dialect the `GROUP BY` clause is facultative. Indeed all the facets defined in the `SELECT` clause are automatically added to the `GROUP BY` clause. The following two querues are equivalent.
 
@@ -67,7 +67,7 @@ GROUP BY
     WindPark
 ```
 
-and 
+and
 
 ```sql
 SELECT
