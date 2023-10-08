@@ -4,11 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Arrangers.Action;
 using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Modeling.Statements.Ordering
 {
-    internal class ColumnOrder : IOrderBy
+    internal class ColumnOrder : IOrderBy, IArrangeable
     {
         public IExpression Expression { get; set; }
         public Sorting Sort { get; }
@@ -26,5 +27,12 @@ namespace Tseesecake.Modeling.Statements.Ordering
 
         public ColumnOrder(ColumnReference reference, Sorting sort, NullSorting nullSort)
             => (Expression, Sort, NullSort) = (reference, sort, nullSort);
+
+        public void Accept(IActionArranger arranger)
+        {
+            if (arranger is IActionArranger<IExpression> exp)
+                Expression = exp.Execute(Expression);
+            (Expression as IArrangeable)?.Accept(arranger);
+        }
     }
 }

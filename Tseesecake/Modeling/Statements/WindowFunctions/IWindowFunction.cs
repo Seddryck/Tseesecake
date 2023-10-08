@@ -7,10 +7,10 @@ using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Modeling.Statements.WindowFunctions
 {
-    public interface IWindowFunction
+    public interface IWindowFunction 
     { }
 
-    public interface IExpressionWindowFunction : IWindowFunction
+    public interface IExpressionWindowFunction : IWindowFunction, IArrangeable
     { 
         IExpression Expression { get; set; }
     }

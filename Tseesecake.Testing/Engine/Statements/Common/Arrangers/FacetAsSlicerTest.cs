@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tseesecake.Arrangers;
 using Tseesecake.Modeling.Statements.Arguments;
 using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Modeling.Statements.Projections;
@@ -11,10 +10,11 @@ using Tseesecake.Modeling.Statements.Slicers;
 using Tseesecake.Testing.Engine;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Expressions;
+using Tseesecake.Engine.Statements.Common.Arrangers;
 
-namespace Tseesecake.Testing.Arrangers
+namespace Tseesecake.Testing.Engine.Statements.Common.Arrangers
 {
-    public class FacetProjectionAsSlicerTest
+    public class FacetAsSlicerTest
     {
         [Test]
         public void Execute_TwoFacetsOneAggregation_TwoSlicers()
@@ -29,7 +29,7 @@ namespace Tseesecake.Testing.Arrangers
                 }
             );
 
-            var arranger = new FacetProjectionAsSlicer();
+            var arranger = new FacetAsSlicer();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
@@ -53,7 +53,7 @@ namespace Tseesecake.Testing.Arrangers
                 }
             );
 
-            var arranger = new FacetProjectionAsSlicer();
+            var arranger = new FacetAsSlicer();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));
@@ -77,7 +77,7 @@ namespace Tseesecake.Testing.Arrangers
                 }
             );
 
-            var arranger = new FacetProjectionAsSlicer();
+            var arranger = new FacetAsSlicer();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Arrangers.Action;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements.Filters;
 using Tseesecake.Modeling.Statements.Ordering;
@@ -13,7 +14,7 @@ using Tseesecake.Modeling.Statements.Windows;
 
 namespace Tseesecake.Modeling.Statements
 {
-    public class SelectStatement : ISelectStatement
+    public class SelectStatement : ISelectStatement, IArrangeable
     {
         public ITimeseries Timeseries { get; set; }
         public List<IProjection> Projections { get; }
@@ -57,5 +58,19 @@ namespace Tseesecake.Modeling.Statements
                         , restriction
                         , expressions?.Length > 0 ? expressions.ToList() : new List<VirtualMeasurement>()
             );
+
+        public void Accept(IActionArranger arranger)
+        {
+            var clauses = Array.Empty<object>()
+                .Union(Projections.Cast<object>())
+                .Union(Filters.Cast<object>())
+                .Union(Slicers.Cast<object>())
+                .Union(GroupFilters.Cast<object>())
+                .Union(Windows.Cast<object>())
+                .Union(Orders.Cast<object>());
+
+            foreach (var clause in clauses)
+                (clause as IArrangeable)?.Accept(arranger);
+        }
     }
 }

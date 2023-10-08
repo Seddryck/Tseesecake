@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Filters;
 using LinqExp = System.Linq.Expressions;
 
@@ -75,7 +76,7 @@ namespace Tseesecake.Testing.Modeling.Statements.Filters
             Assert.That(filter, Is.TypeOf<GathererSifter>());
 
             var typedFilter = (GathererSifter)filter;
-            Assert.That(typedFilter.Measurement.Name, Is.EqualTo("Forecasted"));
+            Assert.That(((IColumn)typedFilter.Expression).Name, Is.EqualTo("Forecasted"));
             Assert.That(typedFilter.ComparisonOperator, Is.EqualTo("GreaterThanOrEqual"));
             Assert.That(typedFilter.Value, Is.EqualTo(10));
         }

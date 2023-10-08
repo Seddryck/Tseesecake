@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
+using Tseesecake.Engine.Statements.Common.Arrangers;
+using Tseesecake.Engine.Statements.MsSqlServer.Arrangers;
 
 namespace Tseesecake.Engine.Statements.MsSql
 {
     [Dialect<TSqlDialect>()]
     internal class MsSqlServerArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
-        protected override ISelectArranger[] InstantiateDialect()
-            => new ISelectArranger[] { new ExpressionForwardedToHavingClause()
-                        , new ExpressionForwardedToOrderByClause()
-                        , new NamedWindowForwardedToProjection()
+        protected override IArranger[] InstantiateDialect()
+            => new IArranger[] { 
+                new MsSqlServerExpressionForward()
+                , new NamedWindowForward()
             };
     }
 }

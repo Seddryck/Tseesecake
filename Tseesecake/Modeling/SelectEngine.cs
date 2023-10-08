@@ -21,9 +21,9 @@ namespace Tseesecake.Modeling
         private IDatabaseUrl DatabaseUrl { get; }
         public Timeseries[] Timeseries { get; }
         public IQueryLogger QueryLogger { get; } = NullQueryLogger.Instance;
-        private ISelectArranger[] Arrangers { get; }
+        private IArranger[] Arrangers { get; }
 
-        protected internal SelectEngine(IDatabaseUrl databaseUrl, Timeseries[] timeseries, ISelectArranger[] arrangers, IQueryLogger logger)
+        protected internal SelectEngine(IDatabaseUrl databaseUrl, Timeseries[] timeseries, IArranger[] arrangers, IQueryLogger logger)
             => (DatabaseUrl, Timeseries, Arrangers, QueryLogger) = (databaseUrl, timeseries, arrangers, logger);
 
         public SelectEngine(IDatabaseUrlFactory factory, string url, Timeseries[] timeseries, IArrangerCollectionProvider provider)

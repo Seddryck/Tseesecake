@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tseesecake.Arrangers.Action;
 using Tseesecake.Modeling.Statements;
 
-namespace Tseesecake.Arrangers
+namespace Tseesecake.Arrangers.Scope
 {
-    public interface IArranger
+    public interface IScopeArranger
     {
-        void Execute(SelectStatement statement);
+        void Execute(IActionArranger action);
     }
 }

@@ -9,7 +9,7 @@ namespace Tseesecake.Modeling.Catalog
 {
     public class Measurement : Column
     {
-        public virtual string Template { get => "ColumnExpression"; }
+        public override string Template { get => "ColumnExpression"; }
 
         public Measurement(string name)
             : base(name, DbType.Decimal) { }

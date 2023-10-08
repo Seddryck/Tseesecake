@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Modeling.Statements.Filters
 {
@@ -16,7 +17,7 @@ namespace Tseesecake.Modeling.Statements.Filters
         public virtual object Value { get; private set; }
 
         public override string Template { get => nameof(GathererSifter); }
-        public GathererSifter(Measurement measurement, Func<Expression, Expression, BinaryExpression> comparison, object value)
-            : base(measurement) { (Comparison, Value) = (comparison, value); }
+        public GathererSifter(IExpression expression, Func<Expression, Expression, BinaryExpression> comparison, object value)
+            : base(expression) { (Comparison, Value) = (comparison, value); }
     }
 }

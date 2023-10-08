@@ -154,7 +154,7 @@ namespace Tseesecake.Testing.Engine
                     new Projection(new Timestamp("Produced"))
                 }
                 , new IFilter[] {
-                    new CullerSifter(new Measurement("Produced"), LinqExp.Expression.LessThan,  5)
+                    new CullerSifter(new ColumnReference("Produced"), LinqExp.Expression.LessThan,  5)
                 });
 
         public static SelectStatement FilterTemporizer
@@ -197,7 +197,7 @@ namespace Tseesecake.Testing.Engine
                     new FacetSlicer(new Facet("WindPark"))
                 }
                 , new IFilter[] {
-                    new GathererSifter(new Measurement("AvgProduced"), LinqExp.Expression.GreaterThanOrEqual, 15)
+                    new GathererSifter(new ColumnReference("AvgProduced"), LinqExp.Expression.GreaterThanOrEqual, 15)
                 });
 
         public static SelectStatement NamedWindow
@@ -236,7 +236,7 @@ namespace Tseesecake.Testing.Engine
                 , null
                 , null
                 , new[] {
-                    new GathererSifter(new Measurement("RowNb"), LinqExp.Expression.LessThanOrEqual, 5)
+                    new GathererSifter(new ColumnReference("RowNb"), LinqExp.Expression.LessThanOrEqual, 5)
                 }
                 , null
                 , null);
