@@ -27,7 +27,6 @@ namespace Tseesecake.Arrangers.Action
                     (statement.Timeseries as Timeseries)!.Timestamp
                 );
 
-
         public IProjection[] Execute(IProjection[] obj)
         {
             if (Bucket is null)

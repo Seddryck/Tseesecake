@@ -12,7 +12,6 @@ namespace Tseesecake.Engine.Statements.Common.Arrangers
 {
     public abstract class ExpressionForward : IArranger
     {
-
         public void Execute(SelectStatement statement)
         {
             var clauses = ClausesSelect(statement);
