@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
+using Tseesecake.Engine.Statements.Common.Arrangers;
 using Tseesecake.Modeling.Catalog;
 using Tseesecake.Modeling.Statements;
 using Tseesecake.Modeling.Statements.Aggregations;
 using Tseesecake.Modeling.Statements.Expressions;
 using Tseesecake.Modeling.Statements.Projections;
-using Tseesecake.Testing.Engine;
 
-namespace Tseesecake.Testing.Arrangers
+namespace Tseesecake.Testing.Engine.Statements.Common.Arrangers
 {
-    public class ColumnProjectionTypedTest
+    public class ColumnForwardTest
     {
         [Test]
         public void Execute_ThreeColumnReferences_ThreeTypedColumns()
@@ -28,7 +28,7 @@ namespace Tseesecake.Testing.Arrangers
                 }
             );
 
-            var arranger = new ProjectionTyped();
+            var arranger = new ColumnForward();
             arranger.Execute(statement);
 
             Assert.That(statement.Projections, Has.Count.EqualTo(4));

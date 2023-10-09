@@ -46,7 +46,7 @@ namespace Tseesecake.Testing.Modeling
             factory.Setup(f => f.Instantiate(It.IsAny<string>())).Returns(databaseUrl);
 
             var arrangers = new Mock<IArrangerCollectionFactory>();
-            arrangers.Setup(af => af.Instantiate<IStatement>()).Returns(Array.Empty<ISelectArranger>());
+            arrangers.Setup(af => af.Instantiate<IStatement>()).Returns(Array.Empty<IArranger>());
             var provider = new Mock<IArrangerCollectionProvider>();
             provider.Setup(a => a.Get(It.IsAny<Type>())).Returns(arrangers.Object);
 

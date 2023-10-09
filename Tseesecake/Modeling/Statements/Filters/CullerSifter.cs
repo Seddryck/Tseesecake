@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Modeling.Catalog;
+using Tseesecake.Modeling.Statements.Expressions;
 
 namespace Tseesecake.Modeling.Statements.Filters
 {
@@ -13,7 +14,7 @@ namespace Tseesecake.Modeling.Statements.Filters
     {
         public override string Template { get => nameof(CullerSifter); }
 
-        public CullerSifter(Measurement measurement, Func<Expression, Expression, BinaryExpression> comparison, object value)
-            : base(measurement, comparison, value) { }
+        public CullerSifter(IExpression expression, Func<Expression, Expression, BinaryExpression> comparison, object value)
+            : base(expression, comparison, value) { }
     }
 }

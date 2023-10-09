@@ -20,21 +20,21 @@ namespace Tseesecake.Arrangers
         public BaseArrangerCollectionFactory(Assembly[] assemblies)
             => (Assemblies) = (assemblies);
 
-        public ISelectArranger[] Instantiate<IStatement>()
+        public IArranger[] Instantiate<IStatement>()
             =>  InstantiatePolyglot(Assemblies)
                     .Union(InstantiateDialect()).ToArray();
 
-        protected virtual ISelectArranger[] InstantiatePolyglot(Assembly[] assemblies)
+        protected virtual IArranger[] InstantiatePolyglot(Assembly[] assemblies)
             => Assemblies.Aggregate(
                         Array.Empty<Type>(), (arrangers, asm)
                             => arrangers.Concat(asm.GetTypes()
                                             .Where(x => x.IsClass && !x.IsAbstract)
-                                            .Where(x => x.GetInterfaces().Contains(typeof(ISelectArranger)))
+                                            .Where(x => x.GetInterfaces().Contains(typeof(IArranger)))
                                             .Where(x => x.GetCustomAttribute(typeof(PolyglotAttribute)) is not null)
                     ).ToArray())
-                    .Select(x => (ISelectArranger)Activator.CreateInstance(x)!)
+                    .Select(x => (IArranger)Activator.CreateInstance(x)!)
                     .ToArray();
 
-        protected abstract ISelectArranger[] InstantiateDialect();
+        protected abstract IArranger[] InstantiateDialect();
     }
 }

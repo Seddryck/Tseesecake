@@ -13,17 +13,17 @@ namespace Tseesecake.Testing.Arrangers
     {
         internal class StubArrangerCollectionFactory : BaseArrangerCollectionFactory
         {
-            protected override ISelectArranger[] InstantiateDialect() => Array.Empty<ISelectArranger>();
+            protected override IArranger[] InstantiateDialect() => Array.Empty<IArranger>();
         }
 
-        internal class StubArranger : ISelectArranger
+        internal class StubArranger : IArranger
         {
             public void Execute(SelectStatement statement) => throw new NotImplementedException();
         }
 
         internal class StubExtendedArrangerCollectionFactory : BaseArrangerCollectionFactory
         {
-            protected override ISelectArranger[] InstantiateDialect() => new[] { new StubArranger() };
+            protected override IArranger[] InstantiateDialect() => new[] { new StubArranger() };
         }
 
         [Test]

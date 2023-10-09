@@ -9,6 +9,6 @@ namespace Tseesecake.Arrangers
 {
     public interface IArrangerCollectionFactory
     {
-        ISelectArranger[] Instantiate<IStatement>();
+        IArranger[] Instantiate<IStatement>();
     }
 }

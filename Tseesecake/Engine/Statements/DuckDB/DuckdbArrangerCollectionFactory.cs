@@ -12,7 +12,7 @@ namespace Tseesecake.Engine.Statements.DuckDB
     [Dialect<DuckdbDialect>()]
     internal class DuckdbArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
-        protected override ISelectArranger[] InstantiateDialect()
-            => Array.Empty<ISelectArranger>();
+        protected override IArranger[] InstantiateDialect()
+            => Array.Empty<IArranger>();
     }
 }

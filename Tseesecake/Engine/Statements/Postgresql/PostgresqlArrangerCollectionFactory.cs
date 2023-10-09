@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tseesecake.Arrangers;
-using Tseesecake.Modeling;
+using Tseesecake.Engine.Statements.Postgresql.Arrangers;
 
 namespace Tseesecake.Engine.Statements.Postgresql
 {
     [Dialect<PgsqlDialect>()]
     internal class PostgresqlArrangerCollectionFactory : BaseArrangerCollectionFactory
     {
-        protected override ISelectArranger[] InstantiateDialect()
-            => new[] { new ExpressionForwardedToHavingClause() };
+        protected override IArranger[] InstantiateDialect()
+            => new IArranger[] { new PostgresqlExpressionForward() };
     }
 }
