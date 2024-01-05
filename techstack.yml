@@ -1,7 +1,8 @@
 repo_name: Seddryck/Tseesecake
 report_id: 7b739c9f235a7bc7ca9f23c1fb0cd183
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-12T20:21:46+00:00'
+timestamp: '2024-01-05T08:47:57+00:00'
 requested_by: Seddryck
 provider: github
 branch: main
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1015/1200px-C_Sharp_wordmark.svg.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -26,6 +28,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/_sass/system-font-css/package.json
   detection_source: docs/_sass/system-font-css/package.json
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -38,6 +41,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/989/ruby.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -49,7 +53,8 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
-  detection_source: Tseesecake.QA/Resources/VirtualMeasurement.sql
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/DuckDB/deploy-duckdb-database.sql
+  detection_source: Tseesecake.QA/DuckDB/deploy-duckdb-database.sql
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-06-27 19:42:50.000000000 Z
 - name: ".NET"
@@ -62,6 +67,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/1014/IoPy1dce_400x400.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.Testing/Tseesecake.Testing.csproj
   detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-09-30 13:47:23.000000000 Z
@@ -73,7 +79,8 @@ tools:
   category: Data Stores
   sub_category: Databases
   image_url: https://img.stackshare.io/service/1028/ASOhU5xJ.png
-  detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-06-27 19:42:50.000000000 Z
 - name: Git
@@ -84,6 +91,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake
   detection_source: Repo Metadata
 - name: Moq
   description: The most popular and friendly mocking framework for .NET
@@ -93,6 +101,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Testing Frameworks
   image_url: https://img.stackshare.io/service/1628/1434934.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.Testing/Tseesecake.Testing.csproj
   detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-04-28 14:41:43.000000000 Z
@@ -104,7 +113,8 @@ tools:
   category: Build, Test, Deploy
   sub_category: Testing Frameworks
   image_url: https://img.stackshare.io/service/2371/jZ6MYx5Y_400x400.png
-  detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-06-27 19:42:50.000000000 Z
 - name: NuGet
@@ -115,6 +125,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Package Managers
   image_url: https://img.stackshare.io/service/2637/6I3oEOP4_400x400.jpg
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.Testing/Tseesecake.Testing.csproj
   detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-04-28 14:41:43.000000000 Z
@@ -126,6 +137,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Package Managers
   image_url: https://img.stackshare.io/service/12795/5jL6-BA5_400x400.jpeg
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -138,6 +150,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Integrated Development Environment
   image_url: https://img.stackshare.io/service/1451/SR2hUhQN.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.Debug.sln
   detection_source: Tseesecake.Debug.sln
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-06-23 21:53:36.000000000 Z
@@ -149,6 +162,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/_sass/system-font-css/package.json
   detection_source: docs/_sass/system-font-css/package.json
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -162,7 +176,7 @@ tools:
   category: Application Utilities
   sub_category: Static Site Generators
   image_url: https://img.stackshare.io/service/1114/ad968c1615d956e800fa36494314f48c.jpeg
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -174,6 +188,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/3681/powershell-logo.png
+  detection_source_url: https://github.com/Seddryck/Tseesecake
   detection_source: Repo Metadata
 - name: jekyll-feed
   description: A Jekyll plugin to generate an Atom feed of your Jekyll posts
@@ -185,7 +200,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/19149/default_b0a1033a29112f6f50b1dd3157e5fbf94dd2778a.png
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -199,7 +214,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/19371/default_ac0591cdb829f62a4300d942f96aea1bb642351d.png
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -214,7 +229,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/19137/default_302643c2b99caa1c440c0d4aa23d4230e1cc78e3.png
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -229,7 +244,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/19516/default_07037590725b871de29c1d2ebb4610950e953355.png
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -244,7 +259,7 @@ tools:
   category: Libraries
   sub_category: RubyGems Packages
   image_url: https://img.stackshare.io/package/19444/default_e747a715ce0379afdb68c78657d70e4a512bf5f4.png
-  detection_source_url: docs/Gemfile.lock
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/Gemfile.lock
   detection_source: docs/Gemfile
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
@@ -258,7 +273,7 @@ tools:
   category: Libraries
   sub_category: NuGet Packages
   image_url: https://img.stackshare.io/package/12846/default_0f5233770e71818507f2339042e7e61bef904e70.png
-  detection_source_url: Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
   detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-09-30 13:47:23.000000000 Z
@@ -273,8 +288,8 @@ tools:
   category: Libraries
   sub_category: NuGet Packages
   image_url: https://img.stackshare.io/package/13216/default_e23dabba1be2c69fbf5fc50bdc46cbffbe6ca2cb.png
-  detection_source_url: Tseesecake.QA/Tseesecake.QA.csproj
-  detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-09-30 13:47:23.000000000 Z
 - name: Npgsql
@@ -287,8 +302,8 @@ tools:
   category: Libraries
   sub_category: NuGet Packages
   image_url: https://img.stackshare.io/package/12954/default_971bb108ce002c2032e407a9046135e1542c46c7.png
-  detection_source_url: Tseesecake.QA/Tseesecake.QA.csproj
-  detection_source: Tseesecake.Testing/Tseesecake.Testing.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-09-16 17:42:50.000000000 Z
 - name: Sprache
@@ -301,8 +316,8 @@ tools:
   category: Libraries
   sub_category: NuGet Packages
   image_url: https://img.stackshare.io/package/13233/default_cadeaa4a9968284dcd1223273394c410c31c9d09.png
-  detection_source_url: Tseesecake.QA/Tseesecake.QA.csproj
-  detection_source: Tseesecake/Tseesecake.csproj
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/Tseesecake.QA/Tseesecake.QA.csproj
+  detection_source: Tseesecake.QA/Tseesecake.QA.csproj
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-07-01 16:48:11.000000000 Z
 - name: cpr
@@ -315,7 +330,7 @@ tools:
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/18105/image.png
-  detection_source_url: docs/_sass/system-font-css/package.json
+  detection_source_url: https://github.com/Seddryck/Tseesecake/blob/main/docs/_sass/system-font-css/package.json
   detection_source: docs/_sass/system-font-css/package.json
   last_updated_by: Cédric L. Charlier
   last_updated_on: 2023-10-01 14:45:32.000000000 Z
