@@ -17,7 +17,7 @@ Tseesecake is a lightweight solution for time series
 **Releases:** [![nuget](https://img.shields.io/nuget/v/Tseesecake.svg)](https://www.nuget.org/packages/Tseesecake/)<!-- [![GitHub Release Date](https://img.shields.io/github/release-date/seddryck/Tseesecake.svg)](https://github.com/Seddryck/Tseesecake/releases/latest) --> [![licence badge](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://github.com/Seddryck/Tseesecake/blob/master/LICENSE)
 
 **Dev. activity:** [![GitHub last commit](https://img.shields.io/github/last-commit/Seddryck/Tseesecake.svg)](https://github.com/Seddryck/Tseesecake/commits)
-![Still maintained](https://img.shields.io/maintenance/yes/2023.svg)
+![Still maintained](https://img.shields.io/maintenance/yes/2025.svg)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Seddryck/Tseesecake)
 
 **Continuous integration builds:** [![Build status](https://ci.appveyor.com/api/projects/status/80321ajt5beih60f?svg=true)](https://ci.appveyor.com/project/Seddryck/Tseesecake/)
